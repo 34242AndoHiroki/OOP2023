@@ -81,7 +81,6 @@ namespace WindowsFormsApp1 {
             this.label1.Size = new System.Drawing.Size(22, 24);
             this.label1.TabIndex = 2;
             this.label1.Text = "+";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label3
             // 
@@ -92,7 +91,6 @@ namespace WindowsFormsApp1 {
             this.label3.Size = new System.Drawing.Size(22, 24);
             this.label3.TabIndex = 2;
             this.label3.Text = "=";
-            this.label3.Click += new System.EventHandler(this.label1_Click);
             // 
             // Form1
             // 
