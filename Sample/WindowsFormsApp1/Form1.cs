@@ -59,10 +59,21 @@ namespace WindowsFormsApp1 {
             }*/
 
             //パターン２　powメソッド方式
-            double pow = Math.Pow((int)nudX.Value , (int)nudY.Value );
-            tbResult.Text = pow.ToString();
+            //double pow = Math.Pow((int)nudX.Value , (int)nudY.Value );
+            //tbResult.Text = pow.ToString();
 
             //tbResult.Text = ((double)Math.Pow((int)nudX.Value , (int)nudY.Value )).ToString();  //１行にまとめた
+
+            //標準解答
+            //Math.Pow(nudX, nudY);     //原型
+            //Math.Pow( nudX.Value , nudY.Value );      //値はValue
+            double result = Math.Pow((double)nudX.Value, (double)nudY.Value);     //double型にする
+            //double result = Math.Pow(double.Parse(nudX.Value), double.Parse(nudY.Value));     //文字列型からならこっち
+
+            tbResult.Text = tbResult.ToString();
+
+            //一行で書く場合
+            //tbResult.Text = ( Math.Pow(double.Parse(nudX.Value), double.Parse(nudY.Value)) ).ToString();
 
         }
 
