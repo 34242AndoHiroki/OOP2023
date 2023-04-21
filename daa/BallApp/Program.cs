@@ -21,28 +21,20 @@ namespace BallApp {
 
         public Program() {
 
+            //Form form = new Form();     //Formを新規作成
+            //System.Windows.Forms.Form form = new System.Windows.Forms.Form();     // 長い
+
+            //this.Width = 1200;  //幅プロパティ    Javaでいうメンバ変数
+            //this.Height = 800;  //高さプロパティ
             this.Size = new Size(800, 600);     //上2つをいっきにやってくれる
             this.BackColor = Color.Green;       //背景色を緑にする
             this.Text = "BallGame";     //左上にン名前を表示
-            this.MouseClick += Program_MouseClick;
 
-            moveTimer = new Timer();
-            moveTimer.Interval = 1;     //タイマーのインターバル（ms）
+            //form.Show();      //フォームを表示　Run使えば勝手にこれやってくれる
+            //this.ShowDialog();      //フォームのダイアログを表示　Run使えば勝手にこれやってくれる
 
-            moveTimer.Tick += MoveTimer_Tick;
-
-
-
-            
-
-        }
-
-        //マウスクリック時のイベントハンドラ
-        private void Program_MouseClick(object sender, MouseEventArgs e)
-        {
-
-            //ボールインスタンス生成
-            soccerBall = new SoccerBall( e.X - 25 , e.Y - 25 );
+            //ボールインスタンス
+            soccerBall = new SoccerBall();
             pb = new PictureBox();       //画像を表示するコントロール
             pb.Image = soccerBall.Image;        //イメージの引っ張り出し
             pb.Location = new Point((int)soccerBall.PosX, (int)soccerBall.PosY);        //画像の位置　(int)はしゃあない
@@ -51,7 +43,12 @@ namespace BallApp {
 
             pb.Parent = this;       //no form  form = this ！
 
+            moveTimer = new Timer();
+            moveTimer.Interval = 1;     //タイマーのインターバル（ms）
             moveTimer.Start();      //タイマースタート
+            moveTimer.Tick += MoveTimer_Tick;
+
+            
 
         }
 

@@ -14,22 +14,16 @@ namespace BallApp {
         private double posX;        //ｘ座標
         private double posY;        //ｙ座標
 
-        private double moveX;      //移動量（ｘ方向）    10も可
-        private double moveY;      //移動量（ｙ方向）    10も可
+        private double moveX = 10;      //移動量（ｘ方向）    10も可
+        private double moveY = 10;      //移動量（ｙ方向）    10も可
 
         //コンストラクタ
-        public SoccerBall(double xp, double yp) {
+        public SoccerBall() {
 
-            Random random = new Random();
             Image = Image.FromFile( @"pic\soccer_ball.png" );        //@：すべて完全な文字列とみなす
-            PosX = xp;     //０でもいいが、double型だから...
-            PosY = yp;
-
-            int rndX = random.Next( -15 , 15 );
-            moveX = ( rndX != 0 ? rndX : 1 );
-
-            int rndY = random.Next( -15 , 15 );
-            moveY = ( rndY != 0 ? rndY : 1 );
+            //image = Image.FromFile("pic\\soccerball.png");        //\:エスケープシーケンス、処理記号
+            PosX = 0.0;     //０でもいいが、double型だから...
+            PosY = 0.0;
 
         }
 
@@ -43,14 +37,25 @@ namespace BallApp {
 
             Console.WriteLine("Ｘ座標 = {0} , Ｙ座標 = {1}", posX, posY);     //確認用
 
+            /*if ( (PosX + moveX) >= 800 )
+            {
+                PosX = 799 - (moveX - (799 - PosX));
+                moveX *= -1;
+            }
+            else if((PosX + moveX) < 0)
+            {
+                PosX = - (moveX - PosX);
+                moveX *= -1;
+            }*/
+
             if ( posY > 520 || posY < 0)       //ｙの折り返し処理
             {
                 moveY = - moveY;
             }
 
-            if ( posX > 730 || posX < 0)       //ｘの折り返し処理
+            if (posX > 720 || posX < 0)       //ｘの折り返し処理
             {
-                moveX = - moveX;
+                moveX = -moveX;
             }
 
             PosX += moveX;
