@@ -43,7 +43,7 @@ namespace BallApp {
 
             Console.WriteLine("Ｘ座標 = {0} , Ｙ座標 = {1}", posX, posY);     //確認用
 
-            if ( posY > 520 || posY < 0)       //ｙの折り返し処理
+            if ( posY > 510 || posY < 0)       //ｙの折り返し処理
             {
                 moveY = - moveY;
             }
@@ -58,10 +58,6 @@ namespace BallApp {
 
         }
 
-        
-
-
-
-
     }
+
 }
