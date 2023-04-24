@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BallApp {
 
-    class SoccerBall : Obj{
+    class TennisBall : Obj {
 
         //フィールド
         private double moveX;   //移動量（ｘ方向）
@@ -23,8 +23,8 @@ namespace BallApp {
         //public static int Count { get => count; set => count = value; }     //見てるのはこれ。静的にする必要あり
 
         //コンストラクタ
-        public SoccerBall( double xp , double yp ) 
-            : /* 基底 */ base( xp , yp , @"pic\soccer_ball.png") {        //親コンストラクタを呼ぶ
+        public TennisBall(double xp, double yp)
+            : /* 基底 */ base(xp, yp, @"pic\tennis_ball.png") {        //親コンストラクタを呼ぶ
 
             //条件演算子
             int rndX = random.Next(-15, 15);
@@ -36,19 +36,19 @@ namespace BallApp {
         }
 
         //メソッド
-        
+
         public override void Move() {
 
             Console.WriteLine("Ｘ座標 = {0} , Ｙ座標 = {1}", PosX, PosX);     //確認用
 
-            if ( PosY > 510 || PosY < 0)       //ｙの折り返し処理
+            if (PosY > 510 || PosY < 0)       //ｙの折り返し処理
             {
-                MoveY = - MoveY;
+                MoveY = -MoveY;
             }
 
             if (PosX > 730 || PosX < 0)       //ｘの折り返し処理
             {
-                MoveX = - MoveX;
+                MoveX = -MoveX;
             }
 
             PosX += MoveX;
