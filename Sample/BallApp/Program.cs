@@ -7,15 +7,16 @@ using System.Windows.Forms;     //Javaだと import System.Windows.Forms.Formか
 using System.Drawing;
 
 namespace BallApp {
-    class Program : Form {      //A : B = AはBを継承
+    class  Program : Form {      //A : B = AはBを継承
 
         private Timer moveTimer;        //タイマー用
         private SoccerBall soccerBall;
         private PictureBox pb;       //画像を表示するコントロール
 
         private List<SoccerBall> balls = new List<SoccerBall>();      //ボールインスタンス格納用　同じことを書いてる
-        ///private var balls = new List<>();        //型推論型　ここでは無理　メソッド内でやって
         private List<PictureBox> pbs = new List<PictureBox>();  //表示用
+
+        //private int ballCount = 0;      //変数利用式
 
         static void Main(string[] args) {
 
@@ -25,25 +26,16 @@ namespace BallApp {
 
         public Program() {
 
-            //Form form = new Form();     //Formを新規作成
-            //System.Windows.Forms.Form form = new System.Windows.Forms.Form();     // 長い
-
-            //this.Width = 1200;  //幅プロパティ    Javaでいうメンバ変数
-            //this.Height = 800;  //高さプロパティ
             this.Size = new Size(800, 600);     //上2つをいっきにやってくれる
             this.BackColor = Color.Green;       //背景色を緑にする
-            this.Text = "BallGame";     //左上にン名前を表示
+            //this.Text = "BallGame：" + ( ++ballCount );     //後置　ballCount++　だとおかしい
+            this.Text = "ボールの数：" + balls.Count;       //インスタンス数え上げ方式
             this.MouseClick += Program_Mouseclick;
-
-            //form.Show();      //フォームを表示　Run使えば勝手にこれやってくれる
-            //this.ShowDialog();      //フォームのダイアログを表示　Run使えば勝手にこれやってくれる
 
             moveTimer = new Timer();
             moveTimer.Interval = 1;     //タイマーのインターバル（ms）
             moveTimer.Start();      //タイマースタート
             moveTimer.Tick += MoveTimer_Tick;       //デリゲート登録
-
-            
 
         }
 
@@ -64,6 +56,9 @@ namespace BallApp {
 
             moveTimer.Start();      //タイマースタート
 
+            this.Text = "ボールの数：" + balls.Count;
+            //this.Text = "ボールの数：" + SoccerBall.Count;  //staticにしたらそれすべて静的にしなきゃいけない
+
         }
 
         //タイマータイムアウト時のイベントハンドラ
@@ -76,7 +71,6 @@ namespace BallApp {
                 pbs[i].Location = new Point((int)balls[i].PosX, (int)balls[i].PosY);        //画像の位置
 
             }
-
 
         }
     }
