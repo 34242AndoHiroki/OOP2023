@@ -10,20 +10,17 @@ namespace BallApp {
     class SoccerBall : Obj{
 
         //フィールド
-        private double moveX;   //移動量（ｘ方向）
-        private double moveY;   //移動量（ｙ方向）
+
         //private static int count;   //インスタンスの個数
 
         Random random = new Random();
 
         //プロパティ
-        public double MoveX { get => moveX; set => moveX = value; }     //忘れ物
-        public double MoveY { get => moveY; set => moveY = value; }     //忘れ物
-
         //public static int Count { get => count; set => count = value; }     //見てるのはこれ。静的にする必要あり
 
         //コンストラクタ
         public SoccerBall( double xp , double yp ) 
+            // ↓ super() と同じ　↓
             : /* 基底 */ base( xp , yp , @"pic\soccer_ball.png") {        //親コンストラクタを呼ぶ
 
             //条件演算子
@@ -56,6 +53,9 @@ namespace BallApp {
 
         }
 
+        public static implicit operator SoccerBall(TennisBall v) {
+            throw new NotImplementedException();
+        }
     }
 
 }

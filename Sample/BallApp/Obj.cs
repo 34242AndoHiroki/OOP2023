@@ -18,12 +18,14 @@ namespace BallApp {
         private double moveX;      //移動量（ｘ方向）
         private double moveY;      //移動量（ｙ方向）
 
-        private static int count;     //ボールに個数情報を持たせる方法
+        //private static int count;     //ボールに個数情報を持たせる方法
 
         //プロパティ
+        public Image Image { get => image; set => image = value; }
         public double PosX { get => posX; set => posX = value; }        //いわゆるカプセル化
         public double PosY { get => posY; set => posY = value; }
-        public Image Image { get => image; set => image = value; }
+        public double MoveX { get => moveX; set => moveX = value; }     //忘れ物
+        public double MoveY { get => moveY; set => moveY = value; }     //忘れ物
 
 
         //コンストラクタ
@@ -33,6 +35,8 @@ namespace BallApp {
             this.PosX = PosX;
             this.PosY = PosY;
             Image = Image.FromFile( Path );
+
+            //後ほど追加あり
 
             //Count++;
 
