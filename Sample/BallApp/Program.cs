@@ -5,17 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;     //Javaだと import System.Windows.Forms.Formか*;
 using System.Drawing;
+using System.Threading;
+using Timer = System.Windows.Forms.Timer;
 
 namespace BallApp {
-    class  Program : Form {      //A : B = AはBを継承
+    class Program : Form {      //A : B = AはBを継承
+
+        Bar bar;            //Barインスタンス格納用
+        PictureBox pbBar;       //Bar表示用
 
         private Timer moveTimer;        //タイマー用
-        private SoccerBall soccerBall;
-        private TennisBall tennisBall;
-        private PictureBox pb;       //画像を表示するコントロール
 
+        //Listコレクション
         private List<Obj> balls = new List<Obj>();      //ボールインスタンス格納用　同じことを書いてる
         private List<PictureBox> pbs = new List<PictureBox>();  //表示用
+
+        //private int soccerBallCount = 0, tennisBallCount = 0;
+        //private int count = 0, count1 = 0;        //こういうの論外
 
         //private int ballCount = 0;      //変数利用式
 
@@ -27,11 +33,25 @@ namespace BallApp {
 
         public Program() {
 
+            //フォーム
             this.Size = new Size(800, 600);     //上2つをいっきにやってくれる
             this.BackColor = Color.Green;       //背景色を緑にする
             //this.Text = "BallGame：" + ( ++ballCount );     //後置　ballCount++　だとおかしい
-            this.Text = "ボールの数：" + balls.Count;       //インスタンス数え上げ方式
+
+            this.Text = Comment(SoccerBall.Count, TennisBall.Count);       //インスタンス数え上げ方式
+
             this.MouseClick += Program_Mouseclick;
+            this.KeyDown += Program_KeyDown;        //タブキーで自動挿入
+
+            //Barインスタンス生成
+            bar = new Bar(370, 550);
+            pbBar = new PictureBox();
+            pbBar.Image = bar.Image;
+            pbBar.Location = new Point( ( int )bar.PosX , ( int )bar.PosY );
+            pbBar.Size = new Size( 150 , 10 );
+            pbBar.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbBar.Parent = this;
+
 
             moveTimer = new Timer();
             moveTimer.Interval = 1;     //タイマーのインターバル（ms）
@@ -40,56 +60,57 @@ namespace BallApp {
 
         }
 
+
+        //キーが押された時のイベントハンドラ
+        private void Program_KeyDown(object sender, KeyEventArgs e) {
+
+            bar.Move(e.KeyData);        //e = Keys型 = Enum
+            pbBar.Location = new Point((int)bar.PosX, (int)bar.PosY);
+
+
+        }
+
         //マウスクリック時のイベントハンドラ
-        private void Program_Mouseclick( object sender , MouseEventArgs e ) {
+        private void Program_Mouseclick(object sender, MouseEventArgs e) {
+
+            //ボールインスタンス生成
+            pbs.Add(new PictureBox());
 
             if (e.Button == MouseButtons.Left)     //左クリック
             {
 
-                //ボールインスタンス生成
-                soccerBall = new SoccerBall(e.X - 25, e.Y - 25);       //座標をもらう
-                pb = new PictureBox();       //画像を表示するコントロール
-                pb.Image = soccerBall.Image;        //イメージの引っ張り出し
-                pb.Location = new Point((int)soccerBall.PosX, (int)soccerBall.PosY);        //画像の位置　(int)はしゃあない
-                pb.Size = new Size( 50 , 50 );     //画像の表示サイズ
-                pb.SizeMode = PictureBoxSizeMode.StretchImage;      //画像の表示モード
-                pb.Parent = this;       //no form  form = this ！
+                balls.Add(new SoccerBall(e.X - 25, e.Y - 25));
+                pbs[pbs.Count - 1].Size = new Size(50, 50);     //画像の表示サイズ
 
-                balls.Add(soccerBall);
-                pbs.Add(pb);
-
-                moveTimer.Start();      //タイマースタート
-
-                this.Text = "ボールの数：" + balls.Count;
-                //this.Text = "ボールの数：" + SoccerBall.Count;  //staticにしたらそれすべて静的にしなきゃいけない
+                SoccerBall.Count++;
 
             }
-            else     //右クリック
+            else
             {
 
-                //ボールインスタンス生成
-                tennisBall = new TennisBall(e.X - 25, e.Y - 25);       //座標をもらう
-                pb = new PictureBox();       //画像を表示するコントロール
-                pb.Image = tennisBall.Image;        //イメージの引っ張り出し
-                pb.Location = new Point((int)tennisBall.PosX, (int)tennisBall.PosY);        //画像の位置　(int)はしゃあない
-                pb.Size = new Size(25, 25);     //画像の表示サイズ
-                pb.SizeMode = PictureBoxSizeMode.StretchImage;      //画像の表示モード
-                pb.Parent = this;       //no form  form = this ！
-
-                balls.Add(tennisBall);
-                pbs.Add(pb);
-
-                moveTimer.Start();      //タイマースタート
-
-                this.Text = "ボールの数：" + balls.Count;
-                //this.Text = "ボールの数：" + SoccerBall.Count;  //staticにしたらそれすべて静的にしなきゃいけない
+                balls.Add(new TennisBall(e.X - 25, e.Y - 25));
+                pbs[pbs.Count - 1].Size = new Size(25, 25);     //画像の表示サイズ
+                TennisBall.Count++;
 
             }
+
+            //画像を表示するコントロール
+            pbs[pbs.Count - 1].Image = balls[balls.Count - 1].Image;        //イメージの引っ張り出し
+            pbs[pbs.Count - 1].Location = new Point((int)balls[balls.Count - 1].PosX, (int)balls[balls.Count - 1].PosY);        //画像の位置　(int)はしゃあない
+            pbs[pbs.Count - 1].SizeMode = PictureBoxSizeMode.StretchImage;      //画像の表示モード
+            pbs[pbs.Count - 1].Parent = this;       //no form  form = this ！
+
+            moveTimer.Start();      //タイマースタート
+
+            this.Text = Comment(SoccerBall.Count, TennisBall.Count);
+            //this.Text = "ボールの数：" + SoccerBall.Count;  //staticにしたらそれすべて静的にしなきゃいけない
 
         }
 
+
+
         //タイマータイムアウト時のイベントハンドラ
-        private void MoveTimer_Tick(Object sender, EventArgs e ) {
+        private void MoveTimer_Tick(Object sender, EventArgs e) {
 
             for (int i = 0; i < balls.Count; i++)
             {
@@ -98,6 +119,12 @@ namespace BallApp {
                 pbs[i].Location = new Point((int)balls[i].PosX, (int)balls[i].PosY);        //画像の位置
 
             }
+
+        }
+
+        private static string Comment(int sbCount, int tbCount) {
+
+            return "サッカーボール：" + sbCount + "　　テニスボール：" + tbCount;
 
         }
 

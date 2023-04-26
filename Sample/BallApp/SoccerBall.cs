@@ -10,13 +10,14 @@ namespace BallApp {
     class SoccerBall : Obj{
 
         //フィールド
-
-        //private static int count;   //インスタンスの個数
+        private static int count = 0;       //ここのカウントはサッカーのってのはわかるよね。全体で共有される。
+        //private int count = 0;        //インスタンス変数　これだとインスタンスごとに+１される ＝ ずっと１
 
         Random random = new Random();
 
         //プロパティ
         //public static int Count { get => count; set => count = value; }     //見てるのはこれ。静的にする必要あり
+        public static int Count { get => count; set => count = value; }
 
         //コンストラクタ
         public SoccerBall( double xp , double yp ) 
@@ -32,8 +33,9 @@ namespace BallApp {
 
         }
 
+
         //メソッド
-        
+
         public override void Move() {
 
             Console.WriteLine("Ｘ座標 = {0} , Ｙ座標 = {1}", PosX, PosX);     //確認用
@@ -52,10 +54,7 @@ namespace BallApp {
             PosY += MoveY;
 
         }
-
-        public static implicit operator SoccerBall(TennisBall v) {
-            throw new NotImplementedException();
-        }
+       
     }
 
 }

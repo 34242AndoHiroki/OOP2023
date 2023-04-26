@@ -10,12 +10,14 @@ namespace BallApp {
     class TennisBall : Obj {
 
         //フィールド
+        private static int count = 0;
         //private static int count;   //インスタンスの個数
 
         Random random = new Random();
 
         //プロパティ
         //public static int Count { get => count; set => count = value; }     //見てるのはこれ。静的にする必要あり
+        public static int Count { get => count; set => count = value; }
 
         //コンストラクタ
         public TennisBall(double xp, double yp)
@@ -25,7 +27,7 @@ namespace BallApp {
             int rndX = random.Next(-30, 30);
             this.MoveX = (rndX != 0 ? rndX : 1);       //乱数で移動量を設定
 
-            int rndY = random.Next(-15, 15);
+            int rndY = random.Next(-30, 30);
             this.MoveY = (rndY != 0 ? rndY : 1);     //乱数で移動量を設定
 
         }
