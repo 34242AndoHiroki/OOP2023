@@ -22,7 +22,7 @@ namespace BallApp {
         //コンストラクタ
         public SoccerBall( double xp , double yp ) 
             // ↓ super() と同じ　↓
-            : /* 基底 */ base( xp , yp , @"pic\soccer_ball.png") {        //親コンストラクタを呼ぶ
+            : /* 基底 */ base( xp , yp , @"C:\Users\ha34242j\source\repos\OOP2023\Sample\BallApp\pic\soccer_ball.png") {        //親コンストラクタを呼ぶ
 
             //条件演算子
             int rndX = random.Next(-15, 15);

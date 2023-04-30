@@ -21,7 +21,7 @@ namespace BallApp {
 
         //コンストラクタ
         public TennisBall(double xp, double yp)
-            : /* 基底 */ base(xp, yp, @"pic\tennis_ball.png") {        //親コンストラクタを呼ぶ
+            : /* 基底 */ base(xp, yp, @"C:\Users\ha34242j\source\repos\OOP2023\Sample\BallApp\pic\tennis_ball.png") {        //親コンストラクタを呼ぶ
 
             //条件演算子
             int rndX = random.Next(-30, 30);

@@ -8,15 +8,12 @@ using System.Windows.Forms;
 namespace BallApp {
     class Bar : Obj{
 
-
-
-        public Bar( double xp , double yp ) : base( xp , yp , @"pic\bar.png") {
+        public Bar( double xp , double yp ) : base( xp , yp , @"C:\Users\ha34242j\source\repos\OOP2023\Sample\BallApp\pic\bar.png") {
 
             base.MoveX = 10;  //baseは親クラスのメンバにアクセスできる
             base.MoveY = 0;
 
         }
-
 
         //抽象クラスを継承しているので、不要なメソッドは空にする
         public override void Move() {
