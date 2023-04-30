@@ -47,8 +47,8 @@ namespace BallApp {
             bar = new Bar(370, 550);
             pbBar = new PictureBox();
             pbBar.Image = bar.Image;
-            pbBar.Location = new Point((int)bar.PosX, (int)bar.PosY);
-            pbBar.Size = new Size(150, 10);
+            pbBar.Location = new Point( ( int )bar.PosX , ( int )bar.PosY );
+            pbBar.Size = new Size( 150 , 10 );
             pbBar.SizeMode = PictureBoxSizeMode.StretchImage;
             pbBar.Parent = this;
 
