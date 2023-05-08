@@ -45,7 +45,7 @@ namespace ProductSample {     //名前空間
              * 
              * あなたは生まれてから今日まで〇〇〇〇日目です。【ヒント：TimeSpan構造体を使用】
              * 
-             * ※できた人は「0508演習2」とコメントを入力し、コミット＆プッシュ
+             * ※できた人は「0508演習2」とコメントを入力し、コミット＆プッシュ。
              */
 
             #region 【演習１】
@@ -62,12 +62,20 @@ namespace ProductSample {     //名前空間
              */
 
             //１０日後を求める
-            DateTime daysAfter10 = date.AddDays( 10 );
-            Console.WriteLine( "今日の10日後は" + daysAfter10 + "日です。" );
+            //DateTime daysAfter10 = date.AddDays( 10 );
+            //Console.WriteLine( "10日後：" + daysAfter10.Year + "年" + daysAfter10.Month + "月" + daysAfter10.Day + "日です。" );
+            Console.WriteLine( "10日後：" 
+                    + date.AddDays( 10 ).Year + "年" 
+                    + date.AddDays( 10 ).Month + "月" 
+                    + date.AddDays( 10 ).Day + "日" );     //すっきり、変数削減
 
             //１０日前を求める
-            DateTime daysBefore10 = date.AddDays( -10 );
-            Console.WriteLine( "今日の10日前は" + daysBefore10 + "日です。" );
+            //DateTime daysBefore10 = date.AddDays( -10 );
+            //Console.WriteLine( "今日の10日前は" + daysBefore10.Year + "年" + daysBefore10.Month + "月" + daysBefore10.Day + "日です。" );
+            Console.WriteLine("10日前："
+                    + date.AddDays( -10 ).Year + "年"
+                    + date.AddDays( -10 ).Month + "月"
+                    + date.AddDays( -10 ).Day + "日");     //すっきり、変数削減
 
             #endregion
 
@@ -83,11 +91,21 @@ namespace ProductSample {     //名前空間
              * 
              * あなたは生まれてから今日まで〇〇〇〇日目です。【ヒント：TimeSpan構造体を使用】
              * 
-             * ※できた人は「0508演習2」とコメントを入力し、コミット＆プッシュ
+             * ※できた人は「0508演習2」とコメントを入力し、コミット＆プッシュ。
              */
 
-            
+            Console.Write( "西暦：" );
+            int year = int.Parse( Console.ReadLine() );
+            Console.Write( "月：" );
+            int month = int.Parse( Console.ReadLine() );
+            Console.Write( "日：" );
+            int day = int.Parse( Console.ReadLine() );
 
+            DateTime birthDay = new DateTime( year , month , day );
+            DateTime now = DateTime.Today;
+            TimeSpan total = now - birthDay;
+
+            Console.WriteLine( "あなたは生まれてから今日まで{0}日目です。" , total.Days );
 
             #endregion
 
