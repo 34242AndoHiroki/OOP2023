@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BallApp {
     //抽象クラス
@@ -45,7 +46,9 @@ namespace BallApp {
         //public static int Count { get => count; set => count = value; }     //見てるのはこれ。静的にする必要あり
 
         //移動メソッド（抽象メソッド）
-        public abstract void Move();
+        public abstract void Move( PictureBox pbBar , PictureBox pbBox );
+        public abstract void Move( Keys direction );
+
 
     }
 

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BallApp {
 
@@ -36,16 +37,20 @@ namespace BallApp {
 
         //メソッド
 
-        public override void Move() {
+        public override void Move( PictureBox pbBar , PictureBox pbBox ) {
 
-            Console.WriteLine("Ｘ座標 = {0} , Ｙ座標 = {1}", PosX, PosX);     //確認用
+            Rectangle rBar = new Rectangle(pbBar.Location.X, pbBar.Location.Y,
+                                  pbBar.Width, pbBar.Height);
 
-            if ( PosY > 510 || PosY < 0)       //ｙの折り返し処理
+            Rectangle rBall = new Rectangle(pbBox.Location.X, pbBox.Location.Y,
+                                                pbBox.Width, pbBox.Height);
+
+            if ( PosY > 510 || PosY < 0 || rBar.IntersectsWith( rBall ))       //IntersectsWith：重なったかの判定メソッド
             {
                 MoveY = - MoveY;
             }
 
-            if (PosX > 730 || PosX < 0)       //ｘの折り返し処理
+            if (PosX > 730 || PosX < 0)
             {
                 MoveX = - MoveX;
             }
@@ -54,7 +59,10 @@ namespace BallApp {
             PosY += MoveY;
 
         }
-       
+
+        public override void Move(Keys direction) {     //やむを得ず
+            ;
+        }
     }
 
 }

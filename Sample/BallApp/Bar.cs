@@ -13,13 +13,13 @@ namespace BallApp {
         public Bar( double xp , double yp ) : base( xp , yp , @"pic\bar.png") {
 
             base.MoveX = 10;  //baseは親クラスのメンバにアクセスできる
-            base.MoveX = 0;
+            base.MoveY = 0;
 
         }
 
 
         //抽象クラスを継承しているので、不要なメソッドは空にする
-        public override void Move() {
+        public override void Move( PictureBox pbBar , PictureBox pbBox ) {
 
             //Console.WriteLine("Ｘ座標 = {0} , Ｙ座標 = {1}", PosX, PosX);     //確認用
 
@@ -27,30 +27,32 @@ namespace BallApp {
 
         }
 
-        public void Move( Keys direction ) {
+        public override void Move( Keys direction ) {
 
             // PosX += 20;       //移動するかの確認用
 
             if( direction == Keys.Right )
             {
 
-                PosX = ( PosX + 20 <= 650 ? PosX + 20 :  650 );
+                //PosX = ( PosX + MoveX <= 650 ? PosX + MoveX :  650 );
+
+                if ( PosX < 635 )
+                {
+                    PosX += MoveX;
+                }
 
             }
             else if ( direction == Keys.Left )
             {
 
-                PosX = ( PosX - 20 >= 0 ? PosX - 20 : 0 );
+                //PosX = ( PosX - MoveX >= 0 ? PosX - MoveX : 0 );
+
+                if( PosX > 0 )
+                {
+                    PosX -= MoveX;
+                }
 
             }
-
-
-            /*switch ( Keys )       //何かすると全パターン表示してくれるとか
-            {
-
-
-
-            }*/
 
         }
 

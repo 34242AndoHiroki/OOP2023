@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BallApp {
 
@@ -24,26 +25,30 @@ namespace BallApp {
             : /* 基底 */ base(xp, yp, @"pic\tennis_ball.png") {        //親コンストラクタを呼ぶ
 
             //条件演算子
-            int rndX = random.Next(-30, 30);
+            int rndX = random.Next(-20, 20);
             this.MoveX = (rndX != 0 ? rndX : 1);       //乱数で移動量を設定
 
-            int rndY = random.Next(-30, 30);
+            int rndY = random.Next(-20, 20);
             this.MoveY = (rndY != 0 ? rndY : 1);     //乱数で移動量を設定
 
         }
 
         //メソッド
 
-        public override void Move() {
+        public override void Move( PictureBox pbBar , PictureBox pbBox ) {
 
-            Console.WriteLine("Ｘ座標 = {0} , Ｙ座標 = {1}", PosX, PosX);     //確認用
+            Rectangle rBar = new Rectangle(pbBar.Location.X, pbBar.Location.Y,
+                                    pbBar.Width, pbBar.Height);
 
-            if (PosY > 537 || PosY < 0)       //ｙの折り返し処理
+            Rectangle rBall = new Rectangle(pbBox.Location.X, pbBox.Location.Y,
+                                                pbBox.Width, pbBox.Height);
+
+            if (PosY > 537 || PosY < 0 || rBar.IntersectsWith(rBall))             //IntersectsWith：重なったかの判定メソッド
             {
                 MoveY = -MoveY;
             }
 
-            if (PosX > 760 || PosX < 0)       //ｘの折り返し処理
+            if (PosX > 760 || PosX < 0)
             {
                 MoveX = -MoveX;
             }
@@ -51,6 +56,10 @@ namespace BallApp {
             PosX += MoveX;
             PosY += MoveY;
 
+        }
+
+        public override void Move(Keys direction) {
+            ;
         }
 
     }
