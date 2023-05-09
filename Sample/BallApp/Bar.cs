@@ -8,6 +8,7 @@ using System.Windows.Forms;
 namespace BallApp {
     class Bar : Obj{
 
+        public Bar( double xp , double yp ) : base( xp , yp , @"C:\Users\ha34242j\source\repos\OOP2023\Sample\BallApp\pic\bar.png") {
 
 
         public Bar( double xp , double yp ) : base( xp , yp , @"pic\bar.png") {
@@ -48,7 +49,7 @@ namespace BallApp {
                 //PosX = ( PosX - MoveX >= 0 ? PosX - MoveX : 0 );
 
                 if( PosX > 0 )
-                {
+            {
                     PosX -= MoveX;
                 }
 
