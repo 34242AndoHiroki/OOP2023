@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 namespace ProductSample {     //名前空間
 
     class Program {     //クラス名（変更可能）
+
         static void Main(string[] args) {
+
 
             #region P26のサンプルプログラム
             //インスタンスの生成
@@ -46,6 +48,17 @@ namespace ProductSample {     //名前空間
              * あなたは生まれてから今日まで〇〇〇〇日目です。【ヒント：TimeSpan構造体を使用】
              * 
              * ※できた人は「0508演習2」とコメントを入力し、コミット＆プッシュ。
+             * 
+             * /* 【演習３】
+             * 実行結果
+             * 
+             * 誕生日を入力
+             * 西暦：
+             * 月：
+             * 日：
+             * 
+             * あなたは〇曜日に生まれました。
+             * ※できた人は「0508演習3」とコメントを入力し、コミット＆プッシュ。
              */
 
             #region 【演習１】
@@ -94,6 +107,10 @@ namespace ProductSample {     //名前空間
              * ※できた人は「0508演習2」とコメントを入力し、コミット＆プッシュ。
              */
 
+
+#if false
+            #region 【演習２】自力
+
             Console.Write( "西暦：" );
             int year = int.Parse( Console.ReadLine() );
             Console.Write( "月：" );
@@ -107,6 +124,87 @@ namespace ProductSample {     //名前空間
 
             Console.WriteLine( "あなたは生まれてから今日まで{0}日目です。" , total.Days );
 
+            #endregion
+#else
+            #region 【演習２】解答
+
+            //西暦の入力
+            Console.Write( "西暦：" );
+            int birthYear = int.Parse( Console.ReadLine() );
+            //月の入力
+            Console.Write( "月：" );
+            int birthMonth = int.Parse( Console.ReadLine() );
+            //日の入力
+            Console.Write( "日：" );
+            int birthDay = int.Parse( Console.ReadLine() );
+
+            DateTime birth = new DateTime( birthYear , birthMonth , birthDay /*, 0 ,0 ,0 */ );     //時間まで入れると時間まで出力される
+            DateTime today = DateTime.Today;
+
+            TimeSpan timeSpan = today - birth;
+            Console.WriteLine( "あなたは生まれてから今日まで{0}日目です。" , timeSpan.Days );
+
+            #endregion
+#endif
+
+            #endregion
+
+            #region 【演習３】
+
+            /* 【演習３】
+             * 実行結果
+             * 
+             * 誕生日を入力
+             * 西暦：
+             * 月：
+             * 日：
+             * 
+             * あなたは〇曜日に生まれました。
+             * ※できた人は「0508演習3」とコメントを入力し、コミット＆プッシュ。
+             */
+
+#if false
+            #region 【演習３】自力
+
+            Console.Write( "西暦：" );
+            int year = int.Parse( Console.ReadLine() );
+            Console.Write( "月：" );
+            int month = int.Parse( Console.ReadLine() );
+            Console.Write( "日：" );
+            int day = int.Parse( Console.ReadLine() );
+
+            DateTime birthDay = new DateTime( year , month , day );
+
+            Console.WriteLine( "あなたは{0}曜日に生まれました。" , birthDay.DayOfWeek );
+
+            birthDay.DayOfWeek.ToString();
+
+            #endregion
+#else
+            #region 【演習３】解答
+
+            string[] DayOfWeekJp = { "日" , "月" , "火" , "水" , "木" , "金" , "土" };     //宣言は一番上で
+
+            //西暦の入力
+            Console.Write( "西暦：" );
+            int birthYear = int.Parse( Console.ReadLine() );
+            //月の入力
+            Console.Write( "月：" );
+            int birthMonth = int.Parse( Console.ReadLine() );
+            //日の入力
+            Console.Write( "日：" );
+            int birthDay = int.Parse( Console.ReadLine() );
+
+            DateTime birth = new DateTime( birthYear , birthMonth , birthDay /*, 0 ,0 ,0 */ );     //時間まで入れると時間まで出力される
+            DateTime today = DateTime.Today;
+
+            TimeSpan timeSpan = today - birth;
+            Console.WriteLine( "あなたは生まれてから今日まで{0}日目です。" , timeSpan.Days );      //ここまでさっきと同じ
+
+            Console.Write( DayOfWeekJp[ ( int )birth.DayOfWeek ] );
+
+            #endregion
+#endif
             #endregion
 
         }
