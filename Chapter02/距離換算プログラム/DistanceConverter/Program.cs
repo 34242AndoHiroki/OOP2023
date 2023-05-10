@@ -8,12 +8,30 @@ namespace DistanceConverter {
     class Program {
         static void Main(string[] args) {
 
-            //フィートからメートルへの対応表を出力
-            for ( int feet = 1 ; feet <= 10 ; feet++ )
+            if ( args.Length >= 1 && args[ 0 ] == "-tom" )
             {
 
-                double metar = FeetToMetar( feet );
-                Console.WriteLine("{0} ft = {1:0.0000}m", feet, metar);
+                //フィートからメートルへの対応表を出力
+                for ( int feet = 1 ; feet <= 10 ; feet++ )
+                {
+
+                    double metar = FeetToMetar( feet );
+                    Console.WriteLine( "{0} ft = {1:0.0000}m" , feet , metar );
+
+                }
+
+            }
+            else
+            {
+
+                //メートルからフィートへの対応表を出力
+                for ( int metar = 1 ; metar <= 10 ; metar++ )
+                {
+
+                    double feet = MetarToFeet( metar );
+                    Console.WriteLine( "{0} ft = {1:0.0000}m" , metar , feet );
+
+                }
 
             }
 
@@ -25,5 +43,14 @@ namespace DistanceConverter {
             return feet * 0.3048;
 
         }
+
+        //メートルからフィートを求める
+        static double MetarToFeet( int metar ) {
+
+            return metar / 0.3048;
+
+        }
+
     }
+
 }
