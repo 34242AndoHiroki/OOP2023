@@ -7,22 +7,21 @@ using System.Threading.Tasks;
 namespace DistanceConverter {
 
     //フィートとメートルの単位換算クラス
-    public static class FeetConverter {     //インスタンスを生成させない
-                                            //staticメソッドしかないからstaticつけない意味がない
+    public static class FeetConverter {     
 
-        //昔のC#のnew阻止の方法（Javaでよくやってる）
-        /*private FeetConverter() {     //デザインパターン
-            
-        }*/
+        //定数
+        private const double ratio = 0.3048;        //publicはあんまり好ましくない
+        //public static readonly double ratio = 0.3048;     //publicならreadonlyにしよう
 
         //フィートからメートルを求める
         public static double FromMeter( double feet ) {
-            return feet * 0.3048;
+            return feet * ratio;
         }
 
         //メートルからフィートを求める
         public static double ToMeter( double metar ) {
-            return metar / 0.3048;
+            return metar / ratio;
         }
+
     }
 }
