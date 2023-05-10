@@ -8,35 +8,33 @@ namespace DistanceConverter {
     class Program {
 
         static void Main(string[] args) {
-            if ( args.Length >= 1 && args[ 0 ] == "-tom" )
+            if (args.Length >= 1 && args[0] == "-tom")
             {
                 //フィートからメートルへの対応表を出力
-                PrintFeetToMetarList( 1 , 10 );
+                PrintFeetToMetarList(1, 10);
             }
             else
             {
                 //メートルからフィートへの対応表を出力
-                PrintMetarToFeetList( 1 , 10 );
+                PrintMetarToFeetList(1, 10);
             }
         }
 
-        private static void PrintMetarToFeetList( int start , int stop ) {
-            for ( int metar = 1 ; metar <= 10 ; metar++ )
+        private static void PrintMetarToFeetList(int start, int stop) {
+            for (int metar = start; metar <= stop; metar++)
             {
-                double feet = FeetConverter.FromMeter( metar );
-                Console.WriteLine( "{0} ft = {1:0.0000}m" , metar , feet );
+                double feet = FeetConverter.FromMeter(metar);
+                Console.WriteLine("{0} ft = {1:0.0000}m", metar, feet);
             }
         }
 
-        private static void PrintFeetToMetarList( int start , int stop ) {
-
-            for ( int feet = 1 ; feet <= 10 ; feet++ )
+        private static void PrintFeetToMetarList(int start, int stop) {
+            for (int feet = start; feet <= stop; feet++)
             {
-                double metar = FeetConverter.ToMeter( feet );
-                Console.WriteLine( "{0} ft = {1:0.0000}m" , feet , metar );
+                double metar = FeetConverter.ToMeter(feet);
+                Console.WriteLine("{0} ft = {1:0.0000}m", feet, metar);
             }
         }
 
     }
-
 }
