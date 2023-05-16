@@ -11,8 +11,8 @@ namespace SalesCalculator {
         private List< Sale > _sales;
 
         //コンストラクタ
-        public SalesCounter( List< Sale > sales ) {
-            _sales = sales;
+        public SalesCounter( string filePath ) {
+            _sales = ReadSales( filePath );
         }
 
         //店舗別売り上げを求める
@@ -31,7 +31,8 @@ namespace SalesCalculator {
         }
 
         //売り上げデータを読み込み、Saleオブジェクトのリストを返す
-        public static List< Sale > ReadSales( string filePath ) {
+        private static List< Sale > ReadSales( string filePath ) {     //staticなしでOK
+                    //読み込み機構は共用という意味合い？
 
             List< Sale > sales = new List< Sale >();        //売り上げデータを格納する
             string[] lines = File.ReadAllLines( filePath );     //ファイルからすべてのデータを読み込む
@@ -49,7 +50,5 @@ namespace SalesCalculator {
             return sales;
 
         }
-
     }
-
 }
