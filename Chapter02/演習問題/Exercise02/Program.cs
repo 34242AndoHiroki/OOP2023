@@ -36,16 +36,38 @@ namespace Exercise02 {
         #region 模範解答
         //DistanceConverterのProgramをコピーして変更
         static void Main(string[] args) {
-            if (args.Length >= 1 && args[0] == "-tom")
+            if (args.Length < 3)        //引数の数の例外処理　下の共通条件の抽出
+            {
+                return;
+            }
+
+            /*      こっちのほうがわかりやすい
+            int start = int.Parse(args[1]);
+            int end = int.Parse(args[2]);
+            
+            switch (args[0])
+            {
+                case "-tom":
+                    PrintInchToMetarList(start, start);
+                    break;
+
+                case "-toi":
+                    PrintMetarToInchList(start, start);
+                    break;
+            }
+            */
+
+            if (/*args.Length >= 3 && */args[0] == "-tom")        //例外対策
             {
                 //フィートからメートルへの対応表を出力
-                PrintInchToMetarList(1, 10);
+                PrintInchToMetarList(int.Parse(args[1]), int.Parse(args[2]));       //引数対応
             }
-            else
+            else if (/*args.Length >= 3 && */args[0] == "-toi")        //例外対策
             {
                 //メートルからフィートへの対応表を出力
-                PrintMetarToInchList(1, 10);
+                PrintMetarToInchList(int.Parse(args[1]), int.Parse(args[2]));       //引数対応
             }
+
         }
 
         private static void PrintInchToMetarList(int start, int stop) {
