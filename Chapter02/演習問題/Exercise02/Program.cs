@@ -38,10 +38,10 @@ namespace Exercise02 {
         static void Main(string[] args) {
             if (args.Length < 3)        //引数の数の例外処理　下の共通条件の抽出
             {
-                return;
+                return;     //何もしない
             }
 
-            /*      こっちのほうがわかりやすい
+            //こっちのほうがわかりやすい
             int start = int.Parse(args[1]);
             int end = int.Parse(args[2]);
             
@@ -54,18 +54,6 @@ namespace Exercise02 {
                 case "-toi":
                     PrintMetarToInchList(start, start);
                     break;
-            }
-            */
-
-            if (/*args.Length >= 3 && */args[0] == "-tom")        //例外対策
-            {
-                //フィートからメートルへの対応表を出力
-                PrintInchToMetarList(int.Parse(args[1]), int.Parse(args[2]));       //引数対応
-            }
-            else if (/*args.Length >= 3 && */args[0] == "-toi")        //例外対策
-            {
-                //メートルからフィートへの対応表を出力
-                PrintMetarToInchList(int.Parse(args[1]), int.Parse(args[2]));       //引数対応
             }
 
         }
