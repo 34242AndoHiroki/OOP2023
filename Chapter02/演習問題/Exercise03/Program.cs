@@ -7,17 +7,32 @@ using System.Threading.Tasks;
 namespace Exercise03 {
     class Program {
         static void Main(string[] args) {
-#if true
+#if false
             #region 自力
             var sales = new SalesCounter(@"data\sales.csv");
             IDictionary<string, int> amount = null;
             int pattern;
+            string[] comments = { "１：店舗別売り上げ" , "２：商品カテゴリー別売り上げ" };
 
             Console.WriteLine("＊＊売上集計＊＊");
-            Console.WriteLine("１：店舗別売り上げ");
-            Console.WriteLine("２：商品カテゴリー別売り上げ");
+            foreach (string comment in comments)
+            {
+                Console.WriteLine(comment);
+            }
             Console.Write(">");
-            pattern = int.Parse(Console.ReadLine());
+
+            while (true)
+            {
+                try
+                {
+                    pattern = int.Parse(Console.ReadLine());
+                    break;
+                }
+                catch (Exception e)
+                {
+                    throw new ArgumentException("入力が不正です。");
+                }
+            }
 
             switch(pattern)
             {
@@ -37,7 +52,12 @@ namespace Exercise03 {
             #endregion
 #else
             #region 模範解答
-
+            var sales = new SalesCounter(@"data\sales.csv");
+            var amountPerStore = sales.GetPerCategorySales();
+            foreach (KeyValuePair<string, int> obj in amountPerStore)
+            {
+                Console.WriteLine("{0} {1:C}", obj.Key, obj.Value);
+            }
             #endregion
 #endif
         }

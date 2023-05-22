@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Exercise03 {
-#if true
+namespace Exercise03 {      //これもまるまるコピー
+#if false
     #region 自力
     //売り上げクラス
     public class Sale {
@@ -21,7 +21,17 @@ namespace Exercise03 {
     #endregion
 #else
     #region 模範解答
+    //売り上げクラス
+    public class Sale {
 
+        //店舗名
+        public string ShopName { get; set; }
+        //商品カテゴリー
+        public string ProductCategory { get; set; }
+        //売上高
+        public int Amount { get; set; }
+
+    }
     #endregion
 #endif
 }
