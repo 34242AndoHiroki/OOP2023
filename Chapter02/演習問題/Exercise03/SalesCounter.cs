@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Exercise03 {
+#if true
+    #region 自力
     public class SalesCounter {
 
         private IEnumerable<Sale> _sales;
@@ -47,4 +49,10 @@ namespace Exercise03 {
         }
 
     }
+    #endregion
+#else
+    #region 模範解答
+
+    #endregion
+#endif
 }
