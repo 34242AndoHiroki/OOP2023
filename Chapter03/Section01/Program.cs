@@ -15,11 +15,13 @@ namespace Section01 {
             var numbers = new[] { 5 , 3, 9 , 6 , 7 , 5 , 8 , 1 , 0 , 5 , 10 , 4 };
             //Judgement judge = IsEven;       //メソッドを格納
             
-            int count = Count( numbers , /* 匿名メソッド */ delegate ( int n ) { return n % 2 == 0; } );        //わかりやすく分離　メソッドまんま書いちゃう
+            int count = numbers.Count( /*numbers ,*/ n => n % 2 == 0 );     // =>： ラムダ演算子、return、{}、型名、()、;とか省略可能
+
             Console.WriteLine( count );      //処理がと渡す
 
         }
 
+        /*      もう指定済み
         //指定された値が何個あるかを求めて返す
         public static int Count ( int[] numbers , Predicate< int > judge ) {       //Predicate　bool型を返す　ほかにもいろいろある
 
@@ -38,6 +40,7 @@ namespace Section01 {
             return count;
 
         }
+        */
 
     }
 
