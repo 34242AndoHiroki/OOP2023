@@ -10,8 +10,27 @@ namespace Exercise03 {
 #if true
             #region 自力
             var sales = new SalesCounter(@"data\sales.csv");
-            var amountPerStore = sales.GetPerCategorySales();
-            foreach (KeyValuePair<string, int> obj in amountPerStore)
+            IDictionary<string, int> amount = null;
+            int pattern;
+
+            Console.WriteLine("＊＊売上集計＊＊");
+            Console.WriteLine("１：店舗別売り上げ");
+            Console.WriteLine("２：商品カテゴリー別売り上げ");
+            Console.Write(">");
+            pattern = int.Parse(Console.ReadLine());
+
+            switch(pattern)
+            {
+                case 1:     //店舗別売り上げ
+                    amount = sales.GetPerStoreSales();
+                    break;
+
+                case 2:     //商品カテゴリー別売り上げ
+                    amount = sales.GetPerCategorySales();
+                    break;
+            }
+
+            foreach (KeyValuePair<string, int> obj in amount)
             {
                 Console.WriteLine("{0}：{1:C}", obj.Key, obj.Value);
             }
