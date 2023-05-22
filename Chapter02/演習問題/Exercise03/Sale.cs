@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Exercise03 {      //これもまるまるコピー
-#if false
+#if true
     #region 自力
     //売り上げクラス
     public class Sale {

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Exercise03 {
-#if false
+#if true
     #region 自力
     public class SalesCounter {
 
