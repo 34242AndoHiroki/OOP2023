@@ -50,13 +50,15 @@ namespace Exercise03 {
                                 amount = sales.GetPerCategorySales();
                                 break;
                         }
+                        break;
                     }
                     catch (Exception e)
                     {
                         throw new ArgumentException("数値が範囲外です。");
                     }
                 }
-            }catch(Exception e)
+            }
+            catch(Exception e)
             {
                 Console.WriteLine(e.StackTrace); 
             }
