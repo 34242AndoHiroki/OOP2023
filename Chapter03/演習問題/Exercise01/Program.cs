@@ -24,9 +24,10 @@ namespace Exercise01 {
             // 3.1.4
             Exercise1_4(numbers);
         }
-
+#if true
+        #region 自力
         private static void Exercise1_1(List<int> numbers) {
-            
+            Console.WriteLine(numbers.Exists(n=>n%8==0||n%9==0)?"存在しています":"存在していません");
         }
 
         private static void Exercise1_2(List<int> numbers) {
@@ -40,5 +41,36 @@ namespace Exercise01 {
         private static void Exercise1_4(List<int> numbers) {
             
         }
+        #endregion
+#else
+        #region 模範解答
+        private static void Exercise1_1(List<int> numbers) {
+
+            var exist = numbers.Exists(         );
+            if (exist)
+            {
+                Console.WriteLine("存在しています");
+            }
+            else
+            {
+                Console.WriteLine("存在していません");
+            }
+
+        }
+
+        private static void Exercise1_2(List<int> numbers) {
+
+        }
+
+        private static void Exercise1_3(List<int> numbers) {
+
+        }
+
+        private static void Exercise1_4(List<int> numbers) {
+
+        }
+        #endregion
+#endif
     }
 }
+
