@@ -21,51 +21,55 @@ namespace Exercise03 {
             }
             Console.Write(">");
 
-            try
+            while (true)
             {
-                while (true)
+                try
                 {
-                    try
+                    while (true)
                     {
-                        pattern = int.Parse(Console.ReadLine());
-                        break;
-                    }
-                    catch (Exception e)
-                    {
-                        throw new ArgumentException("入力が不正です。");
-                    }
-                }
-
-                while (true)
-                {
-                    try
-                    {
-                        switch (pattern)
+                        try
                         {
-                            case 1:     //店舗別売り上げ
-                                amount = sales.GetPerStoreSales();
-                                break;
-
-                            case 2:     //商品カテゴリー別売り上げ
-                                amount = sales.GetPerCategorySales();
-                                break;
+                            pattern = int.Parse(Console.ReadLine());
+                            break;
                         }
-                        break;
+                        catch (Exception e)
+                        {
+                            throw new ArgumentException("入力が不正です。");
+                        }
                     }
-                    catch (Exception e)
-                    {
-                        throw new ArgumentException("数値が範囲外です。");
-                    }
-                }
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.StackTrace); 
-            }
 
-            foreach (KeyValuePair<string, int> obj in amount)
-            {
-                Console.WriteLine("{0}：{1:C}", obj.Key, obj.Value);
+                    while (true)
+                    {
+                        try
+                        {
+                            switch (pattern)
+                            {
+                                case 1:     //店舗別売り上げ
+                                    amount = sales.GetPerStoreSales();
+                                    break;
+
+                                case 2:     //商品カテゴリー別売り上げ
+                                    amount = sales.GetPerCategorySales();
+                                    break;
+                            }
+                            break;
+                        }
+                        catch (Exception e)
+                        {
+                            throw new ArgumentException("数値が範囲外です。");
+                        }
+                    }
+                    break;
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e.StackTrace); 
+                }
+
+                foreach (KeyValuePair<string, int> obj in amount)
+                {
+                    Console.WriteLine("{0}：{1:C}", obj.Key, obj.Value);
+                }
             }
             #endregion
 #else
