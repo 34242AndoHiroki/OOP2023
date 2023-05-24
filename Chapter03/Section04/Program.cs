@@ -16,19 +16,23 @@ namespace Section04 {
 
             };
 
-            //var data = names.Find( s => s.Length <= 5 );      //　string型
-            //var data = names.FindAll( s => s.Length <= 5 );       // List< string >型
-            //var query = names.Where( s => s.Length <= 5 );        //IEnumerable< string >型
+            var query = names.Where( s => s.Length <= 5 ).ToList();
 
-            //IEnumerable< string > query = names.Where( s => s.Length <= 5 ).Select( s => s.ToLower() );       //小文字をセレクト
-
-            var query = names.Select( s => s.Length );      //文字列長をセレクト
-            //var query = names.Where( s => s.Length );      //条件ではない
-
-            foreach ( var s in names )
+            foreach ( var item in query )
             {
-                Console.WriteLine( s );
+                Console.WriteLine( item );
             }
+
+            Console.WriteLine( "----------" );
+
+            names[ 0 ] = "Osaka";
+
+            foreach ( var item in query )
+            {
+                Console.WriteLine( item );
+            }
+
+            Console.WriteLine( "----------" );
 
         }
 

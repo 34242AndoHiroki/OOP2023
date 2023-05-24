@@ -27,7 +27,7 @@ namespace Exercise01 {
 #if true
         #region 自力
         private static void Exercise1_1(List<int> numbers) {
-            //Console.WriteLine(numbers.Exists(n => n % 8 == 0 || n % 9 == 0) ? "存在しています" : "存在していません");
+            Console.WriteLine(numbers.Exists(n => n % 8 == 0 || n % 9 == 0) ? "存在しています" : "存在していません");
         }
 
         private static void Exercise1_2(List<int> numbers) {
