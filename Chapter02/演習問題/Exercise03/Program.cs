@@ -66,10 +66,11 @@ namespace Exercise03 {
                     Console.WriteLine(e.StackTrace); 
                 }
 
-                foreach (KeyValuePair<string, int> obj in amount)
-                {
-                    Console.WriteLine("{0}：{1:C}", obj.Key, obj.Value);
-                }
+            }
+
+            foreach (KeyValuePair<string, int> obj in amount)
+            {
+                Console.WriteLine("{0}：{1:C}", obj.Key, obj.Value);
             }
             #endregion
 #else
