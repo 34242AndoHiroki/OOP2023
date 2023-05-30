@@ -11,11 +11,11 @@ namespace Exercise02 {
 
             var ym = new YearMonth(2023,5);     //実行時に参照 DLL
             var c21 = ym.Is21Century;
+            var ymNextMonth = ym.AddOneMonth();
 
-            Console.WriteLine( c21 );
-
-            Console.WriteLine( ym.AddOneMonth().ToString() );
-            Console.WriteLine(ym.AddOneMonth().Is21Century);
+            Console.WriteLine(ym);      //〇〇〇〇年△月
+                                        //オーバーライドなしだと、Exercise01.YearMonth
+            Console.WriteLine(ymNextMonth);      //〇〇〇〇年△月
 
         }
     }

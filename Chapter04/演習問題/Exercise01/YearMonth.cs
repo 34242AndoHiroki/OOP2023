@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Exercise01 {
     public class YearMonth {
-#if !true
+#if true
         #region 自力
         //年
         public int Year { get; private set; }
@@ -51,7 +51,7 @@ namespace Exercise01 {
         }
 
         //4.1.2
-        public bool Is21Centry
+        public bool Is21Century
         {
             get
             {
@@ -73,6 +73,11 @@ namespace Exercise01 {
             //１行の場合　見づらい
             //return new YearMonth(Month == 12 ? Year + 1 : Year, Month == 12 ? 1 : Month + 1);     //++Monthだと thisのも値が変わる
 
+        }
+
+        //4.1.4
+        public override string ToString() {
+            return this.Year + "年" + this.Month + "月";
         }
         #endregion
 #endif
