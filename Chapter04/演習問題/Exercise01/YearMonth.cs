@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Exercise01 {
     public class YearMonth {
-#if !true
+#if true
         #region 自力
         //年
         public int Year { get; private set; }
@@ -21,17 +21,21 @@ namespace Exercise01 {
             Month = month;
         }
 
-        public YearMonth() { }
-
         //メソッド
-        //4.1.3
         public YearMonth AddOneMonth() {
-            return
-                new YearMonth {
-                    Month = (this.Month) % 12  == 0 ? ,
-                    Year  = ,
-                };
-            
+            return new YearMonth((this.Month) == 12 ? this.Year + 1 : this.Year, (this.Month) % 12 == 0 ? 1 : this.Month + 1);
+
+            //YearMonth() があれば
+            //return new YearMonth
+            //{
+            //    Year = (this.Month) == 12 ? this.Year + 1 : this.Year,
+            //    Month = (this.Month) % 12 == 0 ? 1 : this.Month + 1
+            //}
+        }
+
+        //ToString()のオーバーライド
+        public override string ToString() {
+            return this.Year + "年" + this.Month + "月";
         }
 
         #endregion
