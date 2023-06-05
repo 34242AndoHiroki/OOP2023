@@ -25,7 +25,7 @@ namespace Exercise03 {
             Exercise3_5(text);
 
         }
-#if true
+#if !true
         #region 自力
         private static void Exercise3_1(string text) {
             Console.WriteLine("文字数：" + text.Count(c => c == ' '));
@@ -36,7 +36,8 @@ namespace Exercise03 {
         }
 
         private static void Exercise3_3(string text) {
-            Console.WriteLine("単語数：" + (text.Count(c => c == ' ') + 1));
+            //Console.WriteLine("単語数：" + (text.Count(c => c == ' ') + 1));
+            Console.WriteLine("単語数：" +  text.Split(' ').Length);
         }
 
         private static void Exercise3_4(string text) {
@@ -61,41 +62,56 @@ namespace Exercise03 {
         #region 模範解答
         private static void Exercise3_1(string text) {
 
+            //int spaces = text.Count();      //37　文字列長
+
+            int spaces = text.Count(c => c == ' ');     //s より c が好ましい
+            Console.WriteLine("空白数：{0}", spaces);
+
             //これでもいけないことはないけどやめて
-            int count = 0;
-            foreach (var str in text)
-            {
-                if(str == ' ')
-                {
-                    count++;
-                }
-            }
+            //int count = 0;
+            //foreach (var str in text)
+            //{
+            //    if(str == ' ')
+            //    {
+            //        count++;
+            //    }
+            //}
         }
 
-        private static string Exercise3_2(string text) {
-            return text.Replace("big","small");
+        private static void Exercise3_2(string text) {
+            var replaced = text.Replace("big", "small");
+            Console.WriteLine(replaced);
         }
 
-        private static string Exercise3_3(string text) {
-            return "単語数" + Exercise3_1(text) + 1;
+        private static void Exercise3_3(string text) {
+            var count = text.Split(' ').Length;        //配列の要素数が返ってくる。Length はプロパティ
+            //var count = text.Split(' ').Count();        //Count() だと処理が走って遅くなる
+            Console.WriteLine("単語数：{0}", count);
         }
 
         private static void Exercise3_4(string text) {
-             text.Split(' ').Where(s => s.Length <= 4).ToList().ForEach(Console.WriteLine);
+            var words = text.Split(' ').Where(word => word.Length <= 4);
+
+            //一行完結型　ここまでやらなくていい
+            //var words = text.Split(' ').Where(word => word.Length <= 4).ToList();
+            //words.ForEach(Console.WriteLine);
+
+            foreach (var word in words)
+                Console.WriteLine(word);
         }
 
         private static void Exercise3_5(string text) {
-            var words = text.Split(' ').ToArray();
-            var sb = new StringBuilder(words[1]);
+            var array = text.Split(' ').ToArray();      //後で変更がないように ToArray() で即時実行してる
 
-            for (int i = 1; i < words.Length; i++)
+            var sb = new StringBuilder();       //ストリングビルダー生成
+            foreach (var word in array)
             {
-                sb.Append(" ");
-                sb.Append(words[1]);
+                sb.Append(word);
+                sb.Append(' ');
+                //sb.Append(word + ' ');        //これもアリ
             }
-
-            Console.WriteLine(sb.ToString());
-            
+            var createWords = sb.ToString();
+            Console.WriteLine(createWords);
         }
         #endregion
 #endif        
