@@ -48,14 +48,29 @@ namespace Exercise03 {
             var words = text.Split(' ');
             var sb = new StringBuilder();
 
-            for (int i = 0; i < words.Length; i++)
+            foreach( var word in words )
             {
-                sb.Append(words[i]);
-                if (i != words.Length - 1) sb.Append(" ");
+                sb.Append(word + ' ');
+            }
+
+            //Trim() は上書きしないから sb の意味がなくなるかも
+            Console.WriteLine(sb.ToString().Trim());        //おおもとの書き換えはなし
+
+            //var replaced = sb.ToString().Trim();        //変換後を保持
+            //Console.WriteLine(replaced);
+
+            //ほかの方法
+            /*
+            var words = text.Split(' ');
+            var sb = new StringBuilder(words[0]);
+            for (int i = 1; i < words.Length; i++)
+            {
+                sb.Append(words[i] + ' ');
             }
 
             Console.WriteLine(sb.ToString());
-            
+            */
+
         }
         #endregion
 #else
@@ -103,15 +118,28 @@ namespace Exercise03 {
         private static void Exercise3_5(string text) {
             var array = text.Split(' ').ToArray();      //後で変更がないように ToArray() で即時実行してる
 
-            var sb = new StringBuilder();       //ストリングビルダー生成
-            foreach (var word in array)
+            //一応完成
+            //var sb = new StringBuilder();       //ストリングビルダー生成
+            //foreach (var word in array)
+            //{
+            //    sb.Append(word);
+            //    sb.Append(' ');
+            //    //sb.Append(word + ' ');        //これもアリ
+            //}
+            //var createWords = sb.ToString();
+            //Console.WriteLine(createWords);
+
+            if(array.Length > 0)        //ガード処理。sbの不要なインスタンス生成を阻止
             {
-                sb.Append(word);
-                sb.Append(' ');
-                //sb.Append(word + ' ');        //これもアリ
+                var sb = new StringBuilder(array[0]);
+                foreach (var word in array.Skip(1))     //要素番号1番を飛ばし
+                {
+                    sb.Append(' ');
+                    sb.Append(word);
+                }
+                var createWords = sb.ToString();
+                Console.WriteLine(createWords);
             }
-            var createWords = sb.ToString();
-            Console.WriteLine(createWords);
         }
         #endregion
 #endif        
