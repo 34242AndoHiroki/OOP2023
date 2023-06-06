@@ -12,16 +12,21 @@ namespace Exercise04 {
 
 #if true
             #region 自力
-            string[] tags = { "Novelist", "BestWork", "Born" };      //変更前の書式
-            string[] comments = { "作者　", "代表作", "誕生年" };    //変更後の書式
+            string[] tags = { "Novelist", "BestWork", "Born" };
+            string[] comments = { "作者　", "代表作", "誕生年" };
 
             var informations = line.Split(';');
 
-            for (int i = 0; i < comments.Length; i++)
+            for (int i = 0; i < tags.Length; i++)
             {
-                Console.WriteLine(informations[i].Replace(tags[i] + "=", comments[i] + "："));
-            }
 
+                for (int j = 0; j < informations.Length; j++)
+                {
+                    if (informations[j].Contains(tags[i]))
+                        Console.WriteLine(informations[j].Replace(tags[i] + "=", comments[i] + "："));
+                }
+
+            }
             #endregion
 #else
             #region 模範解答
