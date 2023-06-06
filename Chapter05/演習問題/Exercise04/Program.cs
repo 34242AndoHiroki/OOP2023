@@ -12,15 +12,15 @@ namespace Exercise04 {
 
 #if true
             #region 自力
-            int novelist = 0;
-            int bestwork = 1;
-            int born = 2;
+            string[] tags = { "Novelist", "BestWork", "Born" };      //変更前の書式
+            string[] comments = { "作者　", "代表作", "誕生年" };    //変更後の書式
 
             var informations = line.Split(';');
 
-            Console.WriteLine(informations[novelist].Replace("Novelist=", "作者　："));
-            Console.WriteLine(informations[bestwork].Replace("BestWork=", "代表作："));
-            Console.WriteLine(informations[born].Replace("Born=", "誕生年："));
+            for (int i = 0; i < comments.Length; i++)
+            {
+                Console.WriteLine(informations[i].Replace(tags[i] + "=", comments[i] + "："));
+            }
 
             #endregion
 #else
