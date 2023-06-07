@@ -25,7 +25,8 @@ namespace Exercise01 {
             Exercise1_5(numbers);
 
         }
-
+#if !true
+        #region 自力
         private static void Exercise1_1(int[] numbers) {
             Console.WriteLine(numbers.Max());
         }
@@ -63,5 +64,30 @@ namespace Exercise01 {
         private static void Exercise1_5(int[] numbers) {
             Console.WriteLine(numbers.Distinct().Where(x => x > 10).Count());
         }
+        #endregion
+#else
+        #region 模範解答
+         private static void Exercise1_1(int[] numbers) {
+            var max = numbers.Max();
+            Console.WriteLine(max);
+        }
+
+        private static void Exercise1_2(int[] numbers) {
+            
+        }
+
+        private static void Exercise1_3(int[] numbers) {
+            
+        }
+
+        private static void Exercise1_4(int[] numbers) {
+            
+        }
+
+        private static void Exercise1_5(int[] numbers) {
+            
+        }
+        #endregion
+#endif
     }
 }
