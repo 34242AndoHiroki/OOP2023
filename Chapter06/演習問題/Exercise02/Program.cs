@@ -43,9 +43,9 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_1(List<Book> books) {
-            var i = books.Where(b => b.Title.Contains("ワンダフル・C#ライフ"));
+            var select = books.Where(b => b.Title.Contains("ワンダフル・C#ライフ"));
 
-            foreach (var book in i)
+            foreach (var book in select)
             {
                 Console.WriteLine("価格：{0}　ページ数：{1}" ,book.Price , book.Pages);
             }
@@ -70,6 +70,14 @@ namespace Exercise02 {
         private static void Exercise2_6(List<Book> books) {
             //一行完結型
             books.Where(b => b.Pages >= 400).OrderByDescending(b => b.Price).ToList().ForEach(b => Console.WriteLine("{0}：{1}", b.Title, b.Price));
+
+            //利点を生かす
+            //var select = books.Where(b => b.Pages >= 400).OrderByDescending(b => b.Price);
+
+            //foreach (var book in select)
+            //{
+            //    Console.WriteLine("{0}：{1}", book.Title, book.Price);
+            //}
         }
 
         private static void Exercise2_7(List<Book> books) {

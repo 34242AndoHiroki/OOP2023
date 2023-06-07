@@ -73,19 +73,25 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_2(int[] numbers) {
-            
+            var skip = numbers.Length - 2;
+            foreach (var n in numbers.Skip(skip))
+                Console.WriteLine(n);
         }
 
         private static void Exercise1_3(int[] numbers) {
-            
+            var strs = numbers.Select(n => n.ToString());
+            foreach (var s in strs)
+                Console.WriteLine(s);
         }
 
         private static void Exercise1_4(int[] numbers) {
-            
+            foreach (var n in numbers.OrderBy(n=>n).Take(3))
+                Console.WriteLine(n);
         }
 
         private static void Exercise1_5(int[] numbers) {
-            
+            var count = numbers.Distinct().Count(n => n > 10);
+            Console.WriteLine(count);
         }
         #endregion
 #endif
