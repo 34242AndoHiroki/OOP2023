@@ -27,23 +27,41 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_1(int[] numbers) {
-            throw new NotImplementedException();
+            Console.WriteLine(numbers.Max());
         }
 
         private static void Exercise1_2(int[] numbers) {
-            throw new NotImplementedException();
+            //一行完結型
+            numbers.Reverse().Take(2).ToList().ForEach(Console.WriteLine);
+
+            //利点を生かす
+            //var select = numbers.Reverse().Take(2);
+
+            //foreach (var n in select)
+            //{
+            //    Console.WriteLine(n);
+            //}
         }
 
         private static void Exercise1_3(int[] numbers) {
-            throw new NotImplementedException();
+            //一行完結型
+            numbers.Select(n => n.ToString()).ToList().ForEach(Console.WriteLine);
+
+            //利点を生かす
+            //var convert = numbers.Select(n => n.ToString());
+
+            //foreach (var n in convert)
+            //{
+            //    Console.WriteLine(n);
+            //}
         }
 
         private static void Exercise1_4(int[] numbers) {
-            throw new NotImplementedException();
+            numbers.OrderBy(x => x).Take(3).ToList().ForEach(Console.WriteLine);
         }
 
         private static void Exercise1_5(int[] numbers) {
-            throw new NotImplementedException();
+            Console.WriteLine(numbers.Distinct().Where(x => x > 10).Count());
         }
     }
 }
