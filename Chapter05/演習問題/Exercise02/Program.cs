@@ -19,7 +19,7 @@ namespace Exercise02 {
             }
             else
             {
-                Console.WriteLine();
+                Console.WriteLine("数値を入力して下さい");
             }
             #endregion
 #else

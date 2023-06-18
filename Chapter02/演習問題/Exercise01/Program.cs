@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Exercise01 {
     class Program {
         static void Main(string[] args) {
-#if false
+#if !false
         #region 自力
             #region ３．
             //2.1.3
