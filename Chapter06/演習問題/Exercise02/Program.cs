@@ -42,12 +42,14 @@ namespace Exercise02 {
 
         }
 
+#if true
+        #region 自力
         private static void Exercise2_1(List<Book> books) {
             var select = books.Where(b => b.Title.Contains("ワンダフル・C#ライフ"));
 
             foreach (var book in select)
             {
-                Console.WriteLine("価格：{0}　ページ数：{1}" ,book.Price , book.Pages);
+                Console.WriteLine("価格：{0}　ページ数：{1}", book.Price, book.Pages);
             }
         }
 
@@ -83,7 +85,14 @@ namespace Exercise02 {
         private static void Exercise2_7(List<Book> books) {
             books.Where(b => b.Title.Contains("C#") && b.Pages <= 500).ToList().ForEach(b => Console.WriteLine(b.Title));
         }
+    #endregion
+#else
+    #region 模範解答
+
+    #endregion
+#endif
     }
+
 
     class Book {
         public string Title { get; set; }
