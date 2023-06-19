@@ -42,7 +42,7 @@ namespace Exercise02 {
 
         }
 
-#if true
+#if !true
         #region 自力
         private static void Exercise2_1(List<Book> books) {
             var select = books.Where(b => b.Title.Contains("ワンダフル・C#ライフ"));
@@ -85,11 +85,52 @@ namespace Exercise02 {
         private static void Exercise2_7(List<Book> books) {
             books.Where(b => b.Title.Contains("C#") && b.Pages <= 500).ToList().ForEach(b => Console.WriteLine(b.Title));
         }
-    #endregion
+        #endregion
 #else
-    #region 模範解答
+        #region 模範解答
+        private static void Exercise2_1(List<Book> books) {
+            var book = books.Where(b => b.Title == "ワンダフル・C#ライフ");
+            foreach(var item in book)
+            {
+                Console.WriteLine("{0} {1}",item.Price , item.Pages);
+            }
 
-    #endregion
+            //
+            //var book = books.FirstOrDefault(b => b.Title == "ワンダフル・C#ライフ");
+            //if(book != null)      //例外対策もしなきゃいけない
+            //{
+            //    Console.WriteLine("{0} {1}", book.Price, book.Pages);
+            //}
+        }
+
+        private static void Exercise2_2(List<Book> books) {
+            var count = books.Count(b=>b.Title.Contains("C#"));     // == だと "C#" じゃないと引っかからない
+            Console.WriteLine(count);
+        }
+
+        private static void Exercise2_3(List<Book> books) {
+            var count = books.Where(b => b.Title.Contains("C#")).Average(b => b.Pages);
+            Console.WriteLine(count);
+        }
+
+        private static void Exercise2_4(List<Book> books) {
+            var book = books.FirstOrDefault(b => b.Price >= 4000);
+            if(book != null)
+                Console.WriteLine(book.Title);
+        }
+
+        private static void Exercise2_5(List<Book> books) {
+            throw new NotImplementedException();
+        }
+
+        private static void Exercise2_6(List<Book> books) {
+            throw new NotImplementedException();
+        }
+
+        private static void Exercise2_7(List<Book> books) {
+            throw new NotImplementedException();
+        }
+        #endregion
 #endif
     }
 
