@@ -52,12 +52,16 @@ namespace Test02 {
         //　　　　出力結果【12 14 17 20 31 35 40 48 53 76 87 91 94】
         private static void Exercise03(List<int> numbers) {
 
+            //遅延実行
             var sorted = numbers.OrderBy(n => n);
 
             foreach (var n in sorted)
             {
                 Console.Write(n + " ");
             }
+
+            //即時実行 の場合は...
+            //numbers.OrderBy(n => n).ToList().ForEach(n => Console.Write(n + " "));
 
         }
 

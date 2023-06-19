@@ -10,8 +10,6 @@ namespace Test01 {
 
             _score = ReadScore(filePath);
 
-
-
         }
 
 
