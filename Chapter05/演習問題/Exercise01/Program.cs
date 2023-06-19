@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 namespace Exercise01 {
     class Program {
         static void Main(string[] args) {
-            Console.WriteLine("文字列１：");
+            Console.Write("文字列１：");
             var s1 = Console.ReadLine();
 
-            Console.WriteLine("文字列２：");
+            Console.Write("文字列２：");
             var s2 = Console.ReadLine();
 #if true
             #region 自力

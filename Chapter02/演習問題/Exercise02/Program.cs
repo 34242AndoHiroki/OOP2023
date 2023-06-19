@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Exercise02 {
     class Program {
-#if false
+#if !false
         #region 自力
         static void Main(string[] args) {
             PrintInchToMetarList(1, 10);

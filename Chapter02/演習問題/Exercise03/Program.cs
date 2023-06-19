@@ -12,17 +12,16 @@ namespace Exercise03 {
             var sales = new SalesCounter(@"data\sales.csv");
             IDictionary<string, int> amount = null;
             int pattern;
-            string[] comments = { "１：店舗別売り上げ" , "２：商品カテゴリー別売り上げ" };
+            string[] comments = { "店舗別売り上げ" , "商品カテゴリー別売り上げ" };
 
             Console.WriteLine("＊＊売上集計＊＊");
-            foreach (string comment in comments)
+            for (int i = 0; i < comments.Length; i++)
             {
-                Console.WriteLine(comment);
+                Console.WriteLine("{0}：{1}", i+1, comments[i]);
             }
-            Console.Write(">");
-
             while (true)
             {
+            Console.Write(">");
                 try
                 {
                     while (true)
@@ -38,32 +37,25 @@ namespace Exercise03 {
                         }
                     }
 
-                    while (true)
+                    switch (pattern)
                     {
-                        try
-                        {
-                            switch (pattern)
-                            {
-                                case 1:     //店舗別売り上げ
-                                    amount = sales.GetPerStoreSales();
-                                    break;
-
-                                case 2:     //商品カテゴリー別売り上げ
-                                    amount = sales.GetPerCategorySales();
-                                    break;
-                            }
+                        case 1:     //店舗別売り上げ
+                            amount = sales.GetPerStoreSales();
                             break;
-                        }
-                        catch (Exception e)
-                        {
+
+                        case 2:     //商品カテゴリー別売り上げ
+                            amount = sales.GetPerCategorySales();
+                            break;
+
+                        default: 
                             throw new ArgumentException("数値が範囲外です。");
-                        }
                     }
-                    break;
+                    break;   
                 }
                 catch(Exception e)
                 {
-                    Console.WriteLine(e.StackTrace); 
+                    Console.WriteLine(e.Message);
+                    continue;
                 }
 
             }
