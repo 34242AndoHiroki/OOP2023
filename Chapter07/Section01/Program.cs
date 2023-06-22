@@ -197,11 +197,31 @@ namespace Section01 {
 
             }
 
-            //県名指定出力処理
-            Console.Write( "県名を入力：" );
-            var inputPref = Console.ReadLine();
+            Console.WriteLine();
+            Console.WriteLine( "１：一覧表示 , ２：県名指定" );
+            Console.Write( ">" );
+            var selected = Console.ReadLine();
 
-            Console.WriteLine( "{0}です" , prefOfficeDict[ inputPref ] );
+            if ( selected == "1" )
+            {
+
+                //一覧表示
+                foreach ( var item in prefOfficeDict )
+                {
+                    Console.WriteLine( "{0}({1})" , item.Key , item.Value );
+                }
+
+            }
+            else
+            {
+
+                //県名指定表示
+                Console.Write("県名を入力：");
+                var inputPref = Console.ReadLine();
+
+                Console.WriteLine("{0}です", prefOfficeDict[inputPref]);
+
+            }
 
             #endregion
 
