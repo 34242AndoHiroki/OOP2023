@@ -30,14 +30,14 @@ namespace Section01 {
 
             #region 自力
 
-            //moring glory(あさがお)【250円】を追加
+            //morning glory(あさがお)【250円】を追加
 
             Console.WriteLine( "ひまわりの価格は{0}円です。" , flowerDict[ "sunflower" ] );     //キー値でバリューを呼び出し
             Console.WriteLine( "チューリップの価格は{0}円です。" , flowerDict[ "tulip" ] );
 
-            flowerDict.Add( "moring glory" , 250 );     //あさがおの追加
+            flowerDict.Add( "morning glory" , 250 );     //あさがおの追加
 
-            Console.WriteLine( "あさがおの価格は{0}円です。" , flowerDict[ "moring glory" ] );
+            Console.WriteLine( "あさがおの価格は{0}円です。" , flowerDict[ "morning glory" ] );
 
             #endregion
 
@@ -64,14 +64,14 @@ namespace Section01 {
 
             #region 課題
 
-#if true
+#if !true
 
             #region 自力
 
             try
             {
 
-                var prefecturs = new Dictionary< string , string >();
+                var prefectures = new Dictionary< string , string >();
 
                 Console.WriteLine( "県庁所在地の登録" );
 
@@ -81,9 +81,19 @@ namespace Section01 {
                 while ( name != "999" )
                 {
 
-                    if( prefecturs.ContainsKey( name ))        //県名がもうある
+                    if( prefectures.ContainsKey( name ))        //県名がもうある
                     {
+
                         Console.WriteLine( "既に県名が存在します" );
+                        Console.WriteLine( "どうしますか？" );
+
+                        Console.WriteLine( "U:上書き　S:スキップ" );
+                        Console.Write( ">" );
+                        var choice = Console.ReadLine();
+
+                        
+
+
                     }
                     else        //新規県名
                     {
@@ -91,7 +101,7 @@ namespace Section01 {
                         Console.Write( "所在地：" );
                         var capital = Console.ReadLine();       //所在地の入力
 
-                        prefecturs[ name ] = capital;
+                        prefectures[ name ] = capital;
 
                     }
 
@@ -100,21 +110,45 @@ namespace Section01 {
 
                 }
 
-                Console.Write( "県名を入力：" );
+                Console.WriteLine( "１：一覧表示 , ２：県名指定" );
+                int pattern = int.Parse( Console.ReadLine() );
 
-                try
+                switch ( pattern )
                 {
 
-                    Console.WriteLine( prefecturs[ Console.ReadLine() ] + " です" );      //県名の検索
+                    case 1:         //一覧表示
 
-                }
-                catch ( KeyNotFoundException )
-                {
-                    throw new ArgumentException( "県名が見つかりませんでした。" );               
-                }
-                catch ( Exception )
-                {
-                    throw new ArgumentException( "エラーが発生しました。" );
+                        foreach ( var prefecture in prefectures )
+                        {
+                            Console.WriteLine( "{0}（{1}）" , prefecture.Key , prefecture.Value );
+                        }
+
+                        break;
+
+                    case 2:         //県名指定
+
+                        Console.Write( "県名を入力：" );
+
+                        try
+                        {
+
+                            Console.WriteLine( prefectures[ Console.ReadLine() ] + " です" );      //県名の検索
+
+                        }
+                        catch ( KeyNotFoundException )
+                        {
+                            throw new ArgumentException( "県名が見つかりませんでした。" );               
+                        }
+                        catch ( Exception )
+                        {
+                            throw new ArgumentException( "エラーが発生しました。" );
+                        }
+
+                        break;
+
+                    default:
+                        throw new ArgumentException( "数値の指定が不適切です。" );
+
                 }
 
             }
@@ -135,22 +169,35 @@ namespace Section01 {
             string city;
 
             Console.WriteLine("県庁所在地の登録");
-            Console.Write( "県名：" );
             while ( true )
             {
 
+                Console.Write("県名：");
                 pref = Console.ReadLine();
                 if ( pref == "999" ) break;
 
                 Console.Write( "所在地；" );
                 city = Console.ReadLine();
 
-                prefOfficeDict[ pref ] = city;
+                //既に県名が登録済みか？
+                if ( prefOfficeDict.ContainsKey( pref ) )
+                {
 
-                Console.Write( "県名：" );
+                    Console.WriteLine( "既に県名が登録されています。" );
+                    Console.Write( "上書きしますか？( y , n )：" );
+
+                    if( Console.ReadLine() == "y" )
+                    {
+                        continue;
+                    }
+
+                }
+
+                prefOfficeDict[ pref ] = city;        //登録処理
 
             }
 
+            //県名指定出力処理
             Console.Write( "県名を入力：" );
             var inputPref = Console.ReadLine();
 
