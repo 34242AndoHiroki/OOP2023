@@ -64,7 +64,7 @@ namespace Section01 {
 
             #region 課題
 
-#if !true
+#if true
 
             #region 自力
 
@@ -72,41 +72,74 @@ namespace Section01 {
             {
 
                 var prefectures = new Dictionary< string , string >();
+                string name = null;
+                string capital = null;
 
                 Console.WriteLine( "県庁所在地の登録" );
 
-                Console.Write( "県名：" );
-                var name = Console.ReadLine();      //県名の入力
+                input:
 
-                while ( name != "999" )
+                while ( true )
                 {
 
-                    if( prefectures.ContainsKey( name ))        //県名がもうある
+                    Console.Write( "県名：" );
+                    name = Console.ReadLine();      //県名の入力
+
+                    if ( name == "999" ) break;
+
+                    if( prefectures.ContainsKey( name ) )        //県名がもうある
                     {
 
                         Console.WriteLine( "既に県名が存在します" );
                         Console.WriteLine( "どうしますか？" );
 
                         Console.WriteLine( "U:上書き　S:スキップ" );
-                        Console.Write( ">" );
-                        var choice = Console.ReadLine();
 
+                        while( true )
+                        {
+
+                            Console.Write( ">" );
+                            var choice = Console.ReadLine();
+
+                            try
+                            {
+
+                                if ( choice == "U" )        //上書き
+                                {
+
+                                    prefectures[ name ] = capital;
+                                    Console.WriteLine( "上書きを実行します。" );
+                                    Console.Write( "(上書き)" );
+                                    break;          //次の処理へ
+
+                                }
+                                else if( choice == "S" )        //スキップ
+                                {
+
+                                    Console.WriteLine( "スキップしました。" );
+                                    goto input;
+
+                                }
+                                else
+                                {
+                                    throw new ArgumentException( "定義されていない指定です。" );
+                                }
+
+                            }
+                            catch( Exception e )
+                            {
+                                Console.WriteLine( e.Message ); 
+                            }
+                            
+                        }   
                         
-
-
-                    }
-                    else        //新規県名
-                    {
-
-                        Console.Write( "所在地：" );
-                        var capital = Console.ReadLine();       //所在地の入力
-
-                        prefectures[ name ] = capital;
-
                     }
 
-                    Console.Write( "県名：" );
-                    name = Console.ReadLine();      //県名の入力
+                    //新規県名（上書き）
+                    Console.Write( "所在地：" );
+                    capital = Console.ReadLine();       //所在地の入力
+
+                    prefectures[ name ] = capital;
 
                 }
 
@@ -120,7 +153,7 @@ namespace Section01 {
 
                         foreach ( var prefecture in prefectures )
                         {
-                            Console.WriteLine( "{0}（{1}）" , prefecture.Key , prefecture.Value );
+                            Console.WriteLine( "{0}（ {1} ）" , prefecture.Key , prefecture.Value );
                         }
 
                         break;
