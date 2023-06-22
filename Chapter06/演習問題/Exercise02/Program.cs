@@ -95,7 +95,7 @@ namespace Exercise02 {
                 Console.WriteLine("{0} {1}",item.Price , item.Pages);
             }
 
-            //
+            //最初に見つかったものだけを対象にする
             //var book = books.FirstOrDefault(b => b.Title == "ワンダフル・C#ライフ");
             //if(book != null)      //例外対策もしなきゃいけない
             //{
@@ -115,20 +115,34 @@ namespace Exercise02 {
 
         private static void Exercise2_4(List<Book> books) {
             var book = books.FirstOrDefault(b => b.Price >= 4000);
-            if(book != null)
+            if(book != null) 
+            {
                 Console.WriteLine(book.Title);
+            }
+                
         }
 
         private static void Exercise2_5(List<Book> books) {
-            throw new NotImplementedException();
+            var pages = books.Where(b => b.Price < 4000).Max(b => b.Pages);     // Max() と書かないように。「何を」をしっかりする
+            Console.WriteLine(pages);
         }
 
         private static void Exercise2_6(List<Book> books) {
-            throw new NotImplementedException();
+            var selected = books.Where(b => b.Pages >= 400).OrderByDescending(b => b.Price);
+
+            foreach (var book in selected)
+            {
+                Console.WriteLine("{0} {1}", book.Title, book.Price);
+            }
         }
 
         private static void Exercise2_7(List<Book> books) {
-            throw new NotImplementedException();
+            var selected = books.Where(b => b.Title.Contains("C#") && b.Pages <= 500);      //var selected = books.Where(b => b.Title.Contains("C#") && b.Pages <= 500);       ×
+                                                                                            //b => ... b はすべてに渡される
+            foreach (var book in selected)
+            {
+                Console.WriteLine(book.Title);
+            }
         }
         #endregion
 #endif
