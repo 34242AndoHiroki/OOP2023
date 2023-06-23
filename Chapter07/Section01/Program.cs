@@ -71,9 +71,11 @@ namespace Section01 {
             try
             {
 
-                var prefectures = new Dictionary< string , string >();
+                var prefectures = new Dictionary< string , CityInfo >();
                 string name = null;
                 string capital = null;
+                int population;
+                string comment = "";
 
                 Console.WriteLine( "県庁所在地の登録" );
 
@@ -107,9 +109,8 @@ namespace Section01 {
                                 if ( choice == "U" )        //上書き
                                 {
 
-                                    prefectures[ name ] = capital;
-                                    Console.WriteLine( "上書きを実行します。" );
-                                    Console.Write( "(上書き)" );
+                                    Console.WriteLine( name + " の上書きを実行します。" );
+                                    comment = "(上書き)";
                                     break;          //次の処理へ
 
                                 }
@@ -135,11 +136,30 @@ namespace Section01 {
                         
                     }
 
-                    //新規県名（上書き）
-                    Console.Write( "所在地：" );
+                    //新規登録（上書き）
+                    Console.Write( comment + "所在地：" );
                     capital = Console.ReadLine();       //所在地の入力
 
-                    prefectures[ name ] = capital;
+                    while ( true )
+                    {
+
+                        try
+                        {
+
+                            Console.Write( comment + "人口：" );
+                            population = int.Parse( Console.ReadLine() );       //人口の入力
+                            break;
+
+                        }
+                        catch ( Exception e )
+                        {
+                            Console.WriteLine( e.Message );
+                        }
+
+                    }
+
+                    prefectures[ name ] = new CityInfo { City = capital , Population = population };
+                    comment = "";
 
                 }
 
@@ -153,7 +173,7 @@ namespace Section01 {
 
                         foreach ( var prefecture in prefectures )
                         {
-                            Console.WriteLine( "{0}（ {1} ）" , prefecture.Key , prefecture.Value );
+                            Console.WriteLine(" {0}【 {1} ( 人口：{2} 人 ) 】", prefecture.Key , prefecture.Value.City , prefecture.Value.Population );
                         }
 
                         break;
@@ -265,6 +285,13 @@ namespace Section01 {
 #endif
 
         }
+
+    }
+
+    class CityInfo {        //public はあったほうがいい　コンストラクタでもOK
+
+        public string City { get; set; }           //都市
+        public int Population { get; set; }        //人口
 
     }
 
