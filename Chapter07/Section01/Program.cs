@@ -64,7 +64,7 @@ namespace Section01 {
 
             #region 課題
 
-#if true
+#if !true
 
             #region 自力
 
@@ -190,9 +190,46 @@ namespace Section01 {
 
                     case 1:         //一覧表示
 
-                        foreach ( var prefecture in prefectures )
+                        Console.WriteLine( "表示形式\n0：デフォルト　1：人口の降順　2：名前順" );
+
+                        while ( true )
                         {
-                            Console.WriteLine(" {0}【 {1} ( 人口：{2} 人 ) 】", prefecture.Key , prefecture.Value.City , prefecture.Value.Population );
+
+                            try
+                            {
+
+                                Console.Write( ">" );
+                                pattern = int.Parse( Console.ReadLine() );
+                                break;
+
+                            }
+                            catch ( Exception e )
+                            {
+                                Console.WriteLine( e.Message );
+                            }
+
+                        }
+
+                        switch ( pattern )
+                        {
+
+                            case 0:
+
+                                foreach ( var prefecture in prefectures )
+                                {
+                                    Console.WriteLine(" {0}【 {1} ( 人口：{2} 人 ) 】", prefecture.Key , prefecture.Value.City , prefecture.Value.Population );
+                                }
+
+                                break;
+
+                            case 1:
+
+                                prefectures.OrderByDescending( n => n.Value.Population ).ToList().ForEach( p => Console.WriteLine( " {0}【 {1} ( 人口：{2} 人 ) 】", p.Key , p.Value.City , p.Value.Population ) );
+
+                                break;
+
+                            default:
+                                break;
                         }
 
                         break;
@@ -287,11 +324,13 @@ namespace Section01 {
             if ( selected == "1" )
             {
 
+
+
                 //一覧表示
-                foreach ( var item in prefOfficeDict )
+                foreach ( var item in prefOfficeDict.OrderByDescending( p => p.Value.Population ) )
                 {
                     Console.WriteLine( "{0}【{1}(人口：{2}人)】)" , item.Key , item.Value.City , item.Value.Population );
-                    Console.WriteLine( item );      //KeyValuePairクラスの表示形式　やっちゃダメ
+                    //Console.WriteLine( item );      //KeyValuePairクラスの表示形式　やっちゃダメ
                 }
 
             }
