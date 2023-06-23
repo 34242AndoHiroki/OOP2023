@@ -57,6 +57,13 @@ namespace Section01 {
             #endregion
 
 #endif
+            //応用編
+
+            //ToDictionary() 
+            List< CityInfo > list = new List< CityInfo >();
+            var ciDict = list.ToDictionary( ci => ci.Population );      //引数をキーにしてディクショナリにできる
+
+
 
             #endregion
 
@@ -64,7 +71,7 @@ namespace Section01 {
 
             #region 課題
 
-#if !true
+#if true
 
             #region 自力
 
@@ -225,11 +232,16 @@ namespace Section01 {
                             case 1:
 
                                 prefectures.OrderByDescending( n => n.Value.Population ).ToList().ForEach( p => Console.WriteLine( " {0}【 {1} ( 人口：{2} 人 ) 】", p.Key , p.Value.City , p.Value.Population ) );
+                                break;
 
+                            case 2:
+
+                                //prefectures.OrderByDescending( n => n.Value.Population ).ToList().ForEach( p => Console.WriteLine( " {0}【 {1} ( 人口：{2} 人 ) 】", p.Key , p.Value.City , p.Value.Population ) );
                                 break;
 
                             default:
-                                break;
+                                throw new ArgumentException( "数値の範囲外です。" );
+                                
                         }
 
                         break;
