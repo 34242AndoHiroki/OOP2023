@@ -76,6 +76,8 @@ namespace Section01 {
                 string capital = null;
                 int population;
                 string comment = "";
+                int pattern;
+                string target;
 
                 Console.WriteLine( "県庁所在地の登録" );
 
@@ -164,7 +166,24 @@ namespace Section01 {
                 }
 
                 Console.WriteLine( "１：一覧表示 , ２：県名指定" );
-                int pattern = int.Parse( Console.ReadLine() );
+
+                while ( true )
+                {
+
+                    try
+                    {
+
+                        Console.Write( ">" );
+                        pattern = int.Parse( Console.ReadLine() );
+                        break;
+
+                    }
+                    catch ( Exception e )
+                    {
+                        Console.WriteLine( e.Message );
+                    }
+
+                }
 
                 switch ( pattern )
                 {
@@ -180,12 +199,13 @@ namespace Section01 {
 
                     case 2:         //県名指定
 
-                        Console.Write( "県名を入力：" );
-
                         try
                         {
 
-                            Console.WriteLine( prefectures[ Console.ReadLine() ] + " です" );      //県名の検索
+                            Console.Write( "県名を入力：" );
+                            target = Console.ReadLine();
+
+                            Console.WriteLine("【 {0} ( 人口：{1} 人 ) 】" , prefectures[ target ].City , prefectures[ target ].Population );      //県名の検索
 
                         }
                         catch ( KeyNotFoundException )
@@ -200,7 +220,7 @@ namespace Section01 {
                         break;
 
                     default:
-                        throw new ArgumentException( "数値の指定が不適切です。" );
+                        throw new ArgumentException( "数値の範囲外です。" );
 
                 }
 
@@ -216,10 +236,11 @@ namespace Section01 {
 
             #region 模範解答
 
-            var prefOfficeDict = new Dictionary< string , string >();
+            var prefOfficeDict = new Dictionary< string , CityInfo >();
 
             string pref;
             string city;
+            int population;
 
             Console.WriteLine("県庁所在地の登録");
             while ( true )
@@ -231,6 +252,9 @@ namespace Section01 {
 
                 Console.Write( "所在地；" );
                 city = Console.ReadLine();
+
+                Console.Write( "人口：" );
+                population = int.Parse( Console.ReadLine() );
 
                 //既に県名が登録済みか？
                 if ( prefOfficeDict.ContainsKey( pref ) )
@@ -246,7 +270,12 @@ namespace Section01 {
 
                 }
 
-                prefOfficeDict[ pref ] = city;        //登録処理
+                //登録処理
+                prefOfficeDict[ pref ] = new CityInfo
+                {
+                    City = city ,
+                    Population = population ,
+                };
 
             }
 
@@ -261,7 +290,8 @@ namespace Section01 {
                 //一覧表示
                 foreach ( var item in prefOfficeDict )
                 {
-                    Console.WriteLine( "{0}({1})" , item.Key , item.Value );
+                    Console.WriteLine( "{0}【{1}(人口：{2}人)】)" , item.Key , item.Value.City , item.Value.Population );
+                    Console.WriteLine( item );      //KeyValuePairクラスの表示形式　やっちゃダメ
                 }
 
             }
@@ -272,7 +302,7 @@ namespace Section01 {
                 Console.Write("県名を入力：");
                 var inputPref = Console.ReadLine();
 
-                Console.WriteLine("{0}です", prefOfficeDict[inputPref]);
+                Console.WriteLine( "【{0}(人口：{1}人)】)", prefOfficeDict[ inputPref ].City , prefOfficeDict[ inputPref ].Population );
 
             }
 
