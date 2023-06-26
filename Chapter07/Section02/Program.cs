@@ -8,7 +8,7 @@ namespace Section02 {
     class Program {
         static void Main(string[] args) {
 
-#if true
+#if !true
 
             #region 自力
 
@@ -141,6 +141,7 @@ namespace Section02 {
                     Population = population,
                 };
 
+                //これは冗長
                 ////既に県名が登録済みか？
                 //if ( prefDict.ContainsKey( pref ) )
                 //{
@@ -188,6 +189,7 @@ namespace Section02 {
             Console.Write( ">" );
             var selected = Console.ReadLine();
 
+            //Value がリストでない場合
             //if ( selected == "1" )
             //{
 
@@ -211,6 +213,39 @@ namespace Section02 {
             //    Console.WriteLine( "【{0}(人口：{1}人)】)", prefDict[ inputPref ].City , prefDict[ inputPref ].Population );
 
             //}
+
+            if ( selected == "1" )
+            {
+
+                foreach ( var prefData in prefDict )
+                {
+
+                    foreach ( var cityData in prefData.Value )
+                    {
+
+                        //Console.WriteLine( "【{0}(人口：{1}人)】)" , cityData.Key , cityData.Value.City , cityData.Value.Population );      //Valueいらない
+                        Console.WriteLine( "【{0}(人口：{1}人)】)" , prefData.Key , cityData.City , cityData.Population );
+
+                    }
+
+                }
+
+            }
+            else
+            {
+
+                //県名指定表示
+                Console.Write( "県名を入力：" );
+                var inputPref = Console.ReadLine();
+
+                foreach ( var cityData in prefDict[ inputPref ] )
+                {
+                    Console.WriteLine( "{0}【{1}(人口：{2}人)】)" , inputPref , cityData.City , cityData.Population );
+                }
+
+                //Console.WriteLine( "【{0}(人口：{1}人)】)" , prefDict[ inputPref ].City , prefDict[ inputPref ].Population );       //間違い　List だし...
+
+            }
 
             #endregion
 
