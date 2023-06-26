@@ -8,7 +8,7 @@ namespace Section02 {
     class Program {
         static void Main(string[] args) {
 
-#if !true
+#if true
 
             #region 自力
 
@@ -29,28 +29,31 @@ namespace Section02 {
                 pref = Console.ReadLine();
                 if ( pref == "999" ) break;
 
-                Console.Write( "所在地；" );
+                Console.Write( "所在地：" );
                 city = Console.ReadLine();
 
                 Console.Write( "人口：" );
                 population = int.Parse( Console.ReadLine() );
 
                 //既に県名が登録済みか？
-                if ( prefOfficeDict?.ContainsKey( pref ) ?? false )
+                if ( prefOfficeDict.ContainsKey( pref ) )
                 {
 
                     foreach ( var info in prefOfficeDict[ pref ] )
                     {
+
                         if ( city.Equals( info.City ) )
                         {
 
-                            Console.WriteLine( "既に市名が登録されています。" );
+                            Console.WriteLine( "既に市町村名が登録されています。" );
                             Console.Write( "上書きしますか？( y , n )：" );
 
-                            if( Console.ReadLine() == "n" )
+                            if( Console.ReadLine() == "y" )
                             {
-                                goto input;
+                                info.Population = population;
                             }
+
+                            goto input;
 
                         }
 
