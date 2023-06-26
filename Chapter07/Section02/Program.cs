@@ -12,16 +12,19 @@ namespace Section02 {
 
             #region 自力
 
-            var prefOfficeDict = new Dictionary< string , CityInfo >();
+            var prefOfficeDict = new Dictionary< string , List< CityInfo > >();
 
             string pref;
             string city;
             int population;
 
             Console.WriteLine( "県庁所在地の登録" );
+
+            input:
+
             while ( true )
             {
-
+                        
                 Console.Write( "都市：" );
                 pref = Console.ReadLine();
                 if ( pref == "999" ) break;
@@ -33,25 +36,40 @@ namespace Section02 {
                 population = int.Parse( Console.ReadLine() );
 
                 //既に県名が登録済みか？
-                if ( prefOfficeDict.ContainsKey( pref ) )
+                if ( prefOfficeDict?.ContainsKey( pref ) ?? false )
                 {
 
-                    Console.WriteLine( "既に県名が登録されています。" );
-                    Console.Write( "上書きしますか？( y , n )：" );
-
-                    if( Console.ReadLine() == "y" )
+                    foreach ( var info in prefOfficeDict[ pref ] )
                     {
-                        continue;
+                        if ( city.Equals( info.City ) )
+                        {
+
+                            Console.WriteLine( "既に市名が登録されています。" );
+                            Console.Write( "上書きしますか？( y , n )：" );
+
+                            if( Console.ReadLine() == "n" )
+                            {
+                                goto input;
+                            }
+
+                        }
+
                     }
 
                 }
+                else
+                {
+                    prefOfficeDict.Add( pref , new List< CityInfo >() );
+                }
 
                 //登録処理
-                prefOfficeDict[ pref ] = new CityInfo
+                prefOfficeDict[ pref ].Add( 
+                new CityInfo
                 {
                     City = city ,
                     Population = population ,
-                };
+                } 
+                );
 
             }
 
@@ -63,13 +81,15 @@ namespace Section02 {
             if ( selected == "1" )
             {
 
-
-
                 //一覧表示
-                foreach ( var item in prefOfficeDict.OrderByDescending( p => p.Value.Population ) )
+                foreach ( var list in prefOfficeDict )
                 {
-                    Console.WriteLine( "{0}【{1}(人口：{2}人)】)" , item.Key , item.Value.City , item.Value.Population );
-                    //Console.WriteLine( item );      //KeyValuePairクラスの表示形式　やっちゃダメ
+
+                    foreach ( var item in list.Value )
+                    {
+                        Console.WriteLine( "{0}【 {1} ( 人口：{2} 人 ) 】)" , list.Key , item.City , item.Population );
+                    }
+
                 }
 
             }
@@ -77,10 +97,14 @@ namespace Section02 {
             {
 
                 //県名指定表示
-                Console.Write("県名を入力：");
+                Console.Write( "県名を入力：" );
                 var inputPref = Console.ReadLine();
 
-                Console.WriteLine( "【{0}(人口：{1}人)】)", prefOfficeDict[ inputPref ].City , prefOfficeDict[ inputPref ].Population );
+                foreach ( var item in prefOfficeDict[ inputPref ] )
+                {
+                    Console.WriteLine( "{0} 【 {1} ( 人口：{2} 人 ) 】)", inputPref , item.City , item.Population );
+                }
+
 
             }
 
@@ -90,7 +114,7 @@ namespace Section02 {
 
             #region 模範解答
 
-            var prefOfficeDict = new Dictionary< string , CityInfo >();
+            var prefDict = new Dictionary< string , List< CityInfo > >();
 
             string pref;
             string city;
@@ -104,32 +128,58 @@ namespace Section02 {
                 pref = Console.ReadLine();
                 if ( pref == "999" ) break;
 
-                Console.Write( "所在地；" );
+                Console.Write( "市町村；" );
                 city = Console.ReadLine();
 
                 Console.Write( "人口：" );
                 population = int.Parse( Console.ReadLine() );
 
-                //既に県名が登録済みか？
-                if ( prefOfficeDict.ContainsKey( pref ) )
+                //市町村情報インスタンスの作成
+                var cityInfo = new CityInfo
                 {
+                    City = city,
+                    Population = population,
+                };
 
-                    Console.WriteLine( "既に県名が登録されています。" );
-                    Console.Write( "上書きしますか？( y , n )：" );
+                ////既に県名が登録済みか？
+                //if ( prefDict.ContainsKey( pref ) )
+                //{
 
-                    if( Console.ReadLine() == "y" )
-                    {
-                        continue;
-                    }
+                //    //Console.WriteLine( "既に県名が登録されています。" );
+                //    //Console.Write( "上書きしますか？( y , n )：" );
 
+                //    //if( Console.ReadLine() == "y" )
+                //    //{
+                //    //    continue;
+                //    //}
+
+                //    //List< CityInfo >が存在するため add で市町村データを追加
+                //    prefDict[ pref ].Add( cityInfo );
+
+                //}
+                //else
+                //{
+
+                //    //List< CityInfo >が存在しないため List を作成（new）して市町村データを追加
+                //    //prefDict[ pref ] = new List< CityInfo >;      これでもいいが...
+
+                //    prefDict[ pref ] = new List< CityInfo > { cityInfo }; 
+
+                //}
+
+                if ( !prefDict.ContainsKey( pref ) )
+                {
+                    prefDict[ pref ] = new List< CityInfo >();      //既に県名が未登録ならリスト作成
                 }
 
+                prefDict[ pref ].Add( cityInfo );
+
                 //登録処理
-                prefOfficeDict[ pref ] = new CityInfo
-                {
-                    City = city ,
-                    Population = population ,
-                };
+                //prefOfficeDict[ pref ] = new CityInfo
+                //{
+                //    City = city ,
+                //    Population = population ,
+                //};
 
             }
 
@@ -138,29 +188,29 @@ namespace Section02 {
             Console.Write( ">" );
             var selected = Console.ReadLine();
 
-            if ( selected == "1" )
-            {
+            //if ( selected == "1" )
+            //{
 
 
 
-                //一覧表示
-                foreach ( var item in prefOfficeDict.OrderByDescending( p => p.Value.Population ) )
-                {
-                    Console.WriteLine( "{0}【{1}(人口：{2}人)】)" , item.Key , item.Value.City , item.Value.Population );
-                    //Console.WriteLine( item );      //KeyValuePairクラスの表示形式　やっちゃダメ
-                }
+            //    //一覧表示
+            //    foreach ( var item in prefDict.OrderByDescending( p => p.Value.Population ) )
+            //    {
+            //        Console.WriteLine( "{0}【{1}(人口：{2}人)】)" , item.Key , item.Value.City , item.Value.Population );
+            //        //Console.WriteLine( item );      //KeyValuePairクラスの表示形式　やっちゃダメ
+            //    }
 
-            }
-            else
-            {
+            //}
+            //else
+            //{
 
-                //県名指定表示
-                Console.Write("県名を入力：");
-                var inputPref = Console.ReadLine();
+            //    //県名指定表示
+            //    Console.Write("県名を入力：");
+            //    var inputPref = Console.ReadLine();
 
-                Console.WriteLine( "【{0}(人口：{1}人)】)", prefOfficeDict[ inputPref ].City , prefOfficeDict[ inputPref ].Population );
+            //    Console.WriteLine( "【{0}(人口：{1}人)】)", prefDict[ inputPref ].City , prefDict[ inputPref ].Population );
 
-            }
+            //}
 
             #endregion
 
