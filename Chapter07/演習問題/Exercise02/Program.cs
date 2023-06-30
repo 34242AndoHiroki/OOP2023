@@ -27,7 +27,7 @@ namespace Exercise02 {
             abbrs.Where(a => a.Key.Length <= 3).ToList().ForEach(a => Console.WriteLine("{0}={1}", a.Key, a.Value));
 
             //遅延実行
-            //var selected = abbrs.Where(a => a.Key.Length <= 3);
+            //var selected = abbrs.Where(a => a.Key.Length == 3);
 
             //foreach (var item in selected)
             //{
@@ -43,17 +43,38 @@ namespace Exercise02 {
             abbrs.Add("IOC","国際オリンピック委員会");
             abbrs.Add("NPT", "核拡散防止条約");
 
-            //7.2.3（Removeの呼び出し）
+            // 7.2.3
+            // 上のAddメソッドで、２つのオブジェクトを追加しているので、
+            // 読み込んだ単語数 + 2 が、Countの値になる。
+
+            //int count = abbrs.Count;        //()なしはプロパティ
+            Console.WriteLine(abbrs.Count);
+            Console.WriteLine();
+
+            // 7.2.3（Removeの呼び出し）
+            if (abbrs.Remove("NPT"))
+                Console.WriteLine(abbrs.Count);
+            if (!abbrs.Remove("NPT"))
+                Console.WriteLine("削除できません");
+            Console.WriteLine();
 
 
-            //7.2.4
-            //IEnumerable<> を実装したので、LINQが使える
+            // 7.2.4
+            // IEnumerable<> を実装したので、LINQが使える
 
+            //全件取得
+            //foreach (var item in abbrs)
+            //{
+            //    Console.WriteLine("{0}={1}",item.Key,item.Value);
+            //}
+
+            foreach (var item in abbrs.Where(abb => abb.Value.Length == 3))
+            {
+                Console.WriteLine("{0}={1}",item.Key,item.Value);
+            }
 
             #endregion
 #endif
-
-
         }
     }
 }

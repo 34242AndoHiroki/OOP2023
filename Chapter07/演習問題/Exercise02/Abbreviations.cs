@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 namespace Exercise02 {
     // List 7-19
     // 略語と対応する日本語を管理するクラス
-    class Abbreviations : IEnumerable<KeyValuePair<string,string>>{
+    class Abbreviations : IEnumerable<KeyValuePair<string,string>>{     //外部から LINQ にアクセスする
 
-#if true
+#if !true
         #region 自力
         private Dictionary<string, string> _dict = new Dictionary<string, string>();
         public int Count { get; private set; }
@@ -104,20 +104,24 @@ namespace Exercise02 {
             }
         }
 
-        //7.2.1
+        // 7.2.1
+        public int Count
+        {
+            get     //この中に処理を書く
+            {
+                return _dict.Count;     // get の中では return する
+            }
+        }
 
 
-
-        //7.2.2
-        public bool Remove(string abbr) {
-
-
-
+        // 7.2.2
+        public bool Remove(string abb) {
+            return _dict.Remove(abb);
         }
         #endregion
 #endif
 
-
+        //LINQ のための実装
         public IEnumerator<KeyValuePair<string, string>> GetEnumerator() {
             return ((IEnumerable<KeyValuePair<string, string>>)_dict).GetEnumerator();
         }

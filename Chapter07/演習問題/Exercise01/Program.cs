@@ -13,7 +13,7 @@ namespace Exercise01 {
             Exercise1_2(text);
         }
 
-#if true
+#if !true
         #region 自力
         private static void Exercise1_1(string text) {
             var dict = new Dictionary<Char, int>();
@@ -57,14 +57,33 @@ namespace Exercise01 {
         #region 模範解答
         private static void Exercise1_1(string text) {
             var dict = new Dictionary<Char, int>();
+            foreach (var c in text)
+            {
+                var uc = char.ToUpper(c);
+                if ('A' <= c && c <= 'Z')
+                {
+                    if (dict.ContainsKey(uc))
+                    {
+                        dict[uc]++;
+                    }
+                    else
+                    {
+                        dict[uc] = 1;
+                    }
+                }
+            }
+
+            foreach (var item in dict.OrderBy(c=>c.Key))        //OrderBy(c=>c)はだめ
+            {
+                Console.WriteLine("{0}：{1}", item.Key, item.Value);
+            }
         }
 
         private static void Exercise1_2(string text) {
-
+            var dict = new SortedDictionary<Char, int>();
         }
         #endregion
 #endif
-
 
     }
 }

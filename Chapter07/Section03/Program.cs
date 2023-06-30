@@ -11,7 +11,7 @@ namespace Section03 {
         static void Main(string[] args) {
 
             //ドライバ
-            new Abbreviations();        //動きの確認
+            //new Abbreviations();        //動きの確認
 
             var abbrs = new Abbreviations();
 
