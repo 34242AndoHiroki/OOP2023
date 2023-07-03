@@ -23,18 +23,12 @@ namespace Exercise03 {
     class TimeWatch {
 
         DateTime start;
-        DateTime stop;
 
         public void Start() {
             start = DateTime.Now;
         }
 
-        public TimeSpan Stop() {
-
-            stop = DateTime.Now;
-            return stop - start;
-
-        }
+        public TimeSpan Stop() => DateTime.Now - start;
 
     }
     #endregion
@@ -52,18 +46,15 @@ namespace Exercise03 {
 
     class TimeWatch {
 
+        private DateTime _time;
+
         public void Start() {
-
-
-
+            _time = DateTime.Now;
         }
 
         public TimeSpan Stop() {
-
-
-
+            return DateTime.Now - _time;
         }
-
 
     }
 
