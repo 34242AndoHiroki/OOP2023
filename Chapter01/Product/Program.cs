@@ -1,4 +1,8 @@
-﻿using System;
+﻿//#define Ques01
+//#define Ques02
+//#define Ques03
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -61,6 +65,7 @@ namespace ProductSample {     //名前空間
              * ※できた人は「0508演習3」とコメントを入力し、コミット＆プッシュ。
              */
 
+#if Ques01
             #region 【演習１】
 
             /*
@@ -91,7 +96,9 @@ namespace ProductSample {     //名前空間
                     + date.AddDays( -10 ).Day + "日");     //すっきり、変数削減
 
             #endregion
+#endif
 
+#if Ques02
             #region 【演習２】
 
             /* 【演習２】
@@ -148,7 +155,9 @@ namespace ProductSample {     //名前空間
 #endif
 
             #endregion
+#endif
 
+#if Ques03
             #region 【演習３】
 
             /* 【演習３】
@@ -206,6 +215,7 @@ namespace ProductSample {     //名前空間
             #endregion
 #endif
             #endregion
+#endif
 
         }
     }
