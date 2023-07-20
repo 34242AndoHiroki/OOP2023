@@ -1,4 +1,4 @@
-﻿//#define Mywork
+﻿#define Mywork
 #define Answer
 
 using System;
@@ -6,10 +6,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace CarReportSystem {
 
@@ -17,6 +20,9 @@ namespace CarReportSystem {
 
         //管理用のデータ
         BindingList< CarReport > CarReports = new BindingList< CarReport >();       //バインディングさせるリスト
+
+        //設定情報保存用オブジェクト
+        Settings settings = new Settings();
 
         public Form1() {
 
@@ -51,6 +57,29 @@ namespace CarReportSystem {
             btDeleteReport.Enabled = false;
             authorNameNotInput.Visible = false;
             carNameNotInput.Visible = false;
+
+            //設定ファイルを逆シリアル化して背景を設定
+            using ( var reader = XmlReader.Create( "settings.xml" ) )
+            {
+
+                var serializer = new XmlSerializer( typeof( Settings ) );
+                settings = serializer.Deserialize( reader ) as Settings;
+                //settings = ( Settings )serializer.Deserialize( reader );
+
+                try
+                {
+
+                    BackColor = Color.FromArgb( settings.MainFormColor );
+
+                }
+                catch ( Exception )
+                {
+
+                    BackColor = Color.AliceBlue;    //エラーはデフォルトの色で
+
+                }
+
+            }
 
         }
 
@@ -271,7 +300,10 @@ namespace CarReportSystem {
 
             if ( cd.ShowDialog() == DialogResult.OK )
             {
+
                 this.BackColor = cd.Color;
+                settings.MainFormColor = BackColor.ToArgb();
+
             }
 
         }
@@ -288,7 +320,19 @@ namespace CarReportSystem {
 
         private void btScaleChange_Click( object sender , EventArgs e ) {
 
-            pbCarImage.SizeMode = ( PictureBoxSizeMode )( mode++ %= 5 );        // = ナシは mode オーバーフローのもと
+            pbCarImage.SizeMode = ( PictureBoxSizeMode )( mode++ % 5 );        // = ナシは mode オーバーフローのもと
+
+        }
+
+        private void Form1_FormClosed( object sender , FormClosedEventArgs e ) {
+
+            using ( var writer = XmlWriter.Create( "settings.xml" ) )       //xml ファイルに書き込む
+            {
+
+                var serializer = new XmlSerializer( settings.GetType() );
+                serializer.Serialize( writer , settings );
+
+            }
 
         }
 
@@ -298,7 +342,8 @@ namespace CarReportSystem {
 
         #region 模範解答
 
-        private uint mode;       //クラス変数
+        //private uint mode;       //クラス変数
+        private PictureBoxSizeMode mode;
 
         private void Form1_Load( object sender , EventArgs e ) {
 
@@ -312,7 +357,18 @@ namespace CarReportSystem {
             btDeleteReport.Enabled = false;     //削除ボタン無効
 
             //tsInfoText.Text = "ここにメッセージを入力してください。";     //メッセージの表示
-            tsInfoText.Text = "";     //メッセージの表示
+            //tsInfoText.Text = "";     //メッセージの非表示
+
+            //設定ファイルを逆シリアル化して背景を設定
+            using ( var reader = XmlReader.Create( "settings.xml" ) )
+            {
+
+                var serializer = new XmlSerializer( typeof( Settings ) );
+                settings = serializer.Deserialize( reader ) as Settings;        // as : 参照のキャスト
+                //settings = ( Settings )serializer.Deserialize( reader );        //多分エラー
+                BackColor = Color.FromArgb( settings.MainFormColor );
+
+            }
 
         }
 
@@ -321,19 +377,19 @@ namespace CarReportSystem {
 
             statusLabelDisp();      //ステータスラベルのテキスト非表示
 
-            if (cbAuthor.Equals(""))       //cbAuthor.Text == "" でも可
+            if ( cbAuthor.Equals( "" ) )       //cbAuthor.Text == "" でも可
             {
 
                 //tsInfoText.Text = "記録者を入力してください";
-                statusLabelDisp("記録者を入力してください");
+                statusLabelDisp( "記録者を入力してください" );
                 return;
 
             }
-            else if (cbCarName.Text.Equals(""))
+            else if ( cbCarName.Text.Equals( "" ) )
             {
 
                 //tsInfoText.Text = "車名を入力してください";
-                statusLabelDisp("車名を入力してください");
+                statusLabelDisp( "車名を入力してください" );
                 return;
 
             }
@@ -345,18 +401,18 @@ namespace CarReportSystem {
             var CarReport = new CarReport           //Saleインスタンスを生成
             {
 
-                Date = dtpDate.Value,
-                Author = cbAuthor.Text,
-                Maker = getSelectedMaker(),
-                CarName = cbCarName.Text,
-                Report = tbReport.Text,
-                CarImage = pbCarImage.Image,
+                Date = dtpDate.Value ,
+                Author = cbAuthor.Text ,
+                Maker = getSelectedMaker() ,
+                CarName = cbCarName.Text ,
+                Report = tbReport.Text ,
+                CarImage = pbCarImage.Image ,
 
             };
 
-            CarReports.Add(CarReport);
+            CarReports.Add( CarReport );
 
-            btModifiReport.Enabled = true;
+            //btModifiReport.Enabled = true;
 
             //メソッド化するべき
             //if ( !cbAuthor.Items.Contains( cbAuthor.Text ) )
@@ -617,7 +673,10 @@ namespace CarReportSystem {
 
             if( cdColor.ShowDialog() == DialogResult.OK )       //キャンセル対策
             {
-                BackColor = cdColor.Color;
+
+                BackColor = cdColor.Color;      //this.なしでもOK
+                settings.MainFormColor = cdColor.Color.ToArgb();        // . のインテリセンスで一番上に出てくる
+
             }
 
         }
@@ -640,8 +699,30 @@ namespace CarReportSystem {
             //mode = mode < 5 ? ++mode : 0 ;      //mode++だと変化なし
             //pbCarImage.SizeMode = ( PictureBoxSizeMode )mode;
 
-            mode++;      //mode++だと変化なし
-            pbCarImage.SizeMode = ( PictureBoxSizeMode )( mode % 5 );
+            //mode++;      //mode++ で値の上書き
+            //pbCarImage.SizeMode = ( PictureBoxSizeMode )( mode % 5 );
+
+            //2番のモードをスキップ（ AutoSizeキラー ）
+            //mode = mode < 4  ? ( ( mode == 1 ) ? 3 : ++mode ) : 0 ;     //AutoSize(2)を除外
+            //pbCarImage.SizeMode = ( PictureBoxSizeMode )mode ;
+
+            //そもそも mode の型も最初から PictureBoxSizeMode にしちゃう方式
+            mode = mode < PictureBoxSizeMode.Zoom ? 
+                ( ( mode == PictureBoxSizeMode.StretchImage ) ? PictureBoxSizeMode.CenterImage : ++mode)       //AutoSize(2)を除外
+                                                            : PictureBoxSizeMode.Normal ; 
+
+        }
+
+        private void Form1_FormClosed( object sender , FormClosedEventArgs e ) {
+
+            //設定ファイルのシリアル化
+            using ( var writer = XmlWriter.Create( "settings.xml" ) )       //xml ファイルに書き込む
+            {
+
+                var serializer = new XmlSerializer( settings.GetType() );
+                serializer.Serialize( writer , settings );
+
+            }
 
         }
 
