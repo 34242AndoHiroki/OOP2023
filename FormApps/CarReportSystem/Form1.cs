@@ -131,34 +131,20 @@ namespace CarReportSystem {
 
         public CarReport.MakerGroup getSelectedMaker() { 
 
-            //var condition = ;
-
-            //switch ( gbMaker.Controls.GetEnumerator(). )
-            //{
-
-            //    case "rbToyota" : return CarReport.MakerGroup.トヨタ;
-            //    case "rbNissan" : return CarReport.MakerGroup.日産;
-
-            //    default : return CarReport.MakerGroup.その他; 
-                
-            //}
-
-            foreach ( var item in gbMaker.Controls )
+            switch ( int.Parse( ( string )gbMaker.Controls.Cast< RadioButton >().FirstOrDefault( rb => rb.Checked )?.Tag ?? "-1" ) )
             {
 
-                if ( ( ( RadioButton )item ).Checked )
-                {
-                    
-                    //tag = int.Parse( ( ( RadioButton )item ).Tag.ToString() );
-                    //break;
+                case 0 : return CarReport.MakerGroup.トヨタ;
+                case 1 : return CarReport.MakerGroup.日産;
+                case 2 : return CarReport.MakerGroup.ホンダ;
+                case 3 : return CarReport.MakerGroup.スバル;
+                case 4 : return CarReport.MakerGroup.スズキ;
+                case 5 : return CarReport.MakerGroup.ダイハツ;
+                case 6 : return CarReport.MakerGroup.輸入車;
 
-                    return ( CarReport.MakerGroup )int.Parse( ( ( RadioButton )item ).Tag.ToString() );
-
-                }
-
+                default : return CarReport.MakerGroup.その他; 
+                
             }
-
-            return CarReport.MakerGroup.その他;
 
         }
 
