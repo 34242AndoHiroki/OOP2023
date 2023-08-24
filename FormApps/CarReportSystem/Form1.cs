@@ -1,4 +1,4 @@
-﻿#define Mywork
+﻿//#define Mywork
 #define Answer
 
 using System;
@@ -322,6 +322,13 @@ namespace CarReportSystem {
 
         }
 
+        //タイマーイベントハンドラー
+        private void tmTimeDisp_Tick( object sender , EventArgs e ) {
+
+            statusDisp.Text = DateTime.Now.ToString( "yyyy年MM月dd日(dddd) HH時mm分ss秒" );
+
+        }
+
         #endregion
 
 #elif Answer
@@ -333,9 +340,14 @@ namespace CarReportSystem {
 
         private void Form1_Load( object sender , EventArgs e ) {
 
+            tsInfoTex.Text = "";     //情報表示領域のテキストを初期化
+            //tsTimeDisp.Text = DateTime.Now.ToString( "yyyy年MM月dd日 HH時mm分ss秒" );       //あってもなくてもいい
+            tsTimeDisp.BackColor = Color.Black;
+            tsTimeDisp.ForeColor = Color.White;
+            tmTimeUpdate.Start();       //時刻更新用のタイマー
+
             authorNameNotInput.Visible = false;
             carNameNotInput.Visible = false;
-
 
             dgvCarReports.Columns[ 5 ].Visible = false;     //画像項目非表示
 
@@ -709,6 +721,12 @@ namespace CarReportSystem {
                 serializer.Serialize( writer , settings );
 
             }
+
+        }
+
+        private void tmTimeUpdate_Tick( object sender , EventArgs e ) {
+
+            tsTimeDisp.Text = DateTime.Now.ToString( "HH時mm分ss秒" );
 
         }
 
