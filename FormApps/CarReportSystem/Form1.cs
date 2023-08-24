@@ -730,6 +730,32 @@ namespace CarReportSystem {
 
         }
 
+        private void 保存SToolStripMenuItem_Click( object sender , EventArgs e ) {
+
+            //紹介　C#ではこんなこともできる
+            //int データ;
+            //データ = 10;
+            //Console.WriteLine( データ );
+
+            if( sfdCarRepoSave.ShowDialog() == DialogResult.OK ) {
+                
+                
+            
+            }
+
+
+        }
+
+        private void 開くOToolStripMenuItem_Click( object sender , EventArgs e ) {
+
+            if( ofdCarRepoOpen.ShowDialog() == DialogResult.OK ) {
+                
+                
+            
+            }
+
+        }
+
 
         #endregion
 
