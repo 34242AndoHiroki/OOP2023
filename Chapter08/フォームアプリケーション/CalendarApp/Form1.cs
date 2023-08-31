@@ -119,29 +119,29 @@ namespace CalendarApp {
         }
 
         //なくてもいい感じ
-        private void btForwardYear_Click( object sender , EventArgs e ) {
+        //private void btForwardYear_Click( object sender , EventArgs e ) {
 
-        }
+        //}
 
         //private void btNextYear_Click( object sender , EventArgs e ) {
 
         //}
 
-        private void forwardMonth_Click( object sender , EventArgs e ) {
+        //private void forwardMonth_Click( object sender , EventArgs e ) {
 
-        }
+        //}
 
-        private void nextMonth_Click( object sender , EventArgs e ) {
+        //private void nextMonth_Click( object sender , EventArgs e ) {
 
-        }
+        //}
 
-        private void forwardDay_Click( object sender , EventArgs e ) {
+        //private void forwardDay_Click( object sender , EventArgs e ) {
 
-        }
+        //}
 
-        private void nextDay_Click( object sender , EventArgs e ) {
+        //private void nextDay_Click( object sender , EventArgs e ) {
         
-        }
+        //}
 
         private void btAge_Click( object sender , EventArgs e ) {
 

@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace CarReportSystem {
 
+    [ Serializable ]        //シリアル化できるよという合図
+
     public class CarReport {        //シリアライズするから public
 
         [ System.ComponentModel.DisplayName( "日付" ) ]
