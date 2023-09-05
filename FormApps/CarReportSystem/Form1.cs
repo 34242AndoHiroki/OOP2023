@@ -23,12 +23,13 @@ namespace CarReportSystem {
         BindingList< CarReport > CarReports = new BindingList< CarReport >();       //バインディングさせるリスト
 
         //設定情報保存用オブジェクト
-        Settings settings = new Settings();
+        //Settings setting = new Settings();      //コンストラクタが読めないからエラー
+        Settings settings = Settings.getInstance();     //1つしかインスタンスを作れない　「シングルトン」
 
         public Form1() {
 
             InitializeComponent();
-            dgvCarReports.DataSource = CarReports;      //あくまでのつなげるのは参照先が同じとき、違かったらアウト
+            //dgvCarReports.DataSource = CarReports;      //あくまでのつなげるのは参照先が同じとき、違かったらアウト
 
         }
 
@@ -436,6 +437,9 @@ namespace CarReportSystem {
 
         private void Form1_Load( object sender , EventArgs e ) {
 
+            // TODO: このコード行はデータを 'infosys202332DataSet.CarReportTable' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
+            //this.carReportTableTableAdapter.Fill( this.infosys202332DataSet.CarReportTable );
+
             tsInfoTex.Text = "";     //情報表示領域のテキストを初期化
             //tsTimeDisp.Text = DateTime.Now.ToString( "yyyy年MM月dd日 HH時mm分ss秒" );       //あってもなくてもいい
             tsTimeDisp.BackColor = Color.Black;
@@ -823,7 +827,7 @@ namespace CarReportSystem {
 
             //そもそも mode の型も最初から PictureBoxSizeMode にしちゃう方式
             mode = mode < PictureBoxSizeMode.Zoom ? 
-                ( ( mode == PictureBoxSizeMode.StretchImage ) ? PictureBoxSizeMode.CenterImage : ++mode)       //AutoSize(2)を除外
+                ( ( mode == PictureBoxSizeMode.StretchImage ) ? PictureBoxSizeMode.CenterImage : ++mode )       //AutoSize(2)を除外
                                                             : PictureBoxSizeMode.Normal ; 
 
         }
@@ -954,6 +958,24 @@ namespace CarReportSystem {
                 btDeleteReport.Enabled = true;     //削除ボタン有効
 
             }
+
+        }
+
+        //バインディングナビゲータのフロッピーディスクアイコンを押したときのイベントハンドラ　保存
+        private void carReportTableBindingNavigatorSaveItem_Click( object sender , EventArgs e ) {
+
+            //この3行で保存ができるらしいです
+            this.Validate();
+            this.carReportTableBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll( this.infosys202332DataSet );
+
+        }
+
+        //接続ボタンイベントハンドラ
+        private void btConnection_Click( object sender , EventArgs e ) {
+
+            // TODO: このコード行はデータを 'infosys202332DataSet.CarReportTable' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
+            this.carReportTableTableAdapter.Fill( this.infosys202332DataSet.CarReportTable );
 
         }
 
