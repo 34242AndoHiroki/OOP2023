@@ -438,7 +438,7 @@ namespace CarReportSystem {
         private void Form1_Load( object sender , EventArgs e ) {
 
             // TODO: このコード行はデータを 'infosys202332DataSet.CarReportTable' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
-            //this.carReportTableTableAdapter.Fill( this.infosys202332DataSet.CarReportTable );
+            this.carReportTableTableAdapter.Fill( this.infosys202332DataSet.CarReportTable );
 
             tsInfoTex.Text = "";     //情報表示領域のテキストを初期化
             //tsTimeDisp.Text = DateTime.Now.ToString( "yyyy年MM月dd日 HH時mm分ss秒" );       //あってもなくてもいい
@@ -994,7 +994,8 @@ namespace CarReportSystem {
                 cbCarName.Text = dgvCarReports.CurrentRow.Cells[ 4 ].Value.ToString();
                 tbReport.Text = dgvCarReports.CurrentRow.Cells[ 5 ].Value.ToString();
 
-                pbCarImage.Image = !dgvCarReports.CurrentRow.Cells[6].Value.Equals( DBNull.Value ) ? 
+                pbCarImage.Image = !dgvCarReports.CurrentRow.Cells[6].Value.Equals( DBNull.Value )
+                                        && ( ( Byte[] ) dgvCarReports.CurrentRow.Cells[ 6 ].Value ).Length != 0 ?       //配列長が0かどうかの判断
                                     pbCarImage.Image = ByteArrayToImage( ( Byte[] )dgvCarReports.CurrentRow.Cells[ 6 ].Value ) : null;      //三項演算子
 
                 //if( !dgvCarReports.CurrentRow.Cells[6].Value.Equals( DBNull.Value )) {
@@ -1047,6 +1048,14 @@ namespace CarReportSystem {
             this.carReportTableTableAdapter.Fill( this.infosys202332DataSet.CarReportTable );
             //this.carReportTableTableAdapter.FillByMaker( this.infosys202332DataSet.CarReportTable , "トヨタ" );      //自作SQLコマンド
             dgvCarReports.ClearSelection();     //選択解除
+
+            foreach ( var carReport in infosys202332DataSet.CarReportTable ) {      //直接dgvCarReportsを見てもOK
+
+                setCbAuthor( carReport.Author );
+                setCbCarName( carReport.CarName );
+
+            }
+
 
         }
 
