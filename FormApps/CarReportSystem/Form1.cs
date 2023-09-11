@@ -438,7 +438,7 @@ namespace CarReportSystem {
         private void Form1_Load( object sender , EventArgs e ) {
 
             // TODO: このコード行はデータを 'infosys202332DataSet.CarReportTable' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
-            this.carReportTableTableAdapter.Fill( this.infosys202332DataSet.CarReportTable );
+            //this.carReportTableTableAdapter.Fill( this.infosys202332DataSet.CarReportTable );
 
             tsInfoTex.Text = "";     //情報表示領域のテキストを初期化
             //tsTimeDisp.Text = DateTime.Now.ToString( "yyyy年MM月dd日 HH時mm分ss秒" );       //あってもなくてもいい
@@ -895,88 +895,88 @@ namespace CarReportSystem {
 
         }
 
-        private void 保存SToolStripMenuItem_Click( object sender , EventArgs e ) {
+        //private void 保存SToolStripMenuItem_Click( object sender , EventArgs e ) {
 
-            //紹介　C#ではこんなこともできる
-            //int データ;
-            //データ = 10;
-            //Console.WriteLine( データ );
+        //    //紹介　C#ではこんなこともできる
+        //    //int データ;
+        //    //データ = 10;
+        //    //Console.WriteLine( データ );
 
-            if( sfdCarRepoSave.ShowDialog() == DialogResult.OK ) {
+        //    if( sfdCarRepoSave.ShowDialog() == DialogResult.OK ) {
 
-                try {       //念のため
+        //        try {       //念のため
 
-                    //バイナリ形式でシリアル化
-                    var bf = new BinaryFormatter();
+        //            //バイナリ形式でシリアル化
+        //            var bf = new BinaryFormatter();
 
-                    using ( FileStream fs = File.Open( sfdCarRepoSave.FileName , FileMode.Create ) ) {
+        //            using ( FileStream fs = File.Open( sfdCarRepoSave.FileName , FileMode.Create ) ) {
 
-                        bf.Serialize( fs , CarReports );        //fsにCarReportsを上書き
+        //                bf.Serialize( fs , CarReports );        //fsにCarReportsを上書き
 
-                    }
+        //            }
 
-                }
-                catch ( Exception ex ) {
+        //        }
+        //        catch ( Exception ex ) {
 
-                    MessageBox.Show( ex.Message );
+        //            MessageBox.Show( ex.Message );
 
-                }
+        //        }
 
-            }
+        //    }
 
-        }
+        //}
 
-        private void 開くOToolStripMenuItem_Click( object sender , EventArgs e ) {
+        //private void 開くOToolStripMenuItem_Click( object sender , EventArgs e ) {
 
-            if( ofdCarRepoOpen.ShowDialog() == DialogResult.OK ) {
+        //    if( ofdCarRepoOpen.ShowDialog() == DialogResult.OK ) {
 
-                try {
+        //        try {
 
-                    //逆シリアル化でバイナリ形式を取り込む
-                    var bf = new BinaryFormatter();
+        //            //逆シリアル化でバイナリ形式を取り込む
+        //            var bf = new BinaryFormatter();
 
-                    using ( FileStream fs = File.Open( ofdCarRepoOpen.FileName , FileMode.Open , FileAccess.Read ) ) {
-                                                    //開くもの                なかった場合の処理  どうするのか
+        //            using ( FileStream fs = File.Open( ofdCarRepoOpen.FileName , FileMode.Open , FileAccess.Read ) ) {
+        //                                            //開くもの                なかった場合の処理  どうするのか
 
-                        CarReports = ( BindingList< CarReport > ) bf.Deserialize( fs );
-                        dgvCarReports.DataSource = null;        //厳密にはあった方がいい
-                        dgvCarReports.DataSource = CarReports;      //反映作業をもう一度やらなきゃいけない
-                        //dgvCarReports.Refresh();        //無理
+        //                CarReports = ( BindingList< CarReport > ) bf.Deserialize( fs );
+        //                dgvCarReports.DataSource = null;        //厳密にはあった方がいい
+        //                dgvCarReports.DataSource = CarReports;      //反映作業をもう一度やらなきゃいけない
+        //                //dgvCarReports.Refresh();        //無理
 
-                        cbAuthor.Items.Clear();
-                        cbCarName.Items.Clear();
+        //                cbAuthor.Items.Clear();
+        //                cbCarName.Items.Clear();
 
-                        editItemsClear();       //入力途中などのデータはすべてクリア
-                        dgvCarReports.Columns[ 5 ].Visible = false;     //画像項目非表示
+        //                editItemsClear();       //入力途中などのデータはすべてクリア
+        //                dgvCarReports.Columns[ 5 ].Visible = false;     //画像項目非表示
 
-                        foreach ( var carReport in CarReports ) {
+        //                foreach ( var carReport in CarReports ) {
 
-                            setCbAuthor( carReport.Author );
-                            setCbCarName( carReport.CarName );
+        //                    setCbAuthor( carReport.Author );
+        //                    setCbCarName( carReport.CarName );
 
-                        }
+        //                }
 
-                        //または、
-                        //foreach ( var author in CarReports.Select( p => p.Author ) ) {
-                        //    setCbAuthor( author );
-                        //}
+        //                //または、
+        //                //foreach ( var author in CarReports.Select( p => p.Author ) ) {
+        //                //    setCbAuthor( author );
+        //                //}
 
-                        //foreach ( var report in CarReports.Select( p => p.CarName ) ) {
-                        //    setCbCarName( report );
-                        //}
+        //                //foreach ( var report in CarReports.Select( p => p.CarName ) ) {
+        //                //    setCbCarName( report );
+        //                //}
 
-                    }
+        //            }
 
-                }
-                catch ( Exception ex ) {
+        //        }
+        //        catch ( Exception ex ) {
 
-                    MessageBox.Show( ex.Message );
+        //            MessageBox.Show( ex.Message );
 
-                }
+        //        }
             
-            }
+        //    }
 
-        }
+        //}
 
         //何もないところのクリックを無効化する
         //private void dgvCarReports_CellContentClick( object sender , DataGridViewCellEventArgs e ) {     //文字がクリックされると動く
@@ -1042,7 +1042,13 @@ namespace CarReportSystem {
         }
 
         //接続ボタンイベントハンドラ
-        private void btConnection_Click( object sender , EventArgs e ) {
+        //private void btConnection_Click( object sender , EventArgs e ) {
+
+        //    dbConnection();
+
+        //}
+
+        private void dbConnection() {
 
             // TODO: このコード行はデータを 'infosys202332DataSet.CarReportTable' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
             this.carReportTableTableAdapter.Fill( this.infosys202332DataSet.CarReportTable );
@@ -1056,10 +1062,17 @@ namespace CarReportSystem {
 
             }
 
+        }
+
+        private void dgvCarReports_Validating( object sender , CancelEventArgs e ) {
 
         }
 
+        private void 接続ToolStripMenuItem_Click(object sender, EventArgs e) {
 
+            dbConnection();
+
+        }
 
         #endregion
 
