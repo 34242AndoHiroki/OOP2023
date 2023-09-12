@@ -1074,6 +1074,32 @@ namespace CarReportSystem {
 
         }
 
+        private void btAuthorSearch_Click( object sender , EventArgs e ) {
+
+            carReportTableTableAdapter.FillByAuthor( this.infosys202332DataSet.CarReportTable , tbAuthorSearch.Text );
+
+        }
+
+        private void btCarNameSearch_Click( object sender , EventArgs e ) {
+
+            carReportTableTableAdapter.FillByCarName( this.infosys202332DataSet.CarReportTable , tbCarNameSearch.Text );
+
+        }
+
+        private void btDateSearch_Click( object sender , EventArgs e ) {
+
+            //どっちでもいい
+            //carReportTableTableAdapter.FillByDate( this.infosys202332DataSet.CarReportTable , dtpDateSearch.Value.ToString() );       //ちょっと無駄あり
+            carReportTableTableAdapter.FillByDate( this.infosys202332DataSet.CarReportTable , dtpDateSearch.Text );
+
+        }
+
+        private void btReset_Click( object sender , EventArgs e ) {
+
+            carReportTableTableAdapter.Fill( this.infosys202332DataSet.CarReportTable );
+
+        }
+
         #endregion
 
 #endif
