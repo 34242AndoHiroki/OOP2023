@@ -437,6 +437,8 @@ namespace CarReportSystem {
 
         private void Form1_Load( object sender , EventArgs e ) {
 
+            //dbConnection();     //起動時に読み込んでしまう方式　一番自然かも
+
             // TODO: このコード行はデータを 'infosys202332DataSet.CarReportTable' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
             //this.carReportTableTableAdapter.Fill( this.infosys202332DataSet.CarReportTable );
 
@@ -1090,8 +1092,7 @@ namespace CarReportSystem {
 
             //どっちでもいい
             //carReportTableTableAdapter.FillByDate( this.infosys202332DataSet.CarReportTable , dtpDateSearch.Value.ToString() );       //ちょっと無駄あり
-            carReportTableTableAdapter.FillByPeriodDate( infosys202332DataSet.CarReportTable ,
-                                                            dtpDateSearchStart.Text , dtpDateSearchEnd.Text );
+            carReportTableTableAdapter.FillByDateToDate( infosys202332DataSet.CarReportTable , dtpDateSearchS.Text , dtpDateSearchE.Text );
 
         }
 

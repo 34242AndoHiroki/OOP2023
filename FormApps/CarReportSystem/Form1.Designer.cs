@@ -93,7 +93,7 @@ namespace CarReportSystem {
             this.btAuthorSearch = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btReset = new System.Windows.Forms.Button();
-            this.dtpDateSearchStart = new System.Windows.Forms.DateTimePicker();
+            this.dtpDateSearchS = new System.Windows.Forms.DateTimePicker();
             this.label10 = new System.Windows.Forms.Label();
             this.btDateSearch = new System.Windows.Forms.Button();
             this.tbAuthorSearch = new System.Windows.Forms.TextBox();
@@ -104,7 +104,7 @@ namespace CarReportSystem {
             this.carReportTableTableAdapter = new CarReportSystem.infosys202332DataSetTableAdapters.CarReportTableTableAdapter();
             this.tableAdapterManager = new CarReportSystem.infosys202332DataSetTableAdapters.TableAdapterManager();
             this.label11 = new System.Windows.Forms.Label();
-            this.dtpDateSearchEnd = new System.Windows.Forms.DateTimePicker();
+            this.dtpDateSearchE = new System.Windows.Forms.DateTimePicker();
             this.gbMaker.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarReports)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.carReportTableBindingSource)).BeginInit();
@@ -692,10 +692,10 @@ namespace CarReportSystem {
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dtpDateSearchEnd);
+            this.groupBox1.Controls.Add(this.dtpDateSearchE);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.btReset);
-            this.groupBox1.Controls.Add(this.dtpDateSearchStart);
+            this.groupBox1.Controls.Add(this.dtpDateSearchS);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.btDateSearch);
             this.groupBox1.Controls.Add(this.tbAuthorSearch);
@@ -721,12 +721,12 @@ namespace CarReportSystem {
             this.btReset.UseVisualStyleBackColor = true;
             this.btReset.Click += new System.EventHandler(this.btReset_Click);
             // 
-            // dtpDateSearchStart
+            // dtpDateSearchS
             // 
-            this.dtpDateSearchStart.Location = new System.Drawing.Point(64, 111);
-            this.dtpDateSearchStart.Name = "dtpDateSearchStart";
-            this.dtpDateSearchStart.Size = new System.Drawing.Size(134, 19);
-            this.dtpDateSearchStart.TabIndex = 16;
+            this.dtpDateSearchS.Location = new System.Drawing.Point(64, 111);
+            this.dtpDateSearchS.Name = "dtpDateSearchS";
+            this.dtpDateSearchS.Size = new System.Drawing.Size(134, 19);
+            this.dtpDateSearchS.TabIndex = 16;
             // 
             // label10
             // 
@@ -808,12 +808,12 @@ namespace CarReportSystem {
             this.label11.TabIndex = 23;
             this.label11.Text = "～";
             // 
-            // dtpDateSearchEnd
+            // dtpDateSearchE
             // 
-            this.dtpDateSearchEnd.Location = new System.Drawing.Point(114, 136);
-            this.dtpDateSearchEnd.Name = "dtpDateSearchEnd";
-            this.dtpDateSearchEnd.Size = new System.Drawing.Size(134, 19);
-            this.dtpDateSearchEnd.TabIndex = 24;
+            this.dtpDateSearchE.Location = new System.Drawing.Point(114, 136);
+            this.dtpDateSearchE.Name = "dtpDateSearchE";
+            this.dtpDateSearchE.Size = new System.Drawing.Size(134, 19);
+            this.dtpDateSearchE.TabIndex = 24;
             // 
             // Form1
             // 
@@ -949,9 +949,9 @@ namespace CarReportSystem {
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btDateSearch;
-        private System.Windows.Forms.DateTimePicker dtpDateSearchStart;
+        private System.Windows.Forms.DateTimePicker dtpDateSearchS;
         private System.Windows.Forms.Button btReset;
-        private System.Windows.Forms.DateTimePicker dtpDateSearchEnd;
+        private System.Windows.Forms.DateTimePicker dtpDateSearchE;
         private System.Windows.Forms.Label label11;
     }
 }
