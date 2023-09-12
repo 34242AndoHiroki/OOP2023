@@ -1090,7 +1090,8 @@ namespace CarReportSystem {
 
             //どっちでもいい
             //carReportTableTableAdapter.FillByDate( this.infosys202332DataSet.CarReportTable , dtpDateSearch.Value.ToString() );       //ちょっと無駄あり
-            carReportTableTableAdapter.FillByDate( this.infosys202332DataSet.CarReportTable , dtpDateSearch.Text );
+            carReportTableTableAdapter.FillByPeriodDate( infosys202332DataSet.CarReportTable ,
+                                                            dtpDateSearchStart.Text , dtpDateSearchEnd.Text );
 
         }
 
