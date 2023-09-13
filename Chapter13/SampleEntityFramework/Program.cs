@@ -21,7 +21,7 @@ namespace SampleEntityFramework {
 
             //UpdateBook();
 
-            foreach (var book in GetBooks() ) {
+            foreach ( var book in GetBooks() ) {
                 Console.WriteLine( $"{ book.Title } { book.Author.Name }" );
             }
 
