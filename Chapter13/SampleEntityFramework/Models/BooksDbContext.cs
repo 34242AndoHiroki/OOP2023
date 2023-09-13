@@ -1,9 +1,10 @@
-﻿using System;
+﻿using SampleEntityFramework.Models;
+using System;
 using System.Data.Entity;
 using System.Linq;
 
 //定義以外はすべて自動生成
-namespace CarReportSystem.Models {
+namespace SampleEntityFramework.Models {
 
     public class BooksDbContext : DbContext {       // BooksDbContext 経由で Books 、Authors にアクセスする
 
@@ -15,8 +16,9 @@ namespace CarReportSystem.Models {
         // アプリケーション構成ファイルで 'BooksDbContext' 接続文字列を変更してください。
 
         public BooksDbContext()     //コンストラクタ
-
             : base( "name=BooksDbContext" ) {
+
+            Database.SetInitializer( new MigrateDatabaseToLatestVersion< BooksDbContext , Configuration >() );
 
         }
 

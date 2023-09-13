@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarReportSystem.Models {
+namespace SampleEntityFramework.Models {
 
     public class Author {
 

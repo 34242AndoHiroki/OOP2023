@@ -1,7 +1,8 @@
-﻿using CarReportSystem.Models;
+﻿using SampleEntityFramework.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,8 +22,17 @@ namespace SampleEntityFramework {
 
             //UpdateBook();
 
-            foreach ( var book in GetBooks() ) {
-                Console.WriteLine( $"{ book.Title } { book.Author.Name }" );
+            //foreach ( var book in GetBooks() ) {
+            //    Console.WriteLine( $"{ book.Title } { book.Author.Name }" );
+            //}
+
+            using ( var db = new BooksDbContext() ) {
+
+                db.Database.Log = sql => { Debug.Write( sql ); };       //出力にSQLを書き込む
+
+                var count = db.Books.Count();
+                Console.WriteLine( count );
+
             }
 
             Console.ReadLine();

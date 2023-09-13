@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarReportSystem.Models {
+namespace SampleEntityFramework.Models {
 
     public class Book {
 
@@ -14,7 +14,10 @@ namespace CarReportSystem.Models {
         [ Required ]        //必須項目
         public string Title { get; set; }
 
-        public int PublishedYear { get; set; }
+        [ MaxLength( 16 ) ]
+        public string Publisher { get; set; }
+
+        public int? PublishedYear { get; set; }     //null許容型
         public virtual Author Author { get; set; }      //他のエンティティを参照させる場合に virtual
 
     }
