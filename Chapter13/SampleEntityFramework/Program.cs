@@ -1,4 +1,7 @@
-﻿using SampleEntityFramework.Models;
+﻿#define Mywork
+#define Answer
+
+using SampleEntityFramework.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -35,11 +38,329 @@ namespace SampleEntityFramework {
 
             }
 
+#if Mywork || Answer
+
+            #region 演習問題
+
+            Console.WriteLine( "# 1.1" );
+            //Exercise1_1();
+
+            Console.WriteLine();
+            Console.WriteLine( "# 1.2" );
+            Exercise1_2();
+
+            Console.WriteLine();
+            Console.WriteLine( "# 1.3" );
+            Exercise1_3();
+
+            Console.WriteLine();
+            Console.WriteLine( "# 1.4" );
+            Exercise1_4();
+
+            Console.WriteLine();
+            Console.WriteLine( "# 1.5" );
+            Exercise1_5();
+
+            Console.ReadLine();
+
+            #endregion
+
+#endif
+
             Console.ReadLine();
             Console.WriteLine();
 
 
         }
+
+        #region 演習問題
+
+#if Mywork
+
+        #region 自力
+
+        private static void Exercise1_1() {
+
+            using ( var db = new BooksDbContext() ) {
+
+                //著者の追加
+                db.Authors.Add( 
+                    
+                    new Author
+                    {
+                        Name = "菊池寛" ,
+                        Birthday = new DateTime( 1888 , 12 , 26 ) ,
+                        Gender = "M" ,
+                    }
+                    
+                );
+
+                db.Authors.Add( 
+                    
+                    new Author
+                    {
+                        Name = "川端康成" ,
+                        Birthday = new DateTime( 1899 , 6 , 14 ) ,
+                        Gender = "M" ,
+                    }
+                    
+                );
+
+                //書籍の追加
+                db.Books.Add( 
+                    
+                    new Book
+                    {
+
+                        Title = "こころ" ,
+                        PublishedYear = 1991 ,
+                        Author = new Author 
+                        {
+                            Name = "夏目漱石" ,
+                            Birthday = new DateTime( 1867 , 2 , 9 ) ,
+                            Gender = "M" ,
+                        }
+
+                    }
+                    
+                );
+
+                db.Books.Add( 
+                    
+                    new Book
+                    {
+
+                        Title = "伊豆の踊子" ,
+                        PublishedYear = 2003 ,
+                        Author = new Author() 
+                        {
+                            Name = "川端康成" ,
+                            Birthday = new DateTime( 1899 , 6 , 14 ) ,
+                            Gender = "M" ,
+                        }
+
+                    }
+                    
+                );
+
+                db.Books.Add( 
+                    
+                    new Book
+                    {
+
+                        Title = "真珠夫人" ,
+                        PublishedYear = 2002 ,
+                        Author = new Author() 
+                        {
+                            Name = "菊池寛" ,
+                            Birthday = new DateTime( 1888 , 12 , 26 ) ,
+                            Gender = "M" ,
+                        }
+
+                    }
+                    
+                );
+
+                db.Books.Add( 
+                    
+                    new Book
+                    {
+
+                        Title = "注文の多い料理店" ,
+                        PublishedYear = 2000 ,
+                        Author = new Author() 
+                        {
+                            Birthday = new DateTime( 1896 , 8 , 27 ) ,
+                            Gender = "M" ,
+                            Name = "宮沢賢治" ,
+                        }
+
+                    }
+                    
+                );
+
+                db.SaveChanges();
+
+            }
+
+        }
+
+        private static void Exercise1_2() {
+
+            using ( var db = new BooksDbContext() ) {
+
+                db.Books.ToList().ForEach( book => Console.WriteLine( $"{ book.Title } { book.PublishedYear } { book.Author.Name }" ) );
+
+            }
+
+        }
+
+        private static void Exercise1_3() {
+
+            using ( var db = new BooksDbContext() ) {
+
+                db.Books.Where(book => book.Title.Length == db.Books.Max(mbook => mbook.Title.Length)).ToList().ForEach(book => Console.WriteLine( $"{ book.Title } { book.PublishedYear }" ) );               
+            }
+
+        }
+
+        private static void Exercise1_4() {
+
+            using ( var db = new BooksDbContext() ) { 
+
+                db.Books.OrderBy( book => book.PublishedYear ).Take( 3 ).ToList().ForEach( book => Console.WriteLine( $"{ book.Title } { book.Author.Name }" ) );
+
+            }
+
+        }
+
+        private static void Exercise1_5() {
+
+            using ( var db = new BooksDbContext() ) { 
+
+                //db.Books.OrderByDescending( book => book.PublishedYear ).GroupBy( book => book.Author ).ToList().ForEach( book => Console.WriteLine( $"{ book.Author.Name } { book.Title } { book.Author.Name }" ) );
+
+                
+
+            }
+
+        }
+
+        #endregion
+
+#elif Answer
+
+        #region 模範解答
+
+        private static void Exercise1_1() {
+
+            using ( var db = new BooksDbContext() ) {
+
+                var kan = new Author
+                {
+                    Birthday = new DateTime( 1888 , 12 , 26 ) ,
+                    Gender = "M" ,
+                    Name = "菊池寛" ,
+                }; 
+
+                db.Authors.Add( kan );
+
+                var kawabata = new Author
+                {
+                    Birthday = new DateTime( 1899 , 6 , 14 ) ,
+                    Gender = "M" ,
+                    Name = "川端康成" ,
+                };
+
+                db.Authors.Add( kawabata );
+
+                var natsume = db.Authors.Single( a => a.Name == "夏目漱石" );
+
+                var book1 = new Book
+                {
+                    Title = "こころ" ,
+                    PublishedYear = 1991 ,
+                    Author = natsume ,
+                };
+
+                db.Books.Add( book1 );
+
+                var author2 = db.Authors.Single( a => a.Name == "川端康成");
+
+                var book2 = new Book
+                {
+                    Title = "伊豆の踊子" ,
+                    PublishedYear = 2003 ,
+                    Author = author2 ,
+                };
+
+                db.Books.Add( book2 );
+
+                var author3 = db.Authors.Single( a => a.Name == "菊池寛");
+
+                var book3 = new Book
+                {
+                    Title = "真珠夫人" ,
+                    PublishedYear = 2003 ,
+                    Author = author3 ,
+                };
+
+                db.Books.Add( book3 );
+
+                var author4 = db.Authors.Single( a => a.Name == "宮沢賢治");
+
+                var book4 = new Book
+                {
+                    Title = "注文の多い料理店" ,
+                    PublishedYear = 2000 ,
+                    Author = author4 ,
+                };
+
+                db.Books.Add( book4 );
+
+                db.SaveChanges();
+
+            }
+
+        }
+
+        private static void Exercise1_2() {
+
+            using ( var db = new BooksDbContext() ) {
+
+                foreach ( var book in db.Books.OrderBy( b => b.Author.Id ).ToArray() ) {        //即時実行にしてエラー対策（閉じ忘れ）
+
+                    Console.WriteLine( "{0} {1} {2}({3:yyyy/mm/dd})" ,
+                        book.Title , book.PublishedYear ,
+                        book.Author.Name , book.Author.Birthday );
+
+                }
+            }
+
+            //foreach ( var book in GetBooks() ) {
+
+            //    Console.WriteLine( "{0} {1} {2}({3:yyyy/mm/dd})" ,
+            //        book.Title , book.PublishedYear ,
+            //        book.Author.Name , book.Author.Birthday );
+
+            //}
+
+        }
+
+        private static void Exercise1_3() {
+
+            using ( var db = new BooksDbContext() ) { 
+
+                var books = db.Books
+                                .Where( b => b.Title.Length == db.Books
+                                .Max( x => x.Title.Length ) );
+
+                foreach ( var book in books.ToArray() ) {
+
+                    Console.WriteLine( "{0} {1} {2}({3:yyyy/mm/dd})" ,
+                        book.Title , book.PublishedYear ,
+                        book.Author.Name , book.Author.Birthday 
+                    );
+
+                }
+
+            }
+
+        }
+
+private static void Exercise1_4() {
+            throw new NotImplementedException();
+        }
+
+        private static void Exercise1_5() {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+#endif
+
+        #endregion
 
         // List 13-5
         static void InsertBooks() {
