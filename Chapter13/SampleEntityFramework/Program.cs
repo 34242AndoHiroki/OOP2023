@@ -218,7 +218,7 @@ namespace SampleEntityFramework {
 
             using ( var db = new BooksDbContext() ) { 
 
-                //db.Books.OrderByDescending( book => book.PublishedYear ).GroupBy( book => book.Author ).ToList().ForEach( book => Console.WriteLine( $"{ book.Author.Name } { book.Title } { book.Author.Name }" ) );
+                db.Books.OrderByDescending( book => book.Author.Birthday ).ToList().ForEach( book => Console.WriteLine( $"{ book.Author.Name } { book.Title } { book.PublishedYear }" ) );
 
                 
 
