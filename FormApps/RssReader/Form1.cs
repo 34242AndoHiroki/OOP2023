@@ -32,8 +32,10 @@ namespace RssReader {
 
             using ( var wc = new WebClient() ) {
 
-                var url = wc.OpenRead( /*tbUrl.Text*/ "https://news.yahoo.co.jp/rss/media/kurumans/all.xml" );
+                var url = wc.OpenRead( tbUrl.Text /*"https://news.yahoo.co.jp/rss/media/kurumans/all.xml"*/ );
                 XDocument xdoc = XDocument.Load( url );
+
+                //cbUrl.Items = 
 
                 nodes = xdoc.Root.Descendants( "item" )
                                             .Select( x => new ItemData
@@ -56,28 +58,28 @@ namespace RssReader {
 
         }
 
-        private void lbRssTitle_DragDrop( object sender , DragEventArgs e ) {
+        //private void lbRssTitle_DragDrop( object sender , DragEventArgs e ) {
 
-            //var dropFiles = e.Data.GetData();
+        //    //var dropFiles = e.Data.GetData();
 
-        }
+        //}
 
-        private void lbRssTitle_DragEnter( object sender , DragEventArgs e ) {
+        //private void lbRssTitle_DragEnter( object sender , DragEventArgs e ) {
 
 
 
-        }
+        //}
 
-        private void lbRssTitle_MouseDown(object sender, MouseEventArgs e) {
+        //private void lbRssTitle_MouseDown(object sender, MouseEventArgs e) {
 
-            //Point p = Control.MousePosition;
-            //p = lbRssTitle.PointToClient(p);//マウスの位置をクライアント座標に変換
-            //int ind = lbRssTitle.IndexFromPoint(p);//マウス下のＬＢのインデックスを得る
-            //if (ind > -1) {
-            //    lbRssTitle.DoDragDrop(lbRssTitle.Items[ind].ToString(), DragDropEffects.Copy);//ドラッグスタート
-            //}
+        //    //Point p = Control.MousePosition;
+        //    //p = lbRssTitle.PointToClient(p);//マウスの位置をクライアント座標に変換
+        //    //int ind = lbRssTitle.IndexFromPoint(p);//マウス下のＬＢのインデックスを得る
+        //    //if (ind > -1) {
+        //    //    lbRssTitle.DoDragDrop(lbRssTitle.Items[ind].ToString(), DragDropEffects.Copy);//ドラッグスタート
+        //    //}
 
-        }
+        //}
 
         private void lbRssTitle_Click( object sender , EventArgs e ) {
 
@@ -125,6 +127,7 @@ namespace RssReader {
 
         private void lbRssTitle_Click( object sender , EventArgs e ) {
 
+            wbBrowser.Navigate( ItemDatas[ lbRssTitle.SelectedIndex ].Link );
 
         }
 
