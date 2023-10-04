@@ -34,13 +34,16 @@ namespace RssReader {
             // tbUrl
             // 
             this.tbUrl.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tbUrl.Location = new System.Drawing.Point(27, 23);
+            this.tbUrl.Location = new System.Drawing.Point(27, 24);
             this.tbUrl.Name = "tbUrl";
             this.tbUrl.Size = new System.Drawing.Size(1235, 31);
             this.tbUrl.TabIndex = 0;
             // 
             // btGet
             // 
+            this.btGet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btGet.Location = new System.Drawing.Point(1268, 23);
             this.btGet.Name = "btGet";
             this.btGet.Size = new System.Drawing.Size(90, 31);
@@ -51,27 +54,36 @@ namespace RssReader {
             // 
             // lbRssTitle
             // 
+            this.lbRssTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbRssTitle.FormattingEnabled = true;
             this.lbRssTitle.ItemHeight = 12;
             this.lbRssTitle.Location = new System.Drawing.Point(27, 60);
             this.lbRssTitle.Name = "lbRssTitle";
-            this.lbRssTitle.Size = new System.Drawing.Size(344, 544);
+            this.lbRssTitle.Size = new System.Drawing.Size(344, 568);
             this.lbRssTitle.TabIndex = 2;
             this.lbRssTitle.Click += new System.EventHandler(this.lbRssTitle_Click);
             // 
             // wbBrowser
             // 
+            this.wbBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.wbBrowser.Location = new System.Drawing.Point(377, 60);
             this.wbBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.wbBrowser.Name = "wbBrowser";
-            this.wbBrowser.Size = new System.Drawing.Size(981, 546);
+            this.wbBrowser.Size = new System.Drawing.Size(981, 570);
             this.wbBrowser.TabIndex = 3;
             // 
             // cbUrl
             // 
+            this.cbUrl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cbUrl.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cbUrl.FormattingEnabled = true;
-            this.cbUrl.Location = new System.Drawing.Point(27, 22);
+            this.cbUrl.Location = new System.Drawing.Point(27, 23);
             this.cbUrl.Name = "cbUrl";
             this.cbUrl.Size = new System.Drawing.Size(1235, 32);
             this.cbUrl.TabIndex = 4;
@@ -80,12 +92,12 @@ namespace RssReader {
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 618);
-            this.Controls.Add(this.cbUrl);
+            this.ClientSize = new System.Drawing.Size(1370, 642);
+            this.Controls.Add(this.tbUrl);
             this.Controls.Add(this.wbBrowser);
             this.Controls.Add(this.lbRssTitle);
             this.Controls.Add(this.btGet);
-            this.Controls.Add(this.tbUrl);
+            this.Controls.Add(this.cbUrl);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);

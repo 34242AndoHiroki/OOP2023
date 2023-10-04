@@ -24,7 +24,7 @@ namespace RssReader {
 
         #region 模範解答
 
-        public string Title { get; set; }       //
+        public string Title { get; set; }       //タイトルを保持する
         public string Link { get; set; }
 
         #endregion

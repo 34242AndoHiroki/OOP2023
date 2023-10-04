@@ -1,4 +1,4 @@
-﻿#define Mywork
+﻿//#define Mywork
 #define Answer
 
 using System;
@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -30,9 +31,12 @@ namespace RssReader {
 
         private void btGet_Click( object sender , EventArgs e ) {
 
+            if( tbUrl.Text == "" ) return;
+
             using ( var wc = new WebClient() ) {
 
                 var url = wc.OpenRead( tbUrl.Text /*"https://news.yahoo.co.jp/rss/media/kurumans/all.xml"*/ );
+
                 XDocument xdoc = XDocument.Load( url );
 
                 //cbUrl.Items = 
@@ -47,6 +51,8 @@ namespace RssReader {
                                                 } ).ToList();
 
                 //var nodes = xdoc.Root.Descendants( "item" ).Descendants( "title" );
+
+                lbRssTitle.Items.Clear();
 
                 foreach ( var node in nodes ) {
 
@@ -83,8 +89,9 @@ namespace RssReader {
 
         private void lbRssTitle_Click( object sender , EventArgs e ) {
 
-            wbBrowser.Navigate( ( nodes[ lbRssTitle.SelectedIndex ] ).Link );
+            if( lbRssTitle.SelectedItem == null ) return;
 
+            wbBrowser.Navigate( ( nodes[ lbRssTitle.SelectedIndex ] ).Link );
 
         }
 
@@ -101,6 +108,10 @@ namespace RssReader {
         }
 
         private void btGet_Click( object sender , EventArgs e ) {
+
+            if ( tbUrl.Text == "" ) return;
+
+            lbRssTitle.Items.Clear();       //リストボックスクリア
 
             using ( var wc = new WebClient() ) {
 
@@ -126,6 +137,8 @@ namespace RssReader {
         }
 
         private void lbRssTitle_Click( object sender , EventArgs e ) {
+
+            if( lbRssTitle.SelectedIndex == -1 ) return;
 
             wbBrowser.Navigate( ItemDatas[ lbRssTitle.SelectedIndex ].Link );
 
