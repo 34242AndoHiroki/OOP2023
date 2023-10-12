@@ -24,27 +24,19 @@ namespace RssReader {
         /// コード エディターで変更しないでください。
         /// </summary>
         private void InitializeComponent() {
-            this.tbUrl = new System.Windows.Forms.TextBox();
             this.btGet = new System.Windows.Forms.Button();
             this.lbRssTitle = new System.Windows.Forms.ListBox();
             this.wbBrowser = new System.Windows.Forms.WebBrowser();
             this.cbUrl = new System.Windows.Forms.ComboBox();
+            this.btMyFavorite = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // tbUrl
-            // 
-            this.tbUrl.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tbUrl.Location = new System.Drawing.Point(27, 24);
-            this.tbUrl.Name = "tbUrl";
-            this.tbUrl.Size = new System.Drawing.Size(1235, 31);
-            this.tbUrl.TabIndex = 0;
             // 
             // btGet
             // 
             this.btGet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btGet.Location = new System.Drawing.Point(1268, 23);
+            this.btGet.Location = new System.Drawing.Point(1140, 23);
             this.btGet.Name = "btGet";
             this.btGet.Size = new System.Drawing.Size(90, 31);
             this.btGet.TabIndex = 1;
@@ -59,7 +51,7 @@ namespace RssReader {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbRssTitle.FormattingEnabled = true;
             this.lbRssTitle.ItemHeight = 12;
-            this.lbRssTitle.Location = new System.Drawing.Point(27, 60);
+            this.lbRssTitle.Location = new System.Drawing.Point(27, 62);
             this.lbRssTitle.Name = "lbRssTitle";
             this.lbRssTitle.Size = new System.Drawing.Size(344, 568);
             this.lbRssTitle.TabIndex = 2;
@@ -85,15 +77,27 @@ namespace RssReader {
             this.cbUrl.FormattingEnabled = true;
             this.cbUrl.Location = new System.Drawing.Point(27, 23);
             this.cbUrl.Name = "cbUrl";
-            this.cbUrl.Size = new System.Drawing.Size(1235, 32);
+            this.cbUrl.Size = new System.Drawing.Size(1107, 32);
             this.cbUrl.TabIndex = 4;
+            // 
+            // btMyFavorite
+            // 
+            this.btMyFavorite.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btMyFavorite.Location = new System.Drawing.Point(1236, 24);
+            this.btMyFavorite.Name = "btMyFavorite";
+            this.btMyFavorite.Size = new System.Drawing.Size(122, 31);
+            this.btMyFavorite.TabIndex = 5;
+            this.btMyFavorite.Text = "☆お気に入り追加";
+            this.btMyFavorite.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 642);
-            this.Controls.Add(this.tbUrl);
+            this.Controls.Add(this.btMyFavorite);
             this.Controls.Add(this.wbBrowser);
             this.Controls.Add(this.lbRssTitle);
             this.Controls.Add(this.btGet);
@@ -101,17 +105,15 @@ namespace RssReader {
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox tbUrl;
         private System.Windows.Forms.Button btGet;
         private System.Windows.Forms.ListBox lbRssTitle;
         private System.Windows.Forms.WebBrowser wbBrowser;
         private System.Windows.Forms.ComboBox cbUrl;
+        private System.Windows.Forms.Button btMyFavorite;
     }
 }
 

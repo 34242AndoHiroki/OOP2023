@@ -1,4 +1,4 @@
-﻿//#define Mywork
+﻿#define Mywork
 #define Answer
 
 using System;
@@ -31,15 +31,29 @@ namespace RssReader {
 
         private void btGet_Click( object sender , EventArgs e ) {
 
-            if( tbUrl.Text == "" ) return;
+            if( cbUrl.Text == "" ) return;
 
             using ( var wc = new WebClient() ) {
 
-                var url = wc.OpenRead( tbUrl.Text /*"https://news.yahoo.co.jp/rss/media/kurumans/all.xml"*/ );
+                Stream url;
+
+                try {
+
+                    url =  wc.OpenRead( cbUrl.Text /*"https://news.yahoo.co.jp/rss/media/kurumans/all.xml"*/ );
+
+                }
+                catch ( Exception ) {
+
+                    var errorForm = new ErrorForm();
+                    errorForm.Show();
+                    return;
+
+                }
+
 
                 XDocument xdoc = XDocument.Load( url );
 
-                //cbUrl.Items = 
+                if( !cbUrl.Items.Contains( cbUrl.Text ) ) cbUrl.Items.Add( cbUrl.Text );      //履歴追加
 
                 nodes = xdoc.Root.Descendants( "item" )
                                             .Select( x => new ItemData
@@ -78,12 +92,12 @@ namespace RssReader {
 
         //private void lbRssTitle_MouseDown(object sender, MouseEventArgs e) {
 
-        //    //Point p = Control.MousePosition;
-        //    //p = lbRssTitle.PointToClient(p);//マウスの位置をクライアント座標に変換
-        //    //int ind = lbRssTitle.IndexFromPoint(p);//マウス下のＬＢのインデックスを得る
-        //    //if (ind > -1) {
-        //    //    lbRssTitle.DoDragDrop(lbRssTitle.Items[ind].ToString(), DragDropEffects.Copy);//ドラッグスタート
-        //    //}
+        //    Point p = Control.MousePosition;
+        //    p = lbRssTitle.PointToClient(p);//マウスの位置をクライアント座標に変換
+        //    int ind = lbRssTitle.IndexFromPoint(p);//マウス下のＬＢのインデックスを得る
+        //    if (ind > -1) {
+        //        lbRssTitle.DoDragDrop(lbRssTitle.Items[ind].ToString(), DragDropEffects.Copy);//ドラッグスタート
+        //    }
 
         //}
 
