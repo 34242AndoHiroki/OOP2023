@@ -10,7 +10,7 @@ namespace Section01 {
 
         static void Main(string[] args) {
 
-            var greetings = new List< GreetingBase >()      //親クラスですべてが入るようにしている
+            var greetings = new List< IGreeting >()      //親クラスですべてが入るようにしている
             {
                 new GreetingMorning() ,
                 new GreetingAfternoon() ,

@@ -6,25 +6,25 @@ using System.Threading.Tasks;
 
 namespace Section01 {
 
-    class GreetingMorning : GreetingBase {       // GreetingBase を継承
+    class GreetingMorning : IGreeting {       // GreetingBase を継承
 
-        public string Getmessage() {
+        public string GetMessage() {
             return "おはよう";
         }
 
     }
 
-    class GreetingAfternoon : GreetingBase {
+    class GreetingAfternoon : IGreeting {
 
-        public string Getmessage() {
+        public string GetMessage() {
             return "こんにちは";
         }
 
     }
 
-    class GreetingEvening : GreetingBase {
+    class GreetingEvening : IGreeting {
 
-        public string Getmessage() {
+        public string GetMessage() {
             return "こんばんは";
         }
 

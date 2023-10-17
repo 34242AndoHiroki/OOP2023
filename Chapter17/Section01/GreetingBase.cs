@@ -12,7 +12,7 @@ namespace Section01 {
             return "";
         }
 
-        //public abstract string GetMessage();
+        //public abstract string GetMessage();      //実装しないと怒られるタイプ
 
     }
 
