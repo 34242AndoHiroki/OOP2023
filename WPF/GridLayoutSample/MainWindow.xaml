@@ -43,6 +43,6 @@
             <ComboBoxItem Content="秋"/>
             <ComboBoxItem Content="冬"/>
         </ComboBox>
-        <TextBlock x:Name="seasonTextBlock" Grid.Row="2" Grid.Column="2"/>
+        <TextBlock x:Name="seasonTextBlock" Grid.Row="3" Grid.Column="2"/>
     </Grid>
 </Window>
