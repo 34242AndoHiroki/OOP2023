@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace TextFileProcessor {
+namespace Exercise01 {
 
     // List 17-8
     public abstract class TextProcessor {
@@ -20,7 +20,6 @@ namespace TextFileProcessor {
         private void Process( string fileName ) {
 
             Initialize( fileName );       //初期化処理
-
             using ( var sr = new StreamReader( fileName ) ) {
 
                 while ( !sr.EndOfStream ) {

@@ -9,7 +9,7 @@ namespace DistanceConverter {
     static class ConverterFactory {
 
         //あらかじめインスタンスを生成し、配列に入れておく
-        private static ConverterBase[] _converters = new ConverterBase[]
+        private static ConverterBase[] _converters = new ConverterBase[]        //デザインパターン：ファクトリーメソッド
         {
             new MeterConverter() ,
             new FeetConverter() ,
