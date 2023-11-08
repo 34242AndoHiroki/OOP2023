@@ -13,7 +13,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid>
-            <Label x:Name="colorArea" Margin="20" Background="#FFD6D6D6" />
+            <Label x:Name="colorArea" Margin="20" Background="Black" />
         </Grid>
         <Grid Grid.Column="1" ScrollViewer.CanContentScroll="True" >
             <Grid.RowDefinitions>
