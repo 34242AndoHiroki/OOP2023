@@ -15,22 +15,22 @@
 
         <StackPanel Orientation="Horizontal">
             <TextBox Width="100" Margin="4"
-                     Text="{Binding MetricValue,StringFormat={}{0:N3}}"/>
+                     Text="{Binding MetricValue, StringFormat={}{0:N3}}"/>
             <ComboBox Width="80" Margin="4"
-                      ItemsSource="{Binding Source={x:Static SampleUnitConverter:MetricUnit.Units}}"
+                      ItemsSource="{Binding Source={x:Static SampleUnitConverter:GrumUnit.Units}}"
                       SelectedItem="{Binding CurrentMetricUnit}"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Width="40" Margin="4" Content="▲" Command="{Binding ImperialToMetricUnit}"/>
-            <Button Width="40" Margin="4" Content="▼" Command="{Binding MetricToImperialUnit}"/>
+            <Button Width="40" Margin="4" Content="▲"/>
+            <Button Width="40" Margin="4" Content="▼"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
             <TextBox Width="100" Margin="4"
-                     Text="{Binding ImperialValue,StringFormat={}{0:N3}}"/>
+                     Text="{Binding ImperialValue, StringFormat={}{0:N3}}"/>
             <ComboBox Width="80" Margin="4"
-                      ItemsSource="{Binding Source={x:Static SampleUnitConverter:ImperialUnit.Units}}"
+                      ItemsSource="{Binding Source={x:Static SampleUnitConverter:PoundUnit.Units}}"
                       SelectedItem="{Binding CurrentImperialUnit}"/>
         </StackPanel>
 

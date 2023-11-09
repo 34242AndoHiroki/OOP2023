@@ -9,29 +9,29 @@ namespace SampleUnitConverter {
 
     public class MainWindowViewModel : ViewModel {
 
-        private double metricValue, imperialValue;
+        private double grumValue, poundValue;
 
         //プロパティ
-        public double MetricValue {
+        public double GrumValue {
 
-            get { return this.metricValue; }
+            get { return this.grumValue; }
 
             set {
 
-                this.metricValue = value;
+                this.grumValue = value;
                 this.OnPropertyChanged();       //通知が届くようにする
 
             }
 
         }
 
-        public double ImperialValue {
+        public double PoundValue {
 
-            get { return this.imperialValue; }
+            get { return this.poundValue; }
 
             set {       //代入＝セッター
 
-                this.imperialValue = value;
+                this.poundValue = value;
                 this.OnPropertyChanged();       //通知が届くようにする
 
             }
@@ -39,28 +39,28 @@ namespace SampleUnitConverter {
         }
 
         //上のComboBoxで選択されている値（単位）
-        public MetricUnit CurrentMetricUnit { get; set; }       //コンボボックスの値にアクセスできるプロパティ
+        public GrumUnit CurrentGrumUnit { get; set; }       //コンボボックスの値にアクセスできるプロパティ
 
         //上のComboBoxで選択されている値（単位）
-        public ImperialUnit CurrentImperialUnit { get; set; }   //コンボボックスの値にアクセスできるプロパティ
+        public PoundUnit CurrentPoundUnit { get; set; }   //コンボボックスの値にアクセスできるプロパティ
 
         //▲ボタンで呼ばれるコマンド
-        public ICommand ImperialToMetricUnit { get; private set; }
+        public ICommand PoundToGrumUnit { get; private set; }
 
         //▼ボタンで呼ばれるコマンド
-        public ICommand MetricToImperialUnit { get; private set; }
+        public ICommand GrumToPoundUnit { get; private set; }
 
         //コンストラクタ
         public MainWindowViewModel() {
 
-            this.CurrentMetricUnit = MetricUnit.Units.First();
-            this.CurrentImperialUnit = ImperialUnit.Units.First();
+            this.CurrentGrumUnit = GrumUnit.Units.ElementAt( 1 );
+            this.CurrentPoundUnit = PoundUnit.Units.ElementAt( 1 );
 
-            this.MetricToImperialUnit = new DelegateCommand(            //バインディングしたとき（矢印ボタンを押下したとき）に処理される
-                () => this.imperialValue = this.CurrentImperialUnit.FromMetricUnit( this.CurrentMetricUnit , this.MetricValue ) );      //処理の登録
+            this.GrumToPoundUnit = new DelegateCommand(            //バインディングしたとき（矢印ボタンを押下したとき）に処理される
+                () => this.poundValue = this.CurrentPoundUnit.FromGrumUnit( this.CurrentGrumUnit , this.GrumValue ) );      //処理の登録
 
-            this.ImperialToMetricUnit = new DelegateCommand(            //バインディングしたとき（矢印ボタンを押下したとき）に処理される
-                () => this.MetricValue = this.CurrentMetricUnit.FromImperialUnit( this.CurrentImperialUnit , this.ImperialValue ) );    //処理の登録
+            this.PoundToGrumUnit = new DelegateCommand(            //バインディングしたとき（矢印ボタンを押下したとき）に処理される
+                () => this.GrumValue = this.CurrentGrumUnit.FromPoundUnit( this.CurrentPoundUnit , this.PoundValue ) );    //処理の登録
 
         }
 

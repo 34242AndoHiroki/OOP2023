@@ -57,9 +57,9 @@
     </ApplicationDefinition>
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="DistanceUnit.cs" />
-    <Compile Include="ImperialUnit.cs" />
+    <Compile Include="PoundUnit.cs" />
     <Compile Include="MainWindowViewModel.cs" />
-    <Compile Include="MetricUnit.cs" />
+    <Compile Include="GramUnit.cs" />
     <Compile Include="ViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
