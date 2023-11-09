@@ -1,4 +1,4 @@
-﻿//#define Mywork
+﻿#define Mywork
 #define Answer
 
 using System;
@@ -16,7 +16,7 @@ namespace SampleUnitConverter {
 
         private static List< PoundUnit > units = new List< PoundUnit > {      //所持用
 
-            new PoundUnit{ Name = "ozf" , Coefficient = 0.0625 , } ,
+            new PoundUnit{ Name = "ozf" , Coefficient = 0.0625 , } ,        //( 1 / 16 )
             new PoundUnit{ Name = "lb" , Coefficient = 1 , } ,
             new PoundUnit{ Name = "cwt" , Coefficient = 14 , } ,
 

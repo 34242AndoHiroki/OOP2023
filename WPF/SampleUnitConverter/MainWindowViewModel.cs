@@ -57,7 +57,7 @@ namespace SampleUnitConverter {
             this.CurrentPoundUnit = PoundUnit.Units.ElementAt( 1 );
 
             this.GrumToPoundUnit = new DelegateCommand(            //バインディングしたとき（矢印ボタンを押下したとき）に処理される
-                () => this.poundValue = this.CurrentPoundUnit.FromGrumUnit( this.CurrentGrumUnit , this.GrumValue ) );      //処理の登録
+                () => this.PoundValue = this.CurrentPoundUnit.FromGrumUnit( this.CurrentGrumUnit , this.GrumValue ) );      //処理の登録
 
             this.PoundToGrumUnit = new DelegateCommand(            //バインディングしたとき（矢印ボタンを押下したとき）に処理される
                 () => this.GrumValue = this.CurrentGrumUnit.FromPoundUnit( this.CurrentPoundUnit , this.PoundValue ) );    //処理の登録
