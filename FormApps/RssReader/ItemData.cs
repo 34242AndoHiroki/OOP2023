@@ -1,4 +1,4 @@
-﻿//#define Mywork
+﻿#define Mywork
 #define Answer
 
 using System;
@@ -17,6 +17,10 @@ namespace RssReader {
 
         public string Title { get; set; }
         public string Link { get; set; }
+
+        public override string ToString() {
+            return Title;
+        }
 
         #endregion
 

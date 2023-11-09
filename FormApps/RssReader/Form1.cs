@@ -16,152 +16,171 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 
 namespace RssReader {
-
+ 
     public partial class Form1 : Form {
-
+ 
 #if Mywork
-
+ 
         List< ItemData > nodes;
-
+ 
         public Form1() {
             InitializeComponent();
         }
-
+ 
         #region 自力
-
+ 
         private void btGet_Click( object sender , EventArgs e ) {
-
+ 
             if( cbUrl.Text == "" ) return;
-
+ 
             using ( var wc = new WebClient() ) {
-
-                Stream url;
-
+ 
+                Stream url = null;
+ 
                 try {
-
-                    url =  wc.OpenRead( cbUrl.Text /*"https://news.yahoo.co.jp/rss/media/kurumans/all.xml"*/ );
-
+ 
+                    url = wc.OpenRead( cbUrl.Text /*"https://news.yahoo.co.jp/rss/media/kurumans/all.xml"*/ );
+ 
                 }
-                catch ( Exception ) {
 
-                    var errorForm = new ErrorForm();
-                    errorForm.Show();
+                catch ( Exception ex ) {
+ 
+                    MessageBox.Show( ex.Message );
+
                     return;
-
+ 
                 }
-
-
+ 
                 XDocument xdoc = XDocument.Load( url );
-
-                if( !cbUrl.Items.Contains( cbUrl.Text ) ) cbUrl.Items.Add( cbUrl.Text );      //履歴追加
-
+ 
                 nodes = xdoc.Root.Descendants( "item" )
                                             .Select( x => new ItemData
-                                                {
+                                            {
+ 
+                                                Title = x.Element( "title" ).Value ,
+                                                Link = x.Element( "link" ).Value    
 
-                                                    Title = x.Element( "title" ).Value ,
-                                                    Link = x.Element( "link" ).Value    
-                                                    
-                                                } ).ToList();
-
+                                            } ).ToList();
+ 
                 //var nodes = xdoc.Root.Descendants( "item" ).Descendants( "title" );
-
+ 
                 lbRssTitle.Items.Clear();
-
+ 
                 foreach ( var node in nodes ) {
-
                     lbRssTitle.Items.Add( node.Title );
-
                 }
-
+ 
+                AddItems( xdoc.Root );
+ 
             }
-
+ 
         }
-
+ 
         //private void lbRssTitle_DragDrop( object sender , DragEventArgs e ) {
-
+ 
         //    //var dropFiles = e.Data.GetData();
-
+ 
         //}
-
+ 
         //private void lbRssTitle_DragEnter( object sender , DragEventArgs e ) {
-
-
-
+ 
+ 
         //}
-
+ 
         //private void lbRssTitle_MouseDown(object sender, MouseEventArgs e) {
+ 
+        //    //Point p = Control.MousePosition;
 
-        //    Point p = Control.MousePosition;
-        //    p = lbRssTitle.PointToClient(p);//マウスの位置をクライアント座標に変換
-        //    int ind = lbRssTitle.IndexFromPoint(p);//マウス下のＬＢのインデックスを得る
-        //    if (ind > -1) {
-        //        lbRssTitle.DoDragDrop(lbRssTitle.Items[ind].ToString(), DragDropEffects.Copy);//ドラッグスタート
-        //    }
+        //    //p = lbRssTitle.PointToClient(p);//マウスの位置をクライアント座標に変換
 
+        //    //int ind = lbRssTitle.IndexFromPoint(p);//マウス下のＬＢのインデックスを得る
+
+        //    //if (ind > -1) {
+
+        //    //    lbRssTitle.DoDragDrop(lbRssTitle.Items[ind].ToString(), DragDropEffects.Copy);//ドラッグスタート
+
+        //    //}
+ 
         //}
-
+ 
         private void lbRssTitle_Click( object sender , EventArgs e ) {
-
+ 
             if( lbRssTitle.SelectedItem == null ) return;
-
+ 
             wbBrowser.Navigate( ( nodes[ lbRssTitle.SelectedIndex ] ).Link );
-
+ 
         }
-
+ 
+        private void AddItems( XElement root ) {
+ 
+            if( cbUrl.Items.Contains( root ) ) return;
+ 
+            cbUrl.Items.Add( root );
+ 
+        }
+ 
         #endregion
-
+ 
 #elif Answer
-
+ 
         #region 模範解答
-
+ 
         List< ItemData > ItemDatas = new List< ItemData >();        //IEnumerable<>はインターフェースだから使えない
-
+ 
         public Form1() {
+
             InitializeComponent();
-        }
 
+        }
+ 
         private void btGet_Click( object sender , EventArgs e ) {
-
+ 
             if ( tbUrl.Text == "" ) return;
-
+ 
             lbRssTitle.Items.Clear();       //リストボックスクリア
-
+ 
             using ( var wc = new WebClient() ) {
-
+ 
                 var url = wc.OpenRead( tbUrl.Text );
+
                 XDocument xdoc = XDocument.Load( url );
-
+ 
                 var ItemDatas = xdoc.Root.Descendants( "item" )       //要素を持ってくる条件
+
                                             .Select( x => new ItemData
+
                                                 {
+
                                                     Title = ( string )x.Element( "title" ) ,           //明示的なキャストだから ToString() よりもキャスト
+
                                                     Link = ( string )x.Element( "link" ) ,
+
                                                 } ).ToList();
+
                 //var nodes = xdoc.Root.Descendants( "item" ).Descendants( "title" );
-
+ 
                 foreach ( var node in ItemDatas) {         //ここで解析
-
+ 
                     lbRssTitle.Items.Add( node.Title );
-
+ 
                 }
-
+ 
             }
-
+ 
         }
-
+ 
         private void lbRssTitle_Click( object sender , EventArgs e ) {
-
+ 
             if( lbRssTitle.SelectedIndex == -1 ) return;
-
+ 
             wbBrowser.Navigate( ItemDatas[ lbRssTitle.SelectedIndex ].Link );
-
+ 
         }
-
+ 
         #endregion
-
+ 
 #endif
-
+ 
     }
-
+ 
 }
