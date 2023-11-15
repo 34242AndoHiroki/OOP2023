@@ -1,6 +1,6 @@
 ﻿#define Mywork
 #define Answer
-
+ 
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +14,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
-
+ 
 namespace RssReader {
  
     public partial class Form1 : Form {
@@ -24,10 +24,16 @@ namespace RssReader {
         List< ItemData > nodes;
  
         public Form1() {
+
             InitializeComponent();
+
         }
  
         #region 自力
+
+        private void Form1_Load( object sender , EventArgs e ) {
+
+        }
  
         private void btGet_Click( object sender , EventArgs e ) {
  
@@ -39,7 +45,7 @@ namespace RssReader {
  
                 try {
  
-                    url = wc.OpenRead( cbUrl.Text /*"https://news.yahoo.co.jp/rss/media/kurumans/all.xml"*/ );
+                    url = wc.OpenRead( cbUrl.Text );
  
                 }
 
@@ -54,23 +60,28 @@ namespace RssReader {
                 XDocument xdoc = XDocument.Load( url );
  
                 nodes = xdoc.Root.Descendants( "item" )
-                                            .Select( x => new ItemData
-                                            {
- 
-                                                Title = x.Element( "title" ).Value ,
-                                                Link = x.Element( "link" ).Value    
 
-                                            } ).ToList();
+                                            .Select( x => new ItemData
+
+                                                {
+ 
+                                                    Title = x.Element( "title" ).Value ,
+
+                                                    Link = x.Element( "link" ).Value    
+
+                                                } ).ToList();
  
                 //var nodes = xdoc.Root.Descendants( "item" ).Descendants( "title" );
  
                 lbRssTitle.Items.Clear();
  
                 foreach ( var node in nodes ) {
+ 
                     lbRssTitle.Items.Add( node.Title );
+ 
                 }
  
-                AddItems( xdoc.Root );
+                AddItems( cbUrl.Text );
  
             }
  
@@ -111,16 +122,23 @@ namespace RssReader {
  
         }
  
-        private void AddItems( XElement root ) {
+        private void AddItems( string text ) {
  
-            if( cbUrl.Items.Contains( root ) ) return;
+            if( cbUrl.Items.Contains( text ) ) return;
  
-            cbUrl.Items.Add( root );
+            cbUrl.Items.Add ( cbUrl.Text );
  
         }
- 
+
+        private void btMyFavorite_Click( object sender , EventArgs e ) {
+
+
+
+        }
+
+
         #endregion
- 
+
 #elif Answer
  
         #region 模範解答
@@ -180,7 +198,31 @@ namespace RssReader {
         #endregion
  
 #endif
- 
+
     }
  
 }
+
+/*  URL
+主要
+https://news.yahoo.co.jp/rss/topics/top-picks.xml
+国内
+https://news.yahoo.co.jp/rss/topics/domestic.xml
+国際
+https://news.yahoo.co.jp/rss/topics/world.xml
+経済
+https://news.yahoo.co.jp/rss/topics/business.xml
+エンタメ
+https://news.yahoo.co.jp/rss/topics/entertainment.xml
+スポーツ
+https://news.yahoo.co.jp/rss/topics/sports.xml
+IT
+https://news.yahoo.co.jp/rss/topics/sports.xml
+科学
+https://news.yahoo.co.jp/rss/topics/science.xml
+地域
+https://news.yahoo.co.jp/rss/topics/local.xml
+
+車
+https://news.yahoo.co.jp/rss/media/kurumans/all.xml
+*/

@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--リソースの定義-->
+    <SolidColorBrush x:Key="ButtonBrushKey" Color="Aqua"/>
+
+    <Style TargetType="Button">
+        
+        <Setter Property="Background" Value="White"/>
+        
+        <Style.Triggers>        <!--トリガーの設定-->
+            
+            <Trigger Property="IsMouseOver" Value="True">
+                     <Setter Property="Foreground" Value="Red"/>
+            </Trigger>
+            
+        </Style.Triggers>
+        
+    </Style>
+
+</ResourceDictionary>

@@ -30,6 +30,7 @@ namespace ColorChecker {
 
             InitializeComponent();
             DataContext = GetColorList();
+            ColorChange( Colors.Black );
 
         }
 
@@ -69,6 +70,8 @@ namespace ColorChecker {
             var selectedColor = ( ( MyColor )( ( ( ListBox )sender ).SelectedItem ) ).Color;
 
             ColorChange( selectedColor );
+
+            //var data = stockList.Items[ stockList.SelectedIndex ];        //要素の取得例
 
         }
 

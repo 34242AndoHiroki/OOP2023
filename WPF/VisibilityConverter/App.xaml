@@ -1,0 +1,9 @@
+﻿<Application x:Class="VisibilityConverter.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:VisibilityConverter"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>     <!--共通して使えるリソースを定義できるスペース-->
+        <ResourceDictionary Source="Resources.xaml"/>        <!--外部リソースの参照先を登録すること-->
+    </Application.Resources>
+</Application>
