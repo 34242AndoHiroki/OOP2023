@@ -14,7 +14,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
- 
+
+
 namespace RssReader {
  
     public partial class Form1 : Form {
@@ -22,37 +23,33 @@ namespace RssReader {
 #if Mywork
  
         List< ItemData > nodes;
+        List< ItemData > logs = new List< ItemData >();      //ログ用
+        List< ItemData > favorites = new List< ItemData >();     //お気に入り用
  
         public Form1() {
-
             InitializeComponent();
-
         }
  
         #region 自力
 
         private void Form1_Load( object sender , EventArgs e ) {
-
+            SetTopics();
         }
  
         private void btGet_Click( object sender , EventArgs e ) {
  
-            if( cbUrl.Text == "" ) return;
+            if( cbUrl.Text == "" ) return;      //マスク処理
  
             using ( var wc = new WebClient() ) {
  
                 Stream url = null;
  
                 try {
- 
                     url = wc.OpenRead( cbUrl.Text );
- 
                 }
-
                 catch ( Exception ex ) {
  
                     MessageBox.Show( ex.Message );
-
                     return;
  
                 }
@@ -60,15 +57,10 @@ namespace RssReader {
                 XDocument xdoc = XDocument.Load( url );
  
                 nodes = xdoc.Root.Descendants( "item" )
-
                                             .Select( x => new ItemData
-
                                                 {
- 
                                                     Title = x.Element( "title" ).Value ,
-
                                                     Link = x.Element( "link" ).Value    
-
                                                 } ).ToList();
  
                 //var nodes = xdoc.Root.Descendants( "item" ).Descendants( "title" );
@@ -76,9 +68,7 @@ namespace RssReader {
                 lbRssTitle.Items.Clear();
  
                 foreach ( var node in nodes ) {
- 
                     lbRssTitle.Items.Add( node.Title );
- 
                 }
  
                 AddItems( cbUrl.Text );
@@ -123,19 +113,69 @@ namespace RssReader {
         }
  
         private void AddItems( string text ) {
- 
-            if( cbUrl.Items.Contains( text ) ) return;
- 
-            cbUrl.Items.Add ( cbUrl.Text );
+            
+            //Linkがすでにあれば追加しない
+            if( cbUrl.Items.Cast< ItemData >().Select( i => i.Link ).Contains( text ) ) return;
+
+            var it = new ItemData { Title = cbUrl.Text , Link = cbUrl.Text };
+
+            cbUrl.Items.Add( it );
+            logs.Add( it );
  
         }
 
         private void btMyFavorite_Click( object sender , EventArgs e ) {
 
+            if ( cbUrl.Text == "" ) {        //マスク処理
 
+                MessageBox.Show( "URLが入力されていません。" );
+                return;
+
+            }
+
+            favorites.Add( new ItemData { Title = tbFavoriteName.Text , Link = cbUrl.Text } );
 
         }
 
+        private void cbTopics_SelectedIndexChanged( object sender , EventArgs e ) {
+
+            cbUrl.Text = ( ( ItemData )cbTopics.Items[ cbTopics.SelectedIndex ] ).Link;
+
+        }
+
+        //最初からデフォルトのリンクを用意
+        private void SetTopics() {
+
+            cbTopics.Items.Add( new ItemData { Title = "主要", Link = "https://news.yahoo.co.jp/rss/topics/top-picks.xml" } );
+            cbTopics.Items.Add( new ItemData { Title = "国内", Link = "https://news.yahoo.co.jp/rss/topics/domestic.xml" } );
+            cbTopics.Items.Add( new ItemData { Title = "国際", Link = "https://news.yahoo.co.jp/rss/topics/world.xml" } );
+            cbTopics.Items.Add( new ItemData { Title = "経済", Link = "https://news.yahoo.co.jp/rss/topics/business.xml" } );
+            cbTopics.Items.Add( new ItemData { Title = "エンタメ", Link = "https://news.yahoo.co.jp/rss/topics/entertainment.xml" } );
+            cbTopics.Items.Add( new ItemData { Title = "スポーツ", Link = "https://news.yahoo.co.jp/rss/topics/sports.xml" } );
+            cbTopics.Items.Add( new ItemData { Title = "IT", Link = "https://news.yahoo.co.jp/rss/topics/sports.xml" } );
+            cbTopics.Items.Add( new ItemData { Title = "科学", Link = "https://news.yahoo.co.jp/rss/topics/science.xml" } );
+            cbTopics.Items.Add( new ItemData { Title = "地域", Link = "https://news.yahoo.co.jp/rss/topics/local.xml" } );
+
+        }
+
+        private void chIsFavorite_CheckedChanged( object sender , EventArgs e ) {
+
+            cbUrl.Items.Clear();
+            UrlWrite( chIsFavorite.Checked ? favorites : logs );
+            
+        }
+
+        private void cbUrl_SelectedIndexChanged( object sender , EventArgs e ) {
+
+            cbUrl.Text = ( ( ItemData )cbUrl.Items[ cbUrl.SelectedIndex ] ).Link;
+
+        }
+
+        private void UrlWrite( List< ItemData > datas ) {
+
+            foreach ( var data in datas ) cbUrl.Items.Add( data );
+
+        }
 
         #endregion
 
@@ -204,25 +244,6 @@ namespace RssReader {
 }
 
 /*  URL
-主要
-https://news.yahoo.co.jp/rss/topics/top-picks.xml
-国内
-https://news.yahoo.co.jp/rss/topics/domestic.xml
-国際
-https://news.yahoo.co.jp/rss/topics/world.xml
-経済
-https://news.yahoo.co.jp/rss/topics/business.xml
-エンタメ
-https://news.yahoo.co.jp/rss/topics/entertainment.xml
-スポーツ
-https://news.yahoo.co.jp/rss/topics/sports.xml
-IT
-https://news.yahoo.co.jp/rss/topics/sports.xml
-科学
-https://news.yahoo.co.jp/rss/topics/science.xml
-地域
-https://news.yahoo.co.jp/rss/topics/local.xml
-
 車
 https://news.yahoo.co.jp/rss/media/kurumans/all.xml
 */
