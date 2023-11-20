@@ -29,14 +29,15 @@ namespace RssReader {
             this.wbBrowser = new System.Windows.Forms.WebBrowser();
             this.cbUrl = new System.Windows.Forms.ComboBox();
             this.btMyFavorite = new System.Windows.Forms.Button();
-            this.chIsFavorite = new System.Windows.Forms.CheckBox();
             this.tbFavoriteName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.cbTopics = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cbFavorites = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -46,7 +47,7 @@ namespace RssReader {
             // btGet
             // 
             this.btGet.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btGet.Location = new System.Drawing.Point(1051, 19);
+            this.btGet.Location = new System.Drawing.Point(1204, 18);
             this.btGet.Name = "btGet";
             this.btGet.Size = new System.Drawing.Size(90, 31);
             this.btGet.TabIndex = 1;
@@ -78,7 +79,7 @@ namespace RssReader {
             this.cbUrl.FormattingEnabled = true;
             this.cbUrl.Location = new System.Drawing.Point(6, 18);
             this.cbUrl.Name = "cbUrl";
-            this.cbUrl.Size = new System.Drawing.Size(1039, 32);
+            this.cbUrl.Size = new System.Drawing.Size(1192, 32);
             this.cbUrl.TabIndex = 4;
             this.cbUrl.SelectedIndexChanged += new System.EventHandler(this.cbUrl_SelectedIndexChanged);
             // 
@@ -93,24 +94,12 @@ namespace RssReader {
             this.btMyFavorite.UseVisualStyleBackColor = true;
             this.btMyFavorite.Click += new System.EventHandler(this.btMyFavorite_Click);
             // 
-            // chIsFavorite
-            // 
-            this.chIsFavorite.AutoSize = true;
-            this.chIsFavorite.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.chIsFavorite.Location = new System.Drawing.Point(1147, 23);
-            this.chIsFavorite.Name = "chIsFavorite";
-            this.chIsFavorite.Size = new System.Drawing.Size(145, 24);
-            this.chIsFavorite.TabIndex = 6;
-            this.chIsFavorite.Text = "お気に入りのみ表示";
-            this.chIsFavorite.UseVisualStyleBackColor = true;
-            this.chIsFavorite.CheckedChanged += new System.EventHandler(this.chIsFavorite_CheckedChanged);
-            // 
             // tbFavoriteName
             // 
-            this.tbFavoriteName.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tbFavoriteName.Location = new System.Drawing.Point(68, 48);
+            this.tbFavoriteName.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.tbFavoriteName.Location = new System.Drawing.Point(68, 46);
             this.tbFavoriteName.Name = "tbFavoriteName";
-            this.tbFavoriteName.Size = new System.Drawing.Size(207, 23);
+            this.tbFavoriteName.Size = new System.Drawing.Size(207, 25);
             this.tbFavoriteName.TabIndex = 7;
             // 
             // label3
@@ -145,14 +134,46 @@ namespace RssReader {
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbFavorites);
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.cbTopics);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(12, 192);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(281, 107);
+            this.groupBox1.Size = new System.Drawing.Size(281, 163);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Text = "記事";
+            // 
+            // cbFavorites
+            // 
+            this.cbFavorites.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cbFavorites.FormattingEnabled = true;
+            this.cbFavorites.Location = new System.Drawing.Point(6, 115);
+            this.cbFavorites.Name = "cbFavorites";
+            this.cbFavorites.Size = new System.Drawing.Size(269, 28);
+            this.cbFavorites.TabIndex = 14;
+            this.cbFavorites.SelectedIndexChanged += new System.EventHandler(this.cbFavorites_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label1.Location = new System.Drawing.Point(6, 88);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 24);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "お気に入り";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label2.Location = new System.Drawing.Point(2, 15);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(90, 24);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "トピックス";
             // 
             // groupBox2
             // 
@@ -167,21 +188,10 @@ namespace RssReader {
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "お気に入り";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.Location = new System.Drawing.Point(2, 15);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 24);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "トピックス";
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.cbUrl);
             this.groupBox3.Controls.Add(this.btGet);
-            this.groupBox3.Controls.Add(this.chIsFavorite);
             this.groupBox3.Location = new System.Drawing.Point(12, 2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(1300, 58);
@@ -209,7 +219,6 @@ namespace RssReader {
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -220,7 +229,6 @@ namespace RssReader {
         private System.Windows.Forms.WebBrowser wbBrowser;
         private System.Windows.Forms.ComboBox cbUrl;
         private System.Windows.Forms.Button btMyFavorite;
-        private System.Windows.Forms.CheckBox chIsFavorite;
         private System.Windows.Forms.TextBox tbFavoriteName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -229,6 +237,8 @@ namespace RssReader {
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.ComboBox cbFavorites;
+        private System.Windows.Forms.Label label1;
     }
 }
 

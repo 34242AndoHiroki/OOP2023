@@ -23,8 +23,6 @@ namespace RssReader {
 #if Mywork
  
         List< ItemData > nodes;
-        List< ItemData > logs = new List< ItemData >();      //ログ用
-        List< ItemData > favorites = new List< ItemData >();     //お気に入り用
  
         public Form1() {
             InitializeComponent();
@@ -120,7 +118,6 @@ namespace RssReader {
             var it = new ItemData { Title = cbUrl.Text , Link = cbUrl.Text };
 
             cbUrl.Items.Add( it );
-            logs.Add( it );
  
         }
 
@@ -133,13 +130,7 @@ namespace RssReader {
 
             }
 
-            favorites.Add( new ItemData { Title = tbFavoriteName.Text , Link = cbUrl.Text } );
-
-        }
-
-        private void cbTopics_SelectedIndexChanged( object sender , EventArgs e ) {
-
-            cbUrl.Text = ( ( ItemData )cbTopics.Items[ cbTopics.SelectedIndex ] ).Link;
+            cbFavorites.Items.Add( new ItemData { Title = tbFavoriteName.Text , Link = cbUrl.Text } );
 
         }
 
@@ -158,24 +149,31 @@ namespace RssReader {
 
         }
 
-        private void chIsFavorite_CheckedChanged( object sender , EventArgs e ) {
-
-            cbUrl.Items.Clear();
-            UrlWrite( chIsFavorite.Checked ? favorites : logs );
-            
-        }
-
         private void cbUrl_SelectedIndexChanged( object sender , EventArgs e ) {
 
             cbUrl.Text = ( ( ItemData )cbUrl.Items[ cbUrl.SelectedIndex ] ).Link;
 
         }
 
-        private void UrlWrite( List< ItemData > datas ) {
+        private void cbTopics_SelectedIndexChanged( object sender , EventArgs e ) {
 
-            foreach ( var data in datas ) cbUrl.Items.Add( data );
+            cbUrl.Text = ( ( ItemData )cbTopics.Items[ cbTopics.SelectedIndex ] ).Link;
 
         }
+
+        private void cbFavorites_SelectedIndexChanged( object sender , EventArgs e ) {
+
+            cbUrl.Text = ( ( ItemData )cbFavorites.Items[ cbFavorites.SelectedIndex ] ).Link;
+
+        }
+
+        private void FavoritePrint( ItemData data ) {
+
+
+
+        }
+
+
 
         #endregion
 
