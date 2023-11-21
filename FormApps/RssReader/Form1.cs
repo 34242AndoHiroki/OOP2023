@@ -23,6 +23,7 @@ namespace RssReader {
 #if Mywork
  
         List< ItemData > nodes;
+        bool isFavoriteSelected = false;
  
         public Form1() {
             InitializeComponent();
@@ -61,8 +62,6 @@ namespace RssReader {
                                                     Title = x.Element( "title" ).Value ,
                                                     Link = x.Element( "link" ).Value    
                                                 } ).ToList();
- 
-                //var nodes = xdoc.Root.Descendants( "item" ).Descendants( "title" );
  
                 lbRssTitle.Items.Clear();
  
@@ -115,6 +114,13 @@ namespace RssReader {
 
                 }
 
+                if ( Regex.IsMatch( tbFavoriteName.Text , @"^\s+$" ) ) {       //空白記号のみ
+
+                    MessageBox.Show( "空白文字のみの名前は指定できません。" );
+                    return;
+
+                }
+
                 if ( cbFavorites.Items.Cast< ItemData >().Select( i => i.Title ).Contains( tbFavoriteName.Text ) ) {         //すでに同じ Title があった場合
 
                     MessageBox.Show( "既に同じタイトル名を登録しています。" );
@@ -127,20 +133,42 @@ namespace RssReader {
                 MessageBox.Show( "お気に入りに追加しました。" );
 
             }
+            else if ( btMyFavorite.Text == "名前を変更" /*&& tbFavoriteName.Text != ( cbFavorites.Items[ cbFavorites.SelectedIndex ] as ItemData ).Title*/ )     //名前の変更
+            {
+
+                //( ( ItemData )( cbFavorites.Items[ cbFavorites.SelectedIndex ] ) ).Title = tbFavoriteName.Text;
+                cbFavorites.Items.Insert( cbFavorites.SelectedIndex , new ItemData { Title = tbFavoriteName.Text , Link = ( cbFavorites.Items[ cbFavorites.SelectedIndex ] as ItemData ).Link } );
+                cbFavorites.Items.RemoveAt( cbFavorites.SelectedIndex );
+
+                MessageBox.Show( "名前を変更しました。" );
+                btMyFavorite.Text = "★お気に入り解除";
+
+            }
             else        //"★お気に入り解除"
             {
 
-                cbFavorites.Items.RemoveAt( cbFavorites.SelectedIndex );        //お気に入り解除
+                if( cbFavorites.SelectedIndex == -1 ) 
+                {
 
-                MessageBox.Show( "お気に入りから解除しました。" );
+                    MessageBox.Show( "お気に入りの項目を選択してください。" );
+                    return;
 
-                tbFavoriteName.Text = "";
-                btMyFavorite.Text = "☆お気に入り追加";
+                }
+                else
+                {
 
-                if( cbFavorites.Items.Count == 0 ) cbFavorites.Text = "";
+                    cbFavorites.Items.RemoveAt( cbFavorites.SelectedIndex );        //お気に入り解除
+
+                    MessageBox.Show( "お気に入りから解除しました。" );
+
+                    tbFavoriteName.Text = "";
+                    btMyFavorite.Text = "☆お気に入り追加";
+
+                    if( cbFavorites.Items.Count == 0 ) cbFavorites.Text = "";       //なかったときのマスク処理
+
+                }
 
             }
-
 
         }
 
@@ -164,6 +192,7 @@ namespace RssReader {
         private void cbUrl_SelectedIndexChanged( object sender , EventArgs e ) {
 
             ToNotFavoriteUpdate( ( ItemData )cbUrl.Items[ cbUrl.SelectedIndex ] );
+            OtherSelected();
 
         }
 
@@ -171,6 +200,7 @@ namespace RssReader {
         private void cbTopics_SelectedIndexChanged( object sender , EventArgs e ) {
 
             ToNotFavoriteUpdate( ( ItemData )cbTopics.Items[ cbTopics.SelectedIndex ] );
+            OtherSelected();
 
         }
 
@@ -178,6 +208,7 @@ namespace RssReader {
         private void cbFavorites_SelectedIndexChanged( object sender , EventArgs e ) {
 
             ToFavoriteUpdate( ( ItemData )cbFavorites.Items[ cbFavorites.SelectedIndex ] );
+            cbFavoriteSelected();
 
         }
 
@@ -191,13 +222,22 @@ namespace RssReader {
         }
 
 
-        public void ToFavoriteUpdate(ItemData data) {
+        public void ToFavoriteUpdate( ItemData data ) {
 
             cbUrl.Text = data.Link;
             tbFavoriteName.Text = data.Title;
             btMyFavorite.Text = "★お気に入り解除";
 
         }
+
+        private void tbFavoriteName_TextChanged( object sender, EventArgs e ) {
+
+            if( isFavoriteSelected ) btMyFavorite.Text = "名前を変更";
+
+        }
+
+        private void OtherSelected() => isFavoriteSelected = false;
+        private void cbFavoriteSelected() => isFavoriteSelected = true;
 
 
         #endregion

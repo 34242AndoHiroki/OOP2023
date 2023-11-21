@@ -102,6 +102,7 @@ namespace RssReader {
             this.tbFavoriteName.Name = "tbFavoriteName";
             this.tbFavoriteName.Size = new System.Drawing.Size(207, 25);
             this.tbFavoriteName.TabIndex = 7;
+            this.tbFavoriteName.TextChanged += new System.EventHandler(this.tbFavoriteName_TextChanged);
             // 
             // label3
             // 
@@ -213,7 +214,7 @@ namespace RssReader {
             this.Controls.Add(this.lbRssTitle);
             this.Name = "Form1";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-            this.Text = "Form1";
+            this.Text = "RSS Reader";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
