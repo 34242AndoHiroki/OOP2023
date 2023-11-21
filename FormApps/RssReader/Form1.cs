@@ -33,6 +33,7 @@ namespace RssReader {
         private void Form1_Load( object sender , EventArgs e ) {
             SetTopics();
         }
+
  
         private void btGet_Click( object sender , EventArgs e ) {
  
@@ -74,33 +75,7 @@ namespace RssReader {
             }
  
         }
- 
-        //private void lbRssTitle_DragDrop( object sender , DragEventArgs e ) {
- 
-        //    //var dropFiles = e.Data.GetData();
- 
-        //}
- 
-        //private void lbRssTitle_DragEnter( object sender , DragEventArgs e ) {
- 
- 
-        //}
- 
-        //private void lbRssTitle_MouseDown(object sender, MouseEventArgs e) {
- 
-        //    //Point p = Control.MousePosition;
 
-        //    //p = lbRssTitle.PointToClient(p);//マウスの位置をクライアント座標に変換
-
-        //    //int ind = lbRssTitle.IndexFromPoint(p);//マウス下のＬＢのインデックスを得る
-
-        //    //if (ind > -1) {
-
-        //    //    lbRssTitle.DoDragDrop(lbRssTitle.Items[ind].ToString(), DragDropEffects.Copy);//ドラッグスタート
-
-        //    //}
- 
-        //}
  
         private void lbRssTitle_Click( object sender , EventArgs e ) {
  
@@ -109,30 +84,66 @@ namespace RssReader {
             wbBrowser.Navigate( ( nodes[ lbRssTitle.SelectedIndex ] ).Link );
  
         }
+
  
         private void AddItems( string text ) {
             
             //Linkがすでにあれば追加しない
             if( cbUrl.Items.Cast< ItemData >().Select( i => i.Link ).Contains( text ) ) return;
 
-            var it = new ItemData { Title = cbUrl.Text , Link = cbUrl.Text };
-
-            cbUrl.Items.Add( it );
+            cbUrl.Items.Add( new ItemData { Title = cbUrl.Text , Link = cbUrl.Text } );
  
         }
 
+
         private void btMyFavorite_Click( object sender , EventArgs e ) {
 
-            if ( cbUrl.Text == "" ) {        //マスク処理
+            if ( btMyFavorite.Text == "☆お気に入り追加" ) {
 
-                MessageBox.Show( "URLが入力されていません。" );
-                return;
+                //マスク処理
+                if ( cbUrl.Text == "" ) {
+
+                    MessageBox.Show( "URLが入力されていません。" );
+                    return;
+
+                }
+
+                if ( tbFavoriteName.Text == "" ) {
+
+                    MessageBox.Show( "名前が入力されていません。" );
+                    return;
+
+                }
+
+                if ( cbFavorites.Items.Cast< ItemData >().Select( i => i.Title ).Contains( tbFavoriteName.Text ) ) {         //すでに同じ Title があった場合
+
+                    MessageBox.Show( "既に同じタイトル名を登録しています。" );
+                    return;
+
+                }
+
+                //追加処理
+                cbFavorites.Items.Add( new ItemData { Title = tbFavoriteName.Text , Link = cbUrl.Text } );
+                MessageBox.Show( "お気に入りに追加しました。" );
+
+            }
+            else        //"★お気に入り解除"
+            {
+
+                cbFavorites.Items.RemoveAt( cbFavorites.SelectedIndex );        //お気に入り解除
+
+                MessageBox.Show( "お気に入りから解除しました。" );
+
+                tbFavoriteName.Text = "";
+                btMyFavorite.Text = "☆お気に入り追加";
+
+                if( cbFavorites.Items.Count == 0 ) cbFavorites.Text = "";
 
             }
 
-            cbFavorites.Items.Add( new ItemData { Title = tbFavoriteName.Text , Link = cbUrl.Text } );
 
         }
+
 
         //最初からデフォルトのリンクを用意
         private void SetTopics() {
@@ -143,36 +154,50 @@ namespace RssReader {
             cbTopics.Items.Add( new ItemData { Title = "経済", Link = "https://news.yahoo.co.jp/rss/topics/business.xml" } );
             cbTopics.Items.Add( new ItemData { Title = "エンタメ", Link = "https://news.yahoo.co.jp/rss/topics/entertainment.xml" } );
             cbTopics.Items.Add( new ItemData { Title = "スポーツ", Link = "https://news.yahoo.co.jp/rss/topics/sports.xml" } );
-            cbTopics.Items.Add( new ItemData { Title = "IT", Link = "https://news.yahoo.co.jp/rss/topics/sports.xml" } );
+            cbTopics.Items.Add( new ItemData { Title = "IT", Link = "https://news.yahoo.co.jp/rss/topics/it.xml" } );
             cbTopics.Items.Add( new ItemData { Title = "科学", Link = "https://news.yahoo.co.jp/rss/topics/science.xml" } );
             cbTopics.Items.Add( new ItemData { Title = "地域", Link = "https://news.yahoo.co.jp/rss/topics/local.xml" } );
 
         }
 
+
         private void cbUrl_SelectedIndexChanged( object sender , EventArgs e ) {
 
-            cbUrl.Text = ( ( ItemData )cbUrl.Items[ cbUrl.SelectedIndex ] ).Link;
+            ToNotFavoriteUpdate( ( ItemData )cbUrl.Items[ cbUrl.SelectedIndex ] );
 
         }
+
 
         private void cbTopics_SelectedIndexChanged( object sender , EventArgs e ) {
 
-            cbUrl.Text = ( ( ItemData )cbTopics.Items[ cbTopics.SelectedIndex ] ).Link;
+            ToNotFavoriteUpdate( ( ItemData )cbTopics.Items[ cbTopics.SelectedIndex ] );
 
         }
+
 
         private void cbFavorites_SelectedIndexChanged( object sender , EventArgs e ) {
 
-            cbUrl.Text = ( ( ItemData )cbFavorites.Items[ cbFavorites.SelectedIndex ] ).Link;
+            ToFavoriteUpdate( ( ItemData )cbFavorites.Items[ cbFavorites.SelectedIndex ] );
 
         }
 
-        private void FavoritePrint( ItemData data ) {
 
+        public void ToNotFavoriteUpdate( ItemData data ) {
 
+            cbUrl.Text = data.Link;
+            tbFavoriteName.Text = "";
+            btMyFavorite.Text = "☆お気に入り追加";
 
         }
 
+
+        public void ToFavoriteUpdate(ItemData data) {
+
+            cbUrl.Text = data.Link;
+            tbFavoriteName.Text = data.Title;
+            btMyFavorite.Text = "★お気に入り解除";
+
+        }
 
 
         #endregion

@@ -70,6 +70,7 @@ namespace RssReader {
             this.wbBrowser.Location = new System.Drawing.Point(633, 66);
             this.wbBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.wbBrowser.Name = "wbBrowser";
+            this.wbBrowser.ScriptErrorsSuppressed = true;
             this.wbBrowser.Size = new System.Drawing.Size(679, 600);
             this.wbBrowser.TabIndex = 3;
             // 
